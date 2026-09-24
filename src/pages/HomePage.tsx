@@ -1,705 +1,564 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
-  ArrowUpRight,
-  Calendar, 
+  ArrowUpRight, 
+  Play, 
   ShieldCheck, 
+  Users, 
+  HeartPulse, 
   Award, 
   Sparkles, 
-  CheckCircle2, 
-  ChevronRight, 
-  ChevronLeft,
-  Play, 
-  ExternalLink, 
-  Mic, 
-  Users, 
-  HeartHandshake, 
-  Eye,
-  Activity,
-  Cpu,
-  HeartPulse,
-  Briefcase,
-  Layers,
-  TrendingUp,
-  FileText
+  Layers, 
+  Briefcase, 
+  Cpu, 
+  ChevronLeft, 
+  ChevronRight,
+  Quote,
+  CheckCircle2,
+  Calendar,
+  ExternalLink
 } from 'lucide-react';
-import { SITE_CONFIG, SERVICE_PILLARS, CERTIFICATIONS, ESTABLISHED_STATS, MEDIA_ITEMS } from '../data/siteData';
-import { ServiceCard } from '../components/ServiceCard';
-import { ClientMarquee } from '../components/ClientMarquee';
-import { CertificationsMarquee } from '../components/CertificationsMarquee';
-import { GradientCTASection } from '../components/GradientCTASection';
 import { VideoModal } from '../components/VideoModal';
-import { HeroVideoPlayer } from '../components/HeroVideoPlayer';
 import { CapabilitiesModal } from '../components/CapabilitiesModal';
-import { IOSActivityRings } from '../components/IOSActivityRings';
-import { IOSInfographicsSection } from '../components/IOSInfographicsSection';
-
-// Practice modes for Apple iOS hero switcher
-const HERO_MODES = {
-  keynote: {
-    id: 'keynote',
-    pill: 'Keynote & Speaking',
-    icon: Mic,
-    badge: 'Flagship Keynote Experience',
-    titleLead: 'Transforming organizations to be ',
-    titleAccent: 'truly inclusive',
-    titleEnd: ' — from the Bathroom to the Boardroom.',
-    description: 'World-renowned motivational keynotes and executive fireside chats bridging Fortune 100 enterprise execution with authentic, courageous lived experience.',
-    impactStat: '100+ Global Keynotes Delivered',
-    primaryCta: { label: 'Book Keynote', link: '/book-online' },
-    secondaryCta: { label: 'Explore Keynotes', link: '/media' },
-    video: MEDIA_ITEMS[0], // Bathroom to Boardroom (41:26)
-    audioTrackName: 'Keynote Spotlight: "From the Bathroom to the Boardroom"',
-    trackDuration: '41:26',
-    pillColor: '#FF2D55'
-  },
-  healthcare: {
-    id: 'healthcare',
-    pill: 'Health Equity & BioPharma',
-    icon: HeartPulse,
-    badge: 'Top 20 Biopharma Leader',
-    titleLead: 'Eliminating disparities for ',
-    titleAccent: 'marginalized patients',
-    titleEnd: ' across clinical trials & care systems.',
-    description: 'Advising healthcare systems, academic medical centers, and biopharma giants on cultural competency, transgender health equity, and diverse trial recruitment.',
-    impactStat: 'Endpoints News Top 20 Biopharma Leader',
-    primaryCta: { label: 'Health Equity Practice', link: '/healthcare' },
-    secondaryCta: { label: 'View Case Studies', link: '/case-studies' },
-    video: MEDIA_ITEMS[4], // Safe & Inclusive Workplaces
-    audioTrackName: 'Healthcare Briefing: "Clinical Equity & Transgender Care Delivery"',
-    trackDuration: '18:45',
-    pillColor: '#007AFF'
-  },
-  deib: {
-    id: 'deib',
-    pill: 'Workplace DEIB Strategy',
-    icon: Briefcase,
-    badge: '30+ Years Enterprise Pedigree',
-    titleLead: 'Architecting measurable equity across ',
-    titleAccent: 'Fortune 100 workforces',
-    titleEnd: ' and executive suites.',
-    description: 'Proven enterprise transformation dismantling systemic bias, upgrading talent pipelines, and certifying inclusive supplier ecosystems with certified LGBTBE/MBE status.',
-    impactStat: '30+ Years Fortune 100 Leadership Pedigree',
-    primaryCta: { label: 'DEIB Advisory Practice', link: '/deib' },
-    secondaryCta: { label: 'Enterprise Capabilities', link: '/services' },
-    video: MEDIA_ITEMS[6], // #EquityMatters
-    audioTrackName: 'Executive Briefing: "#EquityMatters: Systemic Policy Reform"',
-    trackDuration: '24:10',
-    pillColor: '#AF52DE'
-  },
-  ai: {
-    id: 'ai',
-    pill: 'Responsible & Inclusive AI',
-    icon: Cpu,
-    badge: 'Frontier AI & Algorithmic Ethics',
-    titleLead: 'Mitigating algorithmic bias with ',
-    titleAccent: 'human-centered AI governance',
-    titleEnd: ' and ethical guardrails.',
-    description: 'Ensuring generative models, predictive healthcare algorithms, and automated hiring systems preserve human dignity, data equity, and intersectional fairness.',
-    impactStat: 'Ethical AI & Data Governance Pioneer',
-    primaryCta: { label: 'AI Advisory Practice', link: '/services' },
-    secondaryCta: { label: 'Read Perspectives', link: '/blogs' },
-    video: MEDIA_ITEMS[1], // FUTRtv Challenge of Being Trans in Tech
-    audioTrackName: 'FUTRtv Tech Dialogue: "Algorithmic Equity & Identity in Tech"',
-    trackDuration: '14:22',
-    pillColor: '#00C7BE'
-  }
-} as const;
-
-type FocusModeKey = keyof typeof HERO_MODES;
+import { SITE_CONFIG, MediaItem } from '../data/siteData';
 
 export const HomePage: React.FC = () => {
-  const [activeVideo, setActiveVideo] = useState<typeof MEDIA_ITEMS[0] | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<MediaItem | null>(null);
   const [capabilitiesModalOpen, setCapabilitiesModalOpen] = useState(false);
-  const [activeFocus, setActiveFocus] = useState<FocusModeKey>('keynote');
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
 
-  const [activeKeynoteIdx, setActiveKeynoteIdx] = useState(0);
-  const [activeMediaIdx, setActiveMediaIdx] = useState(0);
-
-  const keynoteScrollRef = useRef<HTMLDivElement>(null);
-  const mediaScrollRef = useRef<HTMLDivElement>(null);
-
-  const scrollToKeynote = (idx: number) => {
-    const clamped = Math.max(0, Math.min(2, idx));
-    setActiveKeynoteIdx(clamped);
-    if (keynoteScrollRef.current) {
-      const cards = keynoteScrollRef.current.children;
-      if (cards[clamped]) {
-        (cards[clamped] as HTMLElement).scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
-        });
-      }
-    }
+  const featuredVideo: MediaItem = {
+    id: 'bathroom-to-boardroom',
+    title: 'Bathroom to Boardroom: Transforming Healthcare & Corporate Inclusion',
+    source: 'Rebekon Keynote Series',
+    type: 'Keynote',
+    embedUrl: 'https://www.youtube.com/embed/5a4G3p08f3Y',
+    thumbnailUrl: '/images/real/yt_thumb_bathroom_boardroom.jpg',
+    description: 'Celia Sandhya Daniels on dismantling systemic barriers and fostering intersectional equity.'
   };
 
-  const scrollToMedia = (idx: number) => {
-    const clamped = Math.max(0, Math.min(5, idx));
-    setActiveMediaIdx(clamped);
-    if (mediaScrollRef.current) {
-      const cards = mediaScrollRef.current.children;
-      if (cards[clamped]) {
-        (cards[clamped] as HTMLElement).scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
-        });
-      }
+  // Client and Partner brand logos/chips
+  const partnerLogos = [
+    { name: 'Syneos Health', src: '/images/logos/syneos.svg', category: 'Biopharma' },
+    { name: 'Genentech', src: '/images/logos/genentech.svg', category: 'Biotechnology' },
+    { name: 'Stanford Medicine', src: '/images/logos/stanford.svg', category: 'Academic Health' },
+    { name: 'UnitedHealth Group', src: '/images/logos/unitedhealth.svg', category: 'Healthcare' },
+    { name: 'Amgen', src: '/images/logos/amgen.svg', category: 'Life Sciences' },
+    { name: 'Amazon', src: '/images/logos/amazon.svg', category: 'Enterprise Tech' },
+    { name: 'Capgemini', src: '/images/logos/capgemini.svg', category: 'Global Consulting' },
+    { name: 'Cognizant', src: '/images/logos/cognizant.svg', category: 'Digital Solutions' },
+    { name: 'IQVIA', src: '/images/logos/iqvia.svg', category: 'Clinical Research' },
+    { name: 'Dun & Bradstreet', src: '/images/logos/dnb.svg', category: 'Data & Analytics' },
+    { name: 'Blue Cross Blue Shield', src: '/images/logos/bcbs.svg', category: 'Healthcare' },
+    { name: 'NGLCC Certified', src: '/images/real/cert_nglcc.png', category: 'Supplier Diversity' }
+  ];
+
+  // Testimonials matching template
+  const testimonials = [
+    {
+      id: 1,
+      quote: "Celia's keynote at our global health equity summit was truly transformative. She bridges complex clinical trial disparities with vulnerable, unforgettable storytelling that mobilized our entire leadership team.",
+      author: "Dr. Evelyn Vance",
+      title: "VP of Clinical Strategy & Health Equity",
+      organization: "Syneos Health Advisory Council",
+      avatar: "/images/real/celia_headshot.jpg"
+    },
+    {
+      id: 2,
+      quote: "Thanks to Celia's 'Bathroom to Boardroom' framework, our organization modernized transgender workplace guidelines and established active executive ERG sponsorship across 14 global offices.",
+      author: "Marcus Davenport",
+      title: "Chief Diversity Officer",
+      organization: "Fortune 100 Enterprise Sponsor",
+      avatar: "/images/real/corporate_training.jpeg"
+    },
+    {
+      id: 3,
+      quote: "I used to feel that corporate diversity conversations were stuck in performative theory. Celia brings 30 years of enterprise operational rigor that turns ideals into measurable policy and genuine belonging.",
+      author: "Nadia Solis",
+      title: "Senior Director of People & Culture",
+      organization: "Biopharma Innovation Group",
+      avatar: "/images/real/healthcare_workshop.jpeg"
     }
+  ];
+
+  const handlePrevTestimonial = () => {
+    setTestimonialIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
   };
 
-  const handleKeynoteScroll = () => {
-    if (keynoteScrollRef.current) {
-      const scrollLeft = keynoteScrollRef.current.scrollLeft;
-      const cardWidth = keynoteScrollRef.current.clientWidth * 0.84;
-      const newIdx = Math.round(scrollLeft / cardWidth);
-      if (newIdx !== activeKeynoteIdx && newIdx >= 0 && newIdx < 3) {
-        setActiveKeynoteIdx(newIdx);
-      }
-    }
+  const handleNextTestimonial = () => {
+    setTestimonialIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
   };
-
-  const handleMediaScroll = () => {
-    if (mediaScrollRef.current) {
-      const scrollLeft = mediaScrollRef.current.scrollLeft;
-      const cardWidth = mediaScrollRef.current.clientWidth * 0.84;
-      const newIdx = Math.round(scrollLeft / cardWidth);
-      if (newIdx !== activeMediaIdx && newIdx >= 0 && newIdx < 6) {
-        setActiveMediaIdx(newIdx);
-      }
-    }
-  };
-
-  const currentMode = HERO_MODES[activeFocus];
 
   return (
-    <div className="relative pt-20 sm:pt-28 lg:pt-32 overflow-hidden select-none">
-      
+    <div className="bg-[#FFFFFF] text-[#0F172A] min-h-screen">
       {/* =========================================================================
-          HERO SECTION: APPLE iOS GLASS STAGE & INTERACTIVE FOCUS SWITCHER
+          1. DARK HERO SECTION CONTAINER (MATCHING TEMPLATE HERO CARD)
          ========================================================================= */}
-      <section className="relative w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pt-2 sm:pt-4 pb-12 sm:pb-20">
-        
-        {/* Apple Dynamic Island Live Activity Pill */}
-        <div className="flex justify-center sm:justify-start mb-6">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full ios-glass text-xs font-semibold shadow-sm border border-white/80">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#FF2D55] animate-ping" />
-            <span className="text-slate-800 font-bold">2025–2026 Keynote & Health Equity Booking</span>
-            <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-gradient-to-r from-[#FF2D55] to-[#007AFF] text-white">
-              Active
-            </span>
-          </div>
-        </div>
+      <section className="pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-[1520px] mx-auto">
+        <div className="relative template-hero-card text-white p-6 sm:p-10 lg:p-16 overflow-hidden">
+          {/* Ambient Radial Glowing Orbs */}
+          <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-[#FF2D55]/20 rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] bg-[#007AFF]/25 rounded-full blur-[140px] pointer-events-none" />
 
-        {/* Apple iOS Segmented Practice Switcher */}
-        <div className="mb-8 flex items-center justify-start w-full overflow-x-auto scrollbar-none pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="inline-flex items-center gap-1.5 p-1.5 rounded-full ios-glass border border-white/80 shadow-[0_10px_30px_rgba(0,122,255,0.06)] shrink-0">
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-bold tracking-wider text-slate-400 uppercase shrink-0">
-              <Sparkles className="w-3.5 h-3.5 text-[#007AFF]" />
-              Practice:
-            </span>
-            {(Object.keys(HERO_MODES) as FocusModeKey[]).map((key) => {
-              const mode = HERO_MODES[key];
-              const Icon = mode.icon;
-              const isActive = activeFocus === key;
-              return (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => setActiveFocus(key)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
-                    isActive
-                      ? 'bg-white text-slate-900 shadow-md scale-102 border border-slate-100'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-                  }`}
+          {/* Grid Layout: Left Headline & CTA, Right Keynote Portrait */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
+            {/* Left Column: Big Typography & Request a Call CTA */}
+            <div className="lg:col-span-7 space-y-6 sm:space-y-8">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+                You're More Than <br className="hidden sm:inline" />
+                an Organization. <br />
+                You're a{' '}
+                <span className="bg-gradient-to-r from-[#FF2D55] via-[#C084FC] to-[#007AFF] bg-clip-text text-transparent">
+                  Movement.
+                </span>
+              </h1>
+
+              {/* Sub-headline CTA Row (Matching Template) */}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-5 pt-2">
+                <Link
+                  to="/book-online"
+                  className="template-pill-primary self-start group shadow-[0_12px_30px_rgba(0,122,255,0.4)]"
                 >
-                  <Icon 
-                    className="w-3.5 h-3.5 transition-colors" 
-                    style={{ color: isActive ? mode.pillColor : '#94A3B8' }}
-                  />
-                  <span>{mode.pill}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+                  <span className="tracking-wide">Request a Call</span>
+                  <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
+                    <ArrowRight className="w-3.5 h-3.5 text-white" />
+                  </span>
+                </Link>
 
-        {/* Hero Main Cockpit */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center">
-          
-          {/* Left Column: Glass Headline & Telemetry */}
-          <div className="lg:col-span-7 xl:col-span-6 space-y-6 text-left">
-            {/* Multi-badge Kicker Strip */}
-            <div className="inline-flex flex-wrap items-center justify-start gap-2.5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full ios-glass-pill text-xs font-bold text-slate-800 shadow-xs">
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: currentMode.pillColor }} />
-                <span>{currentMode.badge}</span>
-              </div>
-              <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-900 text-white shadow-xs">
-                {currentMode.impactStat}
-              </span>
-            </div>
-
-            {/* Apple Dynamic Headline with Pink & Blue Fluid Gradient */}
-            <h1 className="font-extrabold text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] text-slate-900 tracking-[-0.035em] leading-[1.15]">
-              {currentMode.titleLead}
-              <span className="ios-pink-blue-text font-black">
-                {currentMode.titleAccent}
-              </span>{' '}
-              {currentMode.titleEnd}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
-              {currentMode.description}{' '}
-              Led by <span className="font-bold text-slate-900">{SITE_CONFIG.founder}</span> <span className="text-slate-400 font-medium">{SITE_CONFIG.pronouns}</span>, Founder & CEO.
-            </p>
-
-            {/* Apple Music / Podcast Frosted Preview Bar */}
-            <div className="p-3.5 rounded-2xl ios-glass-card-dark text-white border border-white/15 shadow-xl text-left">
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-                <div className="flex items-center gap-3 w-full sm:w-auto">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center gap-1 shrink-0 px-1.5">
-                    <div className="w-1 bg-[#FF2D55] rounded-full animate-eq-1" />
-                    <div className="w-1 bg-[#AF52DE] rounded-full animate-eq-2" />
-                    <div className="w-1 bg-[#007AFF] rounded-full animate-eq-3" />
-                    <div className="w-1 bg-[#FF2D55] rounded-full animate-eq-4" />
-                  </div>
-                  <div className="text-left overflow-hidden min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-extrabold text-[#FF2D55] tracking-wider uppercase">
-                        SPOTLIGHT · {currentMode.trackDuration}
-                      </span>
-                    </div>
-                    <div className="font-semibold text-xs sm:text-sm text-slate-100 truncate">
-                      {currentMode.audioTrackName}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Instant Play Button */}
-                <button
-                  type="button"
-                  onClick={() => setActiveVideo(currentMode.video)}
-                  className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full ios-btn-primary text-xs font-bold shadow-md cursor-pointer"
-                >
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>Watch Presentation</span>
-                </button>
+                <p className="text-sm sm:text-base text-slate-300 max-w-md leading-relaxed font-normal">
+                  Helping you turn inclusion into enterprise impact through authentic leadership and clinical trial equity.
+                </p>
               </div>
             </div>
 
-            {/* Apple iOS Button Cluster */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 pt-2">
-              <Link
-                to={currentMode.primaryCta.link}
-                className="ios-btn-primary px-7 py-3.5 text-sm sm:text-base flex items-center justify-center gap-2 group shadow-lg"
-              >
-                <span>{currentMode.primaryCta.label}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+            {/* Right Column: Hero Keynote Portrait with Studio Vibe */}
+            <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-gradient-to-b from-white/10 to-transparent">
+                <img
+                  src="/images/real/celia_hero.jpg"
+                  alt="Celia Sandhya Daniels — Keynote Speaker & Health Equity Champion"
+                  className="w-full h-[380px] sm:h-[460px] object-cover object-top transition-transform duration-500 hover:scale-103"
+                />
 
-              <Link
-                to="/book-online"
-                className="ios-btn-secondary px-6 py-3.5 text-sm sm:text-base flex items-center justify-center gap-2"
-              >
-                <Calendar className="w-4 h-4 text-[#007AFF]" />
-                <span>Book Online</span>
-              </Link>
-
-              <button
-                type="button"
-                onClick={() => setCapabilitiesModalOpen(true)}
-                className="px-5 py-3.5 rounded-full ios-glass-pill text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-900 transition-colors flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <FileText className="w-4 h-4 text-[#FF2D55]" />
-                <span>Capabilities Statement</span>
-              </button>
-            </div>
-
-            {/* Official Diverse Supplier Trust Strip */}
-            <div className="pt-4 border-t border-slate-200/70 flex flex-wrap items-center justify-start gap-2.5">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#E8F2FF] text-[#007AFF] border border-blue-200/70 shadow-2xs">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                Verified Diverse Supplier
-              </span>
-              <span className="text-xs text-slate-600 font-semibold">
-                NGLCC (30210) • CPUC VON: 24000841 • SBE • D-U-N-S Registered
-              </span>
-            </div>
-          </div>
-
-          {/* Right Column: Apple Vision Frosted Media Deck */}
-          <div className="lg:col-span-5 xl:col-span-6">
-            <div className="ios-glass-card p-4 sm:p-5 border border-white/90 shadow-[0_25px_65px_-15px_rgba(0,122,255,0.2)]">
-              {/* Autoplaying 16:9 Video Player */}
-              <HeroVideoPlayer
-                video={currentMode.video}
-                onOpenModal={() => setActiveVideo(currentMode.video)}
-                badgeText={currentMode.badge}
-              />
-
-              {/* Speaker Metadata & Telemetry Cards */}
-              <div className="pt-4 px-1">
-                <div className="flex items-center justify-between gap-3 pb-3.5 border-b border-slate-200/60">
-                  <div className="min-w-0">
-                    <div className="font-bold text-sm text-slate-900 flex items-center gap-1.5 truncate">
-                      <span>{SITE_CONFIG.founder}</span>
-                      <CheckCircle2 className="w-4 h-4 text-[#007AFF] shrink-0" />
-                    </div>
-                    <p className="text-xs text-slate-500 truncate mt-0.5 font-medium">
-                      {currentMode.audioTrackName}
-                    </p>
+                {/* Subtle Glass Caption Overlay */}
+                <div className="absolute bottom-4 inset-x-4 p-3.5 rounded-2xl bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-between text-xs text-white">
+                  <div>
+                    <span className="font-bold block text-sm">Celia Sandhya Daniels</span>
+                    <span className="text-slate-300 text-[11px]">Top 20 LGBTQ+ Leader in Biopharma</span>
                   </div>
                   <button
                     type="button"
-                    onClick={() => setActiveVideo(currentMode.video)}
-                    className="shrink-0 text-xs font-bold text-[#007AFF] hover:underline flex items-center gap-1 cursor-pointer"
+                    onClick={() => setSelectedVideo(featuredVideo)}
+                    className="w-9 h-9 rounded-full bg-gradient-to-r from-[#FF2D55] to-[#007AFF] flex items-center justify-center text-white shadow-md hover:scale-110 transition-transform cursor-pointer"
+                    aria-label="Play Keynote Video"
                   >
-                    <span>Expand Video</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
+                    <Play className="w-4 h-4 ml-0.5 fill-white" />
                   </button>
                 </div>
-
-                {/* Micro Metric Pills */}
-                <div className="grid grid-cols-3 gap-2.5 pt-3 text-center">
-                  <div className="p-2.5 rounded-2xl bg-white/70 border border-white shadow-2xs">
-                    <div className="font-black text-slate-900 text-xs sm:text-sm">12+ Podcasts</div>
-                    <div className="text-[10px] text-slate-500 font-semibold">Featured Voice</div>
-                  </div>
-                  <div className="p-2.5 rounded-2xl bg-white/70 border border-white shadow-2xs">
-                    <div className="font-black text-slate-900 text-xs sm:text-sm">Top 20 Leader</div>
-                    <div className="text-[10px] text-slate-500 font-semibold">Endpoints News</div>
-                  </div>
-                  <div className="p-2.5 rounded-2xl bg-white/70 border border-white shadow-2xs">
-                    <div className="font-black text-slate-900 text-xs sm:text-sm">30+ Years</div>
-                    <div className="text-[10px] text-slate-500 font-semibold">Fortune 100 Pedigree</div>
-                  </div>
-                </div>
               </div>
-
             </div>
           </div>
 
-        </div>
-
-        {/* Certifications Rolling Marquee Strip */}
-        <div className="w-full max-w-[1600px] mx-auto mt-8 sm:mt-12 pt-6 border-t border-slate-200/70 relative">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 px-1">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] p-0.5 shrink-0 shadow-md">
-                <div className="w-full h-full bg-white rounded-2xl flex items-center justify-center">
-                  <ShieldCheck className="w-5 h-5 text-[#007AFF]" />
-                </div>
+          {/* Hero Bottom Bar: 4 Pill Stat Chips in a Row (Matching Template) */}
+          <div className="mt-12 sm:mt-16 pt-8 border-t border-white/10 grid grid-cols-2 lg:grid-cols-4 gap-4 relative z-10">
+            {/* Stat 1 */}
+            <div className="template-stat-chip p-4 sm:p-5 flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-[#007AFF]/20 text-[#007AFF] flex items-center justify-center shrink-0">
+                <Users className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight">
-                  OFFICIAL GOVERNMENT & DIVERSE SUPPLIER ACCREDITATIONS
-                </h3>
-                <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">
-                  Certified by NGLCC National LGBT Chamber, California Public Utilities Commission (CPUC), CA/LA SBE, and Dun & Bradstreet Registered
-                </p>
+                <div className="text-xl sm:text-2xl font-black text-white tracking-tight">200+</div>
+                <div className="text-xs text-slate-400 font-medium">Enterprise Engagements</div>
               </div>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setCapabilitiesModalOpen(true)}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#007AFF] hover:underline cursor-pointer self-start sm:self-auto"
-            >
-              <span>View Full Capabilities & Codes</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </button>
-          </div>
+            {/* Stat 2 */}
+            <div className="template-stat-chip p-4 sm:p-5 flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-[#FF2D55]/20 text-[#FF2D55] flex items-center justify-center shrink-0">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="text-xl sm:text-2xl font-black text-white tracking-tight">6M+</div>
+                <div className="text-xs text-slate-400 font-medium">Audience & Media Reach</div>
+              </div>
+            </div>
 
-          <CertificationsMarquee onCardClick={() => setCapabilitiesModalOpen(true)} />
+            {/* Stat 3 */}
+            <div className="template-stat-chip p-4 sm:p-5 flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-[#AF52DE]/20 text-[#AF52DE] flex items-center justify-center shrink-0">
+                <HeartPulse className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="text-xl sm:text-2xl font-black text-white tracking-tight">3k+</div>
+                <div className="text-xs text-slate-400 font-medium">Clinicians & Leaders Trained</div>
+              </div>
+            </div>
+
+            {/* Stat 4 */}
+            <div className="template-stat-chip p-4 sm:p-5 flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-[#007AFF]/20 text-[#007AFF] flex items-center justify-center shrink-0">
+                <Award className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="text-xl sm:text-2xl font-black text-white tracking-tight">500+</div>
+                <div className="text-xs text-slate-400 font-medium">DEIB & Clinical Audits</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* =========================================================================
-          APPLE ACTIVITY RINGS TELEMETRY & SMOOTH INFOGRAPHICS
+          2. PARTNERS AND CLIENTS SECTION (MATCHING TEMPLATE LOGO CHIPS)
          ========================================================================= */}
-      <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <IOSActivityRings />
-      </section>
+      <section className="py-12 sm:py-16 bg-[#FAFAFC] border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-[#FF2D55] via-[#A855F7] to-[#007AFF] bg-clip-text text-transparent">
+              Partners and Clients
+            </h2>
+            <p className="mt-2 text-xs sm:text-sm text-slate-500 font-medium">
+              Trusted by Fortune 100 leaders, biopharma titans, and national health equity coalitions
+            </p>
+          </div>
 
-      {/* =========================================================================
-          DATA-DRIVEN INCLUSION INFOGRAPHIC DASHBOARD (MEASURABLE MATRIX)
-         ========================================================================= */}
-      <IOSInfographicsSection />
-
-      {/* =========================================================================
-          KEYNOTE VIDEO CAROUSEL WITH GLASS PLAYERS
-         ========================================================================= */}
-      <section className="py-16 bg-slate-950/85 text-white relative overflow-hidden backdrop-blur-2xl border-y border-white/10">
-        {/* Ambient Pink and Blue Glows */}
-        <div className="absolute top-0 left-10 w-96 h-96 bg-[#FF2D55]/15 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 right-10 w-96 h-96 bg-[#007AFF]/15 blur-3xl pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#FF2D55] text-xs font-bold tracking-wider uppercase mb-2 border border-white/15">
-                <Mic className="w-3.5 h-3.5" />
-                <span>WATCH CELIA IN ACTION</span>
-              </div>
-              <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight">
-                Featured Keynotes, Interviews & Thought Leadership
-              </h2>
-              <p className="text-slate-400 text-xs sm:text-sm mt-1">
-                Real video recordings covering enterprise inclusion, trans rights, and healthcare equity.
-              </p>
-            </div>
-            <div className="flex items-center justify-between md:justify-end gap-3">
-              <Link
-                to="/media"
-                className="text-xs sm:text-sm font-bold text-[#FF2D55] hover:text-pink-300 flex items-center gap-1.5 transition-colors shrink-0"
+          {/* Logo Chips Grid (2 Rows Matching Template) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+            {partnerLogos.map((partner, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col items-center justify-center gap-2 group hover:-translate-y-1"
               >
-                <span>Explore All 10 Video Appearances</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Keynotes Carousel */}
-          <div className="relative group">
-            {/* Left Arrow */}
-            <button
-              type="button"
-              onClick={() => scrollToKeynote(activeKeynoteIdx - 1)}
-              disabled={activeKeynoteIdx === 0}
-              aria-label="Previous keynote"
-              className={`absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-slate-900/90 text-white border border-white/20 shadow-2xl flex items-center justify-center transition-all cursor-pointer backdrop-blur-xl ${
-                activeKeynoteIdx === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110'
-              }`}
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            {/* Right Arrow */}
-            <button
-              type="button"
-              onClick={() => scrollToKeynote(activeKeynoteIdx + 1)}
-              disabled={activeKeynoteIdx === 2}
-              aria-label="Next keynote"
-              className={`absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-gradient-to-r from-[#FF2D55] to-[#007AFF] text-white shadow-2xl flex items-center justify-center transition-all cursor-pointer ${
-                activeKeynoteIdx === 2 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110'
-              }`}
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-
-            {/* 3 Featured Video Cards */}
-            <div
-              ref={keynoteScrollRef}
-              onScroll={handleKeynoteScroll}
-              className="flex md:grid md:grid-cols-3 gap-5 sm:gap-6 overflow-x-auto pb-4 pt-1 px-[7vw] sm:px-0 snap-x snap-mandatory scrollbar-none scroll-smooth items-stretch"
-            >
-              {MEDIA_ITEMS.slice(0, 3).map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() => setActiveVideo(item)}
-                  className="w-[86vw] max-w-[360px] md:max-w-none md:w-auto shrink-0 snap-center group relative ios-glass-card-dark rounded-3xl overflow-hidden border border-white/15 hover:border-[#FF2D55]/60 shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between h-full"
-                >
-                  {/* YouTube Thumbnail */}
-                  <div className="relative aspect-video overflow-hidden bg-black">
-                    <img
-                      src={item.thumbnailUrl}
-                      alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 transition-colors flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] text-white flex items-center justify-center shadow-2xl group-hover:scale-115 transition-transform">
-                        <Play className="w-5 h-5 ml-0.5 fill-current" />
-                      </div>
-                    </div>
-                    {item.duration && (
-                      <span className="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md text-[11px] font-mono font-bold bg-black/80 text-white backdrop-blur-md">
-                        {item.duration}
-                      </span>
-                    )}
-                    <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-black/80 text-[#FF2D55] uppercase tracking-wider backdrop-blur-md border border-white/10">
-                      {item.type}
-                    </span>
-                  </div>
-
-                  <div className="p-5 flex-1 flex flex-col justify-between">
-                    <div>
-                      <span className="text-[11px] font-semibold text-slate-400 block mb-1">
-                        {item.source}
-                      </span>
-                      <h3 className="font-bold text-white text-base group-hover:text-[#FF2D55] transition-colors line-clamp-2">
-                        {item.title}
-                      </h3>
-                    </div>
-                    <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-[#007AFF]">
-                      <span className="group-hover:translate-x-0.5 transition-transform">Play in Apple Player</span>
-                      <Play className="w-3.5 h-3.5 fill-current" />
-                    </div>
-                  </div>
+                <div className="h-8 flex items-center justify-center w-full">
+                  <img
+                    src={partner.src}
+                    alt={partner.name}
+                    className="max-h-7 max-w-[110px] object-contain grayscale group-hover:grayscale-0 transition-all duration-300 opacity-70 group-hover:opacity-100"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLElement).style.display = 'none';
+                    }}
+                  />
+                  <span className="text-xs font-bold text-slate-800 text-center line-clamp-1 group-hover:text-[#007AFF]">
+                    {partner.name}
+                  </span>
                 </div>
-              ))}
-            </div>
-
-            {/* Mobile Indicators */}
-            <div className="flex md:hidden items-center justify-center gap-2 mt-2">
-              {[0, 1, 2].map((idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => scrollToKeynote(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    activeKeynoteIdx === idx ? 'w-6 bg-[#FF2D55]' : 'w-2 bg-slate-700'
-                  }`}
-                  aria-label={`Go to video ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          REAL PHOTO GALLERY: LEADERSHIP & ADVOCACY IN ACTION
-         ========================================================================= */}
-      <section className="py-20 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
-              LEADERSHIP IN ACTION
-            </span>
-            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
-              On Stage, in the Boardroom, and in the Community
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-              Witness Celia Sandhya Daniels keynoting national healthcare conferences, addressing industry delegations, and receiving bipartisan congressional honors.
-            </p>
-          </div>
-
-          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5 overflow-x-auto pb-4 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory scrollbar-none">
-            {/* Photo 1: OutBuro Spotlight */}
-            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start group relative rounded-3xl overflow-hidden ios-glass-card shadow-md flex flex-col justify-between">
-              <div className="aspect-[4/3] overflow-hidden bg-slate-900">
-                <img
-                  src="/images/real/yt_thumb_outburo.jpg"
-                  alt="Celia Daniels OutBüro Voices Spotlight"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-4 bg-white/90">
-                <span className="text-[10px] font-bold text-[#FF2D55] uppercase tracking-wider block">
-                  Executive Spotlight
+                <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+                  {partner.category}
                 </span>
-                <div className="font-bold text-slate-900 text-sm mt-0.5">
-                  LGBT Professional & Activist
-                </div>
-                <p className="text-xs text-slate-500 mt-1 line-clamp-2">
-                  OutBüro LGBTQ+ community executive dialogue on inclusive corporate leadership.
-                </p>
               </div>
-            </div>
-
-            {/* Photo 2: Bathroom to Boardroom Keynote */}
-            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start group relative rounded-3xl overflow-hidden ios-glass-card shadow-md flex flex-col justify-between">
-              <div className="aspect-[4/3] overflow-hidden bg-slate-900">
-                <img
-                  src="/images/real/yt_thumb_bathroom_boardroom.jpg"
-                  alt="Bathroom to Boardroom Keynote"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-4 bg-white/90">
-                <span className="text-[10px] font-bold text-[#007AFF] uppercase tracking-wider block">
-                  Keynote Address
-                </span>
-                <div className="font-bold text-slate-900 text-sm mt-0.5">
-                  Bathroom to Boardroom
-                </div>
-                <p className="text-xs text-slate-500 mt-1 line-clamp-2">
-                  Actionable roadmap from frontline dignity to C-suite governance.
-                </p>
-              </div>
-            </div>
-
-            {/* Photo 3: Workplace Pride */}
-            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start group relative rounded-3xl overflow-hidden ios-glass-card shadow-md flex flex-col justify-between">
-              <div className="aspect-[4/3] overflow-hidden bg-slate-900">
-                <img
-                  src="/images/real/yt_thumb_workplace_pride.jpg"
-                  alt="Amplify DEI Workplace Pride Keynote"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-4 bg-white/90">
-                <span className="text-[10px] font-bold text-[#AF52DE] uppercase tracking-wider block">
-                  Global Summit
-                </span>
-                <div className="font-bold text-slate-900 text-sm mt-0.5">
-                  Workplace Pride Summit
-                </div>
-                <p className="text-xs text-slate-500 mt-1 line-clamp-2">
-                  Amplify DEI keynote on transforming enterprise culture into genuine allyship.
-                </p>
-              </div>
-            </div>
-
-            {/* Photo 4: 12+ Featured Podcast Networks */}
-            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start group relative rounded-3xl overflow-hidden ios-glass-card shadow-md flex flex-col justify-between">
-              <div className="aspect-[4/3] overflow-hidden bg-slate-900">
-                <img
-                  src="/images/real/award_congressional.png"
-                  alt="12+ Featured Podcast Appearances"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-4 bg-white/90">
-                <span className="text-[10px] font-bold text-[#FF2D55] uppercase tracking-wider block">
-                  Media Roster
-                </span>
-                <div className="font-bold text-slate-900 text-sm mt-0.5">
-                  12+ Podcast Networks
-                </div>
-                <p className="text-xs text-slate-500 mt-1 line-clamp-2">
-                  Featured across FUTRtv, The Transgender Show, Leading People First, and more.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          THE THREE PILLARS: APPLE GLASS BENTO GRID
-         ========================================================================= */}
-      <section className="py-20 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
-              CORE PRACTICE AREAS
-            </span>
-            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
-              Humanizing Healthcare, Workplace & Business
-            </h2>
-            <p className="text-slate-600 text-base sm:text-lg mt-3 leading-relaxed">
-              Strategic advisory grounded in lived experience and over 30 years of corporate Fortune 100 enterprise execution.
-            </p>
-          </div>
-
-          {/* 3 Pillars Grid with Apple Glass Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {SERVICE_PILLARS.map((pillar, idx) => (
-              <ServiceCard key={pillar.id} pillar={pillar} index={idx} />
             ))}
           </div>
 
-          <div className="mt-12 text-center">
-            <Link
-              to="/services"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#007AFF] hover:underline"
+          {/* Capabilities Modal Trigger */}
+          <div className="mt-8 text-center">
+            <button
+              type="button"
+              onClick={() => setCapabilitiesModalOpen(true)}
+              className="inline-flex items-center gap-2 text-xs font-bold text-[#007AFF] hover:text-[#005bb5] transition-colors cursor-pointer"
             >
-              <span>Explore the complete Educate · Engage · Empower framework</span>
+              <span>View Certified Codes & Government Capabilities (NAICS, NIGP, CPUC)</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          3. "ABOUT ME" STORY SECTION (MATCHING TEMPLATE ABOUT COMPOSITION)
+         ========================================================================= */}
+      <section className="py-16 sm:py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Content */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="inline-flex items-center gap-2 text-xs font-bold text-[#FF2D55] uppercase tracking-wider">
+                <span>— About me</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+                Meet Celia Sandhya Daniels Your{' '}
+                <span className="bg-gradient-to-r from-[#FF2D55] to-[#007AFF] bg-clip-text text-transparent">
+                  DEIB Champion
+                </span>
+              </h2>
+
+              <p className="text-base text-slate-600 leading-relaxed">
+                With over 30 years helping Fortune 100 leaders and biopharma innovators stand out in competitive markets, I specialize in crafting authentic, systemic equity that aligns with your mission, people, and healthcare outcomes.
+              </p>
+
+              <p className="text-base text-slate-600 leading-relaxed">
+                Whether you're a corporate executive, healthcare provider, or research leader—I'll guide you to discover your organization's true potential and communicate it with unwavering confidence.
+              </p>
+
+              <div className="pt-2">
+                <Link
+                  to="/book-online"
+                  className="template-pill-primary group shadow-[0_10px_25px_rgba(0,122,255,0.35)]"
+                >
+                  <span>Request a Call</span>
+                  <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
+                    <ArrowRight className="w-3.5 h-3.5 text-white" />
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Multi-Layer Visual Composition (Matching Template Collage) */}
+            <div className="lg:col-span-6 relative">
+              <div className="relative mx-auto max-w-lg lg:max-w-none">
+                {/* Main Portrait */}
+                <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100">
+                  <img
+                    src="/images/real/celia_speaking_award.jpg"
+                    alt="Celia Sandhya Daniels on stage"
+                    className="w-full h-[400px] sm:h-[460px] object-cover object-center"
+                  />
+                </div>
+
+                {/* Overlapping Secondary Card (Top Right / Stage) */}
+                <div className="absolute -top-6 -right-4 sm:-right-6 w-44 sm:w-52 rounded-2xl overflow-hidden shadow-xl border-4 border-white hidden sm:block">
+                  <img
+                    src="/images/real/conference_stage.jpg"
+                    alt="Celia Daniels Keynote Stage"
+                    className="w-full h-28 sm:h-32 object-cover"
+                  />
+                </div>
+
+                {/* Floating Worldwide Pill Badge (Matching Template) */}
+                <div className="absolute -bottom-6 -left-4 sm:-left-6 max-w-xs bg-white p-5 rounded-3xl shadow-xl border border-slate-100 space-y-2">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#007AFF]">
+                    <span className="w-2 h-2 rounded-full bg-[#007AFF] animate-ping" />
+                    <span>— Worldwide</span>
+                  </div>
+                  <div className="text-sm font-extrabold text-slate-900 leading-snug">
+                    Top 20 LGBTQ+ Leader in Biopharma
+                  </div>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    Frameworks and techniques that create real belonging across clinical trials and boardroom governance.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          4. "OUR SERVICES" SECTION (MATCHING TEMPLATE CAROUSEL & ACTIVE CARD)
+         ========================================================================= */}
+      <section className="py-16 sm:py-24 bg-[#F8FAFC] border-y border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header Row: Left Title, Right Subtitle */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+            <div>
+              <div className="inline-flex items-center gap-2 text-xs font-bold text-[#FF2D55] uppercase tracking-wider mb-2">
+                <span>— Our Services</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
+                Executive & Consulting Services{' '}
+                <span className="bg-gradient-to-r from-[#FF2D55] to-[#007AFF] bg-clip-text text-transparent">
+                  Tailored for You
+                </span>
+              </h2>
+            </div>
+
+            <p className="text-sm sm:text-base text-slate-600 max-w-md">
+              A range of 1:1 and enterprise advisory packages to help you <strong className="text-slate-900">elevate your organizational equity</strong>.
+            </p>
+          </div>
+
+          {/* 4 Cards Grid (First card is highlighted in gradient background!) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* CARD 1: ACTIVE / HIGHLIGHTED CARD (Matching Template Gradient Style) */}
+            <div className="rounded-3xl p-6 bg-gradient-to-br from-[#7C3AED] via-[#6366F1] to-[#007AFF] text-white shadow-xl flex flex-col justify-between relative overflow-hidden group hover:scale-102 transition-all duration-300">
+              <div className="space-y-4">
+                {/* Top Badge & Arrow Circle */}
+                <div className="flex items-center justify-between">
+                  <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-white/20 text-white backdrop-blur-xs">
+                    KEYNOTE SPEAKING
+                  </span>
+                  <Link
+                    to="/topics"
+                    className="w-8 h-8 rounded-full bg-white/20 hover:bg-white text-white hover:text-slate-900 flex items-center justify-center transition-colors shadow-xs"
+                    aria-label="Explore Keynotes"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+
+                <h3 className="text-xl font-bold tracking-tight text-white pt-2">
+                  Keynote Speaking & Masterclasses
+                </h3>
+
+                <p className="text-xs text-white/90 leading-relaxed">
+                  High-energy, transformative keynotes on healthcare equity, lived-experience storytelling, and inclusive leadership.
+                </p>
+              </div>
+
+              {/* Bottom Image Thumbnail */}
+              <div className="mt-6 rounded-2xl overflow-hidden border border-white/20">
+                <img
+                  src="/images/real/conference_stage.jpg"
+                  alt="Keynote Speaking"
+                  className="w-full h-36 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
+
+            {/* CARD 2: Clinical Trial Diversity */}
+            <div className="rounded-3xl p-6 bg-white text-slate-900 border border-slate-200 shadow-sm flex flex-col justify-between group hover:shadow-lg transition-all duration-300">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700">
+                    HEALTH EQUITY
+                  </span>
+                  <Link
+                    to="/healthcare"
+                    className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#007AFF] text-slate-700 hover:text-white flex items-center justify-center transition-colors"
+                    aria-label="Explore Health Equity"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+
+                <h3 className="text-xl font-bold tracking-tight text-slate-900 pt-2">
+                  Clinical Trial Diversity Program
+                </h3>
+
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Eliminating systematic barriers in biopharma trial recruitment and implementing patient-centric protocols.
+                </p>
+              </div>
+
+              <div className="mt-6 rounded-2xl overflow-hidden border border-slate-100">
+                <img
+                  src="/images/real/healthcare_workshop.jpeg"
+                  alt="Clinical Trials Diversity"
+                  className="w-full h-36 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
+
+            {/* CARD 3: Bathroom to Boardroom DEIB */}
+            <div className="rounded-3xl p-6 bg-white text-slate-900 border border-slate-200 shadow-sm flex flex-col justify-between group hover:shadow-lg transition-all duration-300">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700">
+                    DEIB ARCHITECTURE
+                  </span>
+                  <Link
+                    to="/deib"
+                    className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#FF2D55] text-slate-700 hover:text-white flex items-center justify-center transition-colors"
+                    aria-label="Explore DEIB Architecture"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+
+                <h3 className="text-xl font-bold tracking-tight text-slate-900 pt-2">
+                  Bathroom to Boardroom DEIB Strategy
+                </h3>
+
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Comprehensive workplace policy modernization, ERG executive buy-in, and measurable culture reform.
+                </p>
+              </div>
+
+              <div className="mt-6 rounded-2xl overflow-hidden border border-slate-100">
+                <img
+                  src="/images/real/corporate_training.jpeg"
+                  alt="Bathroom to Boardroom"
+                  className="w-full h-36 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
+
+            {/* CARD 4: Responsible AI & Data */}
+            <div className="rounded-3xl p-6 bg-white text-slate-900 border border-slate-200 shadow-sm flex flex-col justify-between group hover:shadow-lg transition-all duration-300">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700">
+                    AI & TECH ETHICS
+                  </span>
+                  <Link
+                    to="/topics"
+                    className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#AF52DE] text-slate-700 hover:text-white flex items-center justify-center transition-colors"
+                    aria-label="Explore AI Ethics"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+
+                <h3 className="text-xl font-bold tracking-tight text-slate-900 pt-2">
+                  Responsible AI & Algorithmic Dignity
+                </h3>
+
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Auditing generative models for demographic bias, ensuring fairness and ethical dignity across technologies.
+                </p>
+              </div>
+
+              <div className="mt-6 rounded-2xl overflow-hidden border border-slate-100">
+                <img
+                  src="/images/real/panel_discussion.jpg"
+                  alt="Responsible AI"
+                  className="w-full h-36 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          5. VIDEO / MEDIA SPOTLIGHT SECTION (MATCHING TEMPLATE TOP-RIGHT VIDEO PANEL)
+         ========================================================================= */}
+      <section className="py-16 sm:py-20 bg-[#0B0F19] text-white relative overflow-hidden">
+        {/* Glows */}
+        <div className="absolute top-0 right-10 w-96 h-96 bg-[#007AFF]/20 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#FF2D55]/20 blur-3xl pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-xs font-bold text-[#FF2D55] uppercase tracking-wider mb-4 border border-white/10">
+            <span>Watch Celia In Action</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-8">
+            Experience the Energy of a Rebekon Keynote
+          </h2>
+
+          {/* Large Video Player Card */}
+          <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-black group">
+            <img
+              src="/images/real/yt_thumb_bathroom_boardroom.jpg"
+              alt="Celia Daniels Keynote Video"
+              className="w-full h-[320px] sm:h-[460px] object-cover opacity-80 group-hover:opacity-90 transition-opacity"
+            />
+
+            {/* Play Button Overlay */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 backdrop-blur-[2px]">
+              <button
+                type="button"
+                onClick={() => setSelectedVideo(featuredVideo)}
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-r from-[#FF2D55] to-[#007AFF] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform cursor-pointer group-hover:shadow-[0_0_50px_rgba(0,122,255,0.6)]"
+                aria-label="Play Featured Video"
+              >
+                <Play className="w-8 h-8 sm:w-10 sm:h-10 ml-1 fill-white" />
+              </button>
+
+              <span className="mt-4 text-xs sm:text-sm font-bold text-white tracking-wider uppercase bg-black/60 px-4 py-1.5 rounded-full border border-white/20">
+                Watch all my activities
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-8 flex justify-center gap-4">
+            <Link
+              to="/media"
+              className="template-pill-primary"
+            >
+              <span>Explore All Media & Interviews</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -707,195 +566,261 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          CLIENT PARTNERS MARQUEE
+          6. "OUR BLOG" & INSIGHTS (MATCHING TEMPLATE 3-CARD BLOG GRID)
          ========================================================================= */}
-      <section className="py-16 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
-          <span className="text-xs font-bold tracking-widest text-slate-400 uppercase">
-            TRUSTED PARTNERSHIPS & CLIENT EXPERIENCE
-          </span>
-          <h2 className="font-extrabold text-2xl sm:text-3xl text-slate-900 mt-2 tracking-tight">
-            Working With the Best Clients and Partners
-          </h2>
-          <p className="text-slate-500 text-sm mt-1">
-            Proven collaboration across Fortune 100 biopharma, health systems, and diversity advocacy organizations.
-          </p>
-        </div>
-
-        <ClientMarquee />
-      </section>
-
-      {/* =========================================================================
-          FOUNDER VISION STATEMENT: APPLE FROSTED GLASS CALLOUT
-         ========================================================================= */}
-      <section className="py-20 relative">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="ios-glass-card p-8 sm:p-14 text-center border border-white/95 shadow-[0_20px_60px_-15px_rgba(255,45,85,0.12)]">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#FF2D55] via-[#AF52DE] to-[#007AFF] flex items-center justify-center text-white mx-auto mb-6 shadow-md">
-              <Sparkles className="w-7 h-7" />
-            </div>
-
-            <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
-              OUR CORE VISION & MISSION
-            </span>
-
-            <blockquote className="font-medium text-2xl sm:text-3xl lg:text-4xl text-slate-900 leading-snug my-8 italic">
-              "Transforming organizations to foster genuine inclusivity at all levels from the Bathroom to the Boardroom, unlocking the potential of employees to drive innovation, enhance productivity, and cultivate a profound sense of authenticity and belonging in the workplace."
-            </blockquote>
-
-            <div className="flex items-center justify-center gap-3">
-              <img
-                src="/images/real/celia_official_speaker.jpg"
-                alt="Celia Sandhya Daniels"
-                className="w-14 h-14 rounded-full object-cover object-[75%_25%] border-2 border-[#FF2D55] shadow-md"
-              />
-              <div className="text-left">
-                <div className="font-bold text-slate-900 text-base">{SITE_CONFIG.founder}</div>
-                <div className="text-xs text-slate-500 font-medium">Founder & CEO, Rebekon Consulting LLC • {SITE_CONFIG.pronouns}</div>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#007AFF] hover:underline"
-              >
-                <span>Read Celia's Full Biography & 16+ Civic Honors</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          FEATURED VOICES & INTERVIEWS REEL
-         ========================================================================= */}
-      <section className="pt-8 sm:pt-12 pb-8">
+      <section className="py-16 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
-                PODCASTS · WEBCASTS · KEYNOTES
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">
+              Our Blog
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
+              Insights & Strategies for Building Your{' '}
+              <span className="bg-gradient-to-r from-[#FF2D55] to-[#007AFF] bg-clip-text text-transparent">
+                Personal & Organizational Equity
               </span>
-              <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl text-slate-900 mt-1 tracking-tight">
-                Featured Voices & Thought Leadership
-              </h2>
-            </div>
-            <div className="flex items-center justify-between md:justify-end gap-3">
-              <Link
-                to="/media"
-                className="text-sm font-bold text-[#007AFF] hover:underline flex items-center gap-1.5 shrink-0"
-              >
-                <span>View All 10 Interviews</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+            </h2>
+            <p className="mt-4 text-sm sm:text-base text-slate-500">
+              Actionable tips, expert advice, and real-life lessons to help you grow your influence, authority, and systemic impact.
+            </p>
           </div>
 
-          {/* Podcasts and Videos */}
-          <div className="relative group">
-            {/* Left Arrow */}
+          {/* 3 Blog Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Article 1 */}
+            <article className="group flex flex-col justify-between">
+              <div>
+                <div className="rounded-2xl overflow-hidden mb-4 bg-slate-100 shadow-xs border border-slate-100">
+                  <img
+                    src="/images/real/healthcare_workshop.jpeg"
+                    alt="Clinical Trial Diversity"
+                    className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="text-xs font-semibold text-slate-400 mb-2">
+                  June 20, 2025
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#007AFF] transition-colors leading-snug">
+                  Bridging Clinical Trial Disparities for Diverse Patient Cohorts
+                </h3>
+                <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                  How biopharma sponsors can implement trauma-informed protocols and diverse recruitment pipelines that build enduring community trust.
+                </p>
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-slate-100">
+                <Link
+                  to="/blogs"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#007AFF] hover:underline"
+                >
+                  <span>Read Article</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </article>
+
+            {/* Article 2 */}
+            <article className="group flex flex-col justify-between">
+              <div>
+                <div className="rounded-2xl overflow-hidden mb-4 bg-slate-100 shadow-xs border border-slate-100">
+                  <img
+                    src="/images/real/corporate_training.jpeg"
+                    alt="Corporate Equity"
+                    className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="text-xs font-semibold text-slate-400 mb-2">
+                  July 14, 2025
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#007AFF] transition-colors leading-snug">
+                  Bathroom to Boardroom: Dismantling Hidden Corporate Barriers
+                </h3>
+                <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                  Why corporate equity must move beyond performative statements into structural policy overhaul and executive sponsorship.
+                </p>
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-slate-100">
+                <Link
+                  to="/blogs"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#007AFF] hover:underline"
+                >
+                  <span>Read Article</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </article>
+
+            {/* Article 3 */}
+            <article className="group flex flex-col justify-between">
+              <div>
+                <div className="rounded-2xl overflow-hidden mb-4 bg-slate-100 shadow-xs border border-slate-100">
+                  <img
+                    src="/images/real/conference_stage.jpg"
+                    alt="Responsible AI"
+                    className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="text-xs font-semibold text-slate-400 mb-2">
+                  August 02, 2025
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#007AFF] transition-colors leading-snug">
+                  Why Content & Ethics are the Currency of Modern Inclusion
+                </h3>
+                <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                  Auditing algorithmic systems and establishing human dignity standards across healthcare AI and corporate talent models.
+                </p>
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-slate-100">
+                <Link
+                  to="/blogs"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#007AFF] hover:underline"
+                >
+                  <span>Read Article</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </article>
+          </div>
+
+          {/* Button: See All Articles (Matching Template Pill Button) */}
+          <div className="mt-12 text-center">
+            <Link
+              to="/blogs"
+              className="template-pill-primary group shadow-md"
+            >
+              <span>See All Articles</span>
+              <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center transition-transform group-hover:translate-x-1">
+                <ArrowRight className="w-3 h-3 text-white" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          7. TESTIMONIALS SECTION (MATCHING TEMPLATE WHAT MY CLIENTS ARE SAYING)
+         ========================================================================= */}
+      <section className="py-16 sm:py-24 bg-[#FAFAFC] border-t border-slate-200/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">
+              Testimonials
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
+              What{' '}
+              <span className="bg-gradient-to-r from-[#FF2D55] to-[#007AFF] bg-clip-text text-transparent">
+                My Clients
+              </span>{' '}
+              Are Saying
+            </h2>
+            <p className="mt-4 text-sm sm:text-base text-slate-500">
+              Hear from leaders who transformed their healthcare protocols, corporate culture, and workforce confidence.
+            </p>
+          </div>
+
+          {/* 3 Testimonials Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t, idx) => (
+              <div
+                key={t.id}
+                className={`bg-white rounded-3xl p-7 border transition-all duration-300 flex flex-col justify-between ${
+                  idx === testimonialIndex
+                    ? 'border-[#007AFF] shadow-lg ring-1 ring-[#007AFF]/20 scale-101'
+                    : 'border-slate-200/80 shadow-xs hover:shadow-md'
+                }`}
+              >
+                <div>
+                  {/* Top Quote Icon */}
+                  <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mb-6">
+                    <Quote className="w-5 h-5 text-[#007AFF]" />
+                  </div>
+
+                  <p className="text-sm text-slate-700 leading-relaxed font-normal italic">
+                    "{t.quote}"
+                  </p>
+                </div>
+
+                {/* Author Info */}
+                <div className="mt-8 pt-6 border-t border-slate-100 flex items-center gap-3.5">
+                  <img
+                    src={t.avatar}
+                    alt={t.author}
+                    className="w-11 h-11 rounded-full object-cover border-2 border-slate-100"
+                  />
+                  <div>
+                    <div className="font-bold text-sm text-slate-900">{t.author}</div>
+                    <div className="text-[11px] text-slate-500">{t.title}</div>
+                    <div className="text-[10px] font-semibold text-[#007AFF]">{t.organization}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Slider Prev/Next Controls (Matching Template) */}
+          <div className="mt-10 flex justify-center items-center gap-3">
             <button
               type="button"
-              onClick={() => scrollToMedia(activeMediaIdx - 1)}
-              disabled={activeMediaIdx === 0}
-              aria-label="Previous podcast"
-              className={`absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full ios-glass text-slate-800 shadow-2xl flex items-center justify-center transition-all cursor-pointer ${
-                activeMediaIdx === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110'
-              }`}
+              onClick={handlePrevTestimonial}
+              className="w-10 h-10 rounded-full bg-white border border-slate-200 hover:border-slate-400 flex items-center justify-center text-slate-700 hover:text-slate-900 shadow-xs transition-colors cursor-pointer"
+              aria-label="Previous Testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
-
-            {/* Right Arrow */}
             <button
               type="button"
-              onClick={() => scrollToMedia(activeMediaIdx + 1)}
-              disabled={activeMediaIdx === 5}
-              aria-label="Next podcast"
-              className={`absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full ios-btn-primary text-white shadow-2xl flex items-center justify-center transition-all cursor-pointer ${
-                activeMediaIdx === 5 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110'
-              }`}
+              onClick={handleNextTestimonial}
+              className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center shadow-md hover:bg-slate-800 transition-colors cursor-pointer"
+              aria-label="Next Testimonial"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
-
-            <div
-              ref={mediaScrollRef}
-              onScroll={handleMediaScroll}
-              className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 overflow-x-auto pb-4 pt-1 px-[7vw] sm:px-0 snap-x snap-mandatory scrollbar-none scroll-smooth items-stretch"
-            >
-              {MEDIA_ITEMS.slice(0, 6).map((item) => (
-                <div
-                  key={item.id}
-                  className="w-[86vw] max-w-[360px] md:max-w-none md:w-auto shrink-0 snap-center group ios-glass-card rounded-3xl overflow-hidden shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between cursor-pointer h-full"
-                  onClick={() => setActiveVideo(item)}
-                >
-                  <div className="relative aspect-video overflow-hidden bg-slate-900">
-                    <img
-                      src={item.thumbnailUrl}
-                      alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95 group-hover:opacity-100"
-                    />
-                    <div className="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                        <Play className="w-5 h-5 ml-0.5 fill-current" />
-                      </div>
-                    </div>
-                    <span className="absolute bottom-3 right-3 px-2 py-0.5 rounded-md text-[11px] font-mono font-bold bg-black/75 text-white backdrop-blur-md">
-                      {item.duration || 'Watch'}
-                    </span>
-                  </div>
-
-                  <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between">
-                    <div>
-                      <span className="text-[11px] font-extrabold text-[#FF2D55] uppercase tracking-wider">
-                        {item.type} • {item.source}
-                      </span>
-                      <h3 className="font-bold text-base sm:text-lg text-slate-900 mt-1 mb-2 group-hover:text-[#007AFF] transition-colors line-clamp-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-slate-600 text-xs sm:text-sm line-clamp-2 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                    <div className="mt-4 pt-4 border-t border-slate-200/60 flex items-center justify-between text-xs font-bold text-[#007AFF]">
-                      <span>Watch Full Recording</span>
-                      <Play className="w-3.5 h-3.5 fill-current" />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Mobile Indicators */}
-            <div className="flex md:hidden items-center justify-center gap-1.5 mt-2">
-              {MEDIA_ITEMS.slice(0, 6).map((_, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => scrollToMedia(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    activeMediaIdx === idx ? 'w-6 bg-[#007AFF]' : 'w-2 bg-slate-300'
-                  }`}
-                  aria-label={`Go to podcast ${idx + 1}`}
-                />
-              ))}
-            </div>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          CLOSING APPLE AURORA CTA BAND
+          8. CALL TO ACTION SECTION BEFORE FOOTER
          ========================================================================= */}
-      <GradientCTASection onOpenCapabilities={() => setCapabilitiesModalOpen(true)} />
+      <section className="py-16 sm:py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="p-8 sm:p-12 rounded-[2.5rem] bg-gradient-to-r from-[#FF2D55]/10 via-[#AF52DE]/10 to-[#007AFF]/10 border border-slate-200 shadow-sm">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Ready to Turn Your Organization into a{' '}
+              <span className="bg-gradient-to-r from-[#FF2D55] to-[#007AFF] bg-clip-text text-transparent">
+                Movement?
+              </span>
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
+              Schedule an executive consultation with Celia Sandhya Daniels to architect sustainable health equity and inclusive leadership.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <Link
+                to="/book-online"
+                className="template-pill-primary shadow-lg"
+              >
+                <span>Book a Consultation</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:border-slate-400 hover:bg-slate-50 transition-all shadow-xs"
+              >
+                <span>Contact Our Office</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Video Modal Player */}
-      <VideoModal item={activeVideo} onClose={() => setActiveVideo(null)} />
+      {/* Video & Capabilities Modals */}
+      <VideoModal
+        item={selectedVideo}
+        onClose={() => setSelectedVideo(null)}
+      />
 
-      {/* Capabilities Statement Modal */}
       <CapabilitiesModal
         isOpen={capabilitiesModalOpen}
         onClose={() => setCapabilitiesModalOpen(false)}
@@ -903,5 +828,3 @@ export const HomePage: React.FC = () => {
     </div>
   );
 };
-
-export default HomePage;

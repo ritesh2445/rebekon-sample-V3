@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, ArrowUpRight, Award, ShieldCheck, Sparkles } from 'lucide-react';
+import { Mail, ArrowUpRight, ShieldCheck, Award } from 'lucide-react';
 import { LinkedinIcon, YoutubeIcon, FacebookIcon, InstagramIcon } from './SocialIcons';
 import { SITE_CONFIG } from '../data/siteData';
 
@@ -8,216 +8,136 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-slate-950/90 text-slate-300 pt-16 pb-12 border-t border-white/10 backdrop-blur-3xl overflow-hidden select-none">
-      {/* Subtle Aurora Ambient Reflection at Footer Bottom */}
-      <div className="absolute -bottom-24 left-1/4 w-[500px] h-[300px] bg-[#FF2D55]/15 blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-24 right-1/4 w-[500px] h-[300px] bg-[#007AFF]/15 blur-[120px] pointer-events-none" />
+    <footer className="relative bg-[#070A11] text-slate-300 pt-20 pb-12 overflow-hidden border-t border-white/10">
+      {/* Subtle Aurora Ambient Reflection */}
+      <div className="absolute top-0 left-1/4 w-[450px] h-[250px] bg-[#FF2D55]/10 blur-[130px] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[450px] h-[250px] bg-[#007AFF]/10 blur-[130px] pointer-events-none" />
 
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 relative z-10">
-        {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-14 border-b border-slate-800/80">
-          {/* Brand Info */}
-          <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="inline-block bg-white rounded-2xl p-2 shadow-md hover:scale-102 transition-transform">
-              <img
-                src="/images/real/rebekon_official_logo.jpg"
-                alt={SITE_CONFIG.companyName}
-                className="h-8 sm:h-9 w-auto object-contain"
-              />
-            </Link>
+      {/* GIANT WATERMARK TEXT (MATCHING TEMPLATE REFERENCE) */}
+      <div className="absolute bottom-6 inset-x-0 flex justify-center items-center pointer-events-none select-none overflow-hidden z-0">
+        <span className="text-[14vw] font-black tracking-tight text-white/[0.04] leading-none whitespace-nowrap uppercase">
+          REBEKON
+        </span>
+      </div>
 
-            <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-              <strong className="text-white font-semibold">{SITE_CONFIG.tagline}</strong>
-              <br />
-              {SITE_CONFIG.positioningLine}
-            </p>
-
-            <div className="pt-2 text-xs text-slate-400 space-y-1">
-              <p>Founded by <span className="text-white font-semibold">{SITE_CONFIG.founder}</span> {SITE_CONFIG.pronouns}</p>
-              <p className="flex items-center gap-1.5 text-slate-400">
-                <MapPin className="w-3.5 h-3.5 text-[#FF2D55]" />
-                {SITE_CONFIG.location}
-              </p>
-            </div>
-
-            {/* Certifications Micro-Badges */}
-            <div className="pt-2 flex flex-wrap gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-slate-900/80 text-slate-300 border border-slate-700/80 shadow-2xs">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#007AFF]" />
-                NGLCC Certified (30210)
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Top Header Row with Logo & Email Pill */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-12 border-b border-white/10">
+          <Link to="/" className="flex items-center gap-3 group">
+            <img
+              src="/images/real/rebekon_official_logo.jpg"
+              alt={SITE_CONFIG.companyName}
+              className="h-10 w-auto object-contain rounded-xl ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-105"
+            />
+            <div>
+              <span className="text-xl font-extrabold text-white tracking-tight block">
+                Rebekon<span className="text-[#007AFF]">.</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-slate-900/80 text-slate-300 border border-slate-700/80 shadow-2xs">
-                <Award className="w-3.5 h-3.5 text-[#FF2D55]" />
-                CPUC VON: 24000841
+              <span className="text-[11px] text-slate-400 font-medium tracking-wide">
+                Health Equity & DEIB Advisory
               </span>
             </div>
+          </Link>
+
+          {/* Nav Links in Center/Right */}
+          <nav className="flex flex-wrap items-center gap-5 sm:gap-8 text-xs sm:text-sm font-semibold text-slate-300">
+            <Link to="/" className="hover:text-white transition-colors">Home</Link>
+            <Link to="/about" className="hover:text-white transition-colors">About</Link>
+            <Link to="/services" className="hover:text-white transition-colors">Services</Link>
+            <Link to="/healthcare" className="hover:text-white transition-colors">Health Equity</Link>
+            <Link to="/case-studies" className="hover:text-white transition-colors">Success Stories</Link>
+            <Link to="/blogs" className="hover:text-white transition-colors">Blog</Link>
+            <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
+          </nav>
+
+          {/* Email Pill Button (Matching Template) */}
+          <a
+            href={`mailto:${SITE_CONFIG.email}`}
+            className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-xs sm:text-sm font-semibold text-white transition-all duration-300 hover:border-white/30 shadow-sm"
+          >
+            <Mail className="w-4 h-4 text-[#FF2D55]" />
+            <span>{SITE_CONFIG.email}</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-slate-400" />
+          </a>
+        </div>
+
+        {/* Certifications and Enterprise Badges */}
+        <div className="py-8 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 text-xs text-slate-400">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="font-semibold text-slate-300 uppercase tracking-wider text-[11px]">
+              Certifications:
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#007AFF]" />
+              NGLCC Certified LGBTBE (#30210)
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">
+              <Award className="w-3.5 h-3.5 text-[#FF2D55]" />
+              CPUC VON: 24000841
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">
+              SBE / EBE Certified
+            </span>
           </div>
 
-          {/* Nav Column 1: Services */}
-          <div>
-            <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">
-              Services
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link to="/services" className="hover:text-[#FF2D55] transition-colors">
-                  Overview & Framework
-                </Link>
-              </li>
-              <li>
-                <Link to="/healthcare" className="hover:text-[#007AFF] transition-colors">
-                  Healthcare & Clinical Trials
-                </Link>
-              </li>
-              <li>
-                <Link to="/topics" className="hover:text-[#AF52DE] transition-colors">
-                  Trainings & Workshops
-                </Link>
-              </li>
-              <li>
-                <Link to="/deib" className="hover:text-[#FF2D55] transition-colors">
-                  Diversity & Inclusion
-                </Link>
-              </li>
-              <li>
-                <Link to="/policies" className="hover:text-[#007AFF] transition-colors">
-                  Policy & Guidelines
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Nav Column 2: Company */}
-          <div>
-            <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">
-              Company
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link to="/about" className="hover:text-[#007AFF] transition-colors">
-                  About Celia Daniels
-                </Link>
-              </li>
-              <li>
-                <Link to="/media" className="hover:text-[#007AFF] transition-colors">
-                  Media & Podcasts
-                </Link>
-              </li>
-              <li>
-                <Link to="/case-studies" className="hover:text-[#007AFF] transition-colors">
-                  Case Studies
-                </Link>
-              </li>
-              <li>
-                <Link to="/resources" className="hover:text-[#007AFF] transition-colors">
-                  Resources & Speaking
-                </Link>
-              </li>
-              <li>
-                <Link to="/blogs" className="hover:text-[#007AFF] transition-colors">
-                  Insights & Blogs
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Nav Column 3: Connect & Book */}
-          <div>
-            <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">
-              Get in Touch
-            </h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <a
-                  href={`mailto:${SITE_CONFIG.email}`}
-                  className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
-                >
-                  <Mail className="w-4 h-4 text-[#FF2D55]" />
-                  <span>{SITE_CONFIG.email}</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${SITE_CONFIG.phone.replace(/\s+/g, '')}`}
-                  className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
-                >
-                  <Phone className="w-4 h-4 text-[#007AFF]" />
-                  <span>{SITE_CONFIG.phone}</span>
-                </a>
-              </li>
-              <li className="pt-2">
-                <Link
-                  to="/book-online"
-                  className="inline-flex items-center gap-1.5 text-sm font-bold text-[#FF2D55] hover:text-pink-400 transition-colors"
-                >
-                  <span>Book Free Consultation</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/download"
-                  className="inline-flex items-center gap-1.5 text-sm font-bold text-[#007AFF] hover:text-blue-400 transition-colors"
-                >
-                  <span>Capabilities Statement</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </Link>
-              </li>
-            </ul>
-
-            {/* Social Icons */}
-            <div className="flex items-center gap-3 pt-4">
-              <a
-                href={SITE_CONFIG.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-[#007AFF] transition-all"
-                aria-label="LinkedIn"
-              >
-                <LinkedinIcon className="w-4 h-4" />
-              </a>
-              <a
-                href={SITE_CONFIG.socials.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-[#FF2D55] transition-all"
-                aria-label="YouTube"
-              >
-                <YoutubeIcon className="w-4 h-4" />
-              </a>
-              <a
-                href={SITE_CONFIG.socials.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-[#007AFF] transition-all"
-                aria-label="Facebook"
-              >
-                <FacebookIcon className="w-4 h-4" />
-              </a>
-              <a
-                href={SITE_CONFIG.socials.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-[#FF2D55] transition-all"
-                aria-label="Instagram"
-              >
-                <InstagramIcon className="w-4 h-4" />
-              </a>
-            </div>
+          <div className="text-slate-400">
+            Founded by <span className="text-white font-semibold">{SITE_CONFIG.founder}</span> ({SITE_CONFIG.pronouns}) • {SITE_CONFIG.location}
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {currentYear} {SITE_CONFIG.companyName}. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <span>Thousand Oaks, CA</span>
+        {/* Bottom Bar (Socials, Copyright, Legal) */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-slate-400">
+          {/* Social Icons */}
+          <div className="flex items-center gap-3">
+            <a
+              href={SITE_CONFIG.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Rebekon on LinkedIn"
+              className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 flex items-center justify-center text-slate-300 hover:text-white transition-all hover:scale-105"
+            >
+              <LinkedinIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={SITE_CONFIG.socials.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Rebekon on YouTube"
+              className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 flex items-center justify-center text-slate-300 hover:text-white transition-all hover:scale-105"
+            >
+              <YoutubeIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={SITE_CONFIG.socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Rebekon on Instagram"
+              className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 flex items-center justify-center text-slate-300 hover:text-white transition-all hover:scale-105"
+            >
+              <InstagramIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={SITE_CONFIG.socials.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Rebekon on Facebook"
+              className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 flex items-center justify-center text-slate-300 hover:text-white transition-all hover:scale-105"
+            >
+              <FacebookIcon className="w-4 h-4" />
+            </a>
+          </div>
+
+          {/* Legal / Copyright */}
+          <div className="flex flex-wrap items-center gap-6">
             <Link to="/policies" className="hover:text-white transition-colors">
-              Privacy & Inclusion Policy
+              Terms & Conditions
             </Link>
-            <Link to="/download" className="hover:text-white transition-colors">
-              Capabilities (PDF)
+            <Link to="/policies" className="hover:text-white transition-colors">
+              Privacy Policy
             </Link>
+            <span>
+              All rights reserved © {currentYear} {SITE_CONFIG.companyName}.
+            </span>
           </div>
         </div>
       </div>

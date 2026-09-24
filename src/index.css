@@ -373,3 +373,101 @@
     animation: none !important;
   }
 }
+
+/* =========================================================================
+   TEMPLATE REBEKON-SAMPLE-V3 UTILITIES (MATCHING DESIGN REFERENCE)
+   ========================================================================= */
+
+.template-hero-card {
+  background: #0B0F19;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2.75rem;
+  box-shadow: 
+    0 30px 80px -20px rgba(0, 0, 0, 0.7),
+    0 0 100px -30px rgba(0, 122, 255, 0.15);
+}
+
+.template-pill-primary {
+  background: #007AFF;
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px rgba(0, 122, 255, 0.4);
+}
+
+.template-pill-primary:hover {
+  background: #0066D6;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -5px rgba(0, 122, 255, 0.5);
+}
+
+.template-pill-pink {
+  background: #FF2D55;
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px rgba(255, 45, 85, 0.35);
+}
+
+.template-pill-pink:hover {
+  background: #E01E44;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -5px rgba(255, 45, 85, 0.45);
+}
+
+.template-pill-gradient {
+  background: linear-gradient(135deg, #FF2D55 0%, #AF52DE 50%, #007AFF 100%);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px rgba(255, 45, 85, 0.3);
+}
+
+.template-pill-gradient:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 32px -5px rgba(0, 122, 255, 0.4);
+}
+
+.template-stat-chip {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.template-stat-chip:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.template-watermark {
+  font-size: clamp(4rem, 16vw, 15rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.8;
+  color: rgba(15, 23, 42, 0.04);
+  pointer-events: none;
+  user-select: none;
+}
+

@@ -5,44 +5,26 @@ import {
   Menu, 
   X, 
   ArrowRight, 
-  Sparkles, 
   HeartPulse, 
-  Users, 
-  ShieldCheck, 
-  Calendar,
   Layers,
-  BookOpen,
-  ArrowUpRight
+  Sparkles,
+  Calendar,
+  Briefcase,
+  ShieldCheck,
+  Cpu
 } from 'lucide-react';
 import { SITE_CONFIG } from '../data/siteData';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [hiddenOnDesktop, setHiddenOnDesktop] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const lastScrollY = useRef(0);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 20);
-
-      // Auto-hide on desktop only when scrolling down
-      if (window.innerWidth >= 1024) {
-        if (currentScrollY > 90 && currentScrollY > lastScrollY.current + 8) {
-          setHiddenOnDesktop(true);
-          setServicesDropdownOpen(false);
-        } else if (currentScrollY < lastScrollY.current - 6 || currentScrollY <= 90) {
-          setHiddenOnDesktop(false);
-        }
-      } else {
-        setHiddenOnDesktop(false);
-      }
-
-      lastScrollY.current = currentScrollY;
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -54,20 +36,6 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
     setServicesDropdownOpen(false);
   }, [location.pathname]);
-
-  // Lock background scrolling when mobile menu is open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      const originalOverflow = document.body.style.overflow;
-      const originalTouchAction = document.body.style.touchAction;
-      document.body.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
-      return () => {
-        document.body.style.overflow = originalOverflow;
-        document.body.style.touchAction = originalTouchAction;
-      };
-    }
-  }, [mobileMenuOpen]);
 
   // Handle click outside dropdown
   useEffect(() => {
@@ -82,48 +50,47 @@ export const Navbar: React.FC = () => {
 
   const serviceLinks = [
     { 
-      title: 'All Services & Framework', 
+      title: 'Executive Services & Framework', 
       path: '/services', 
-      desc: 'Educate, Engage, Empower 3-pillar framework',
+      desc: 'Educate, Engage, Empower 3-pillar consulting model',
       icon: Layers,
       color: '#FF2D55'
     },
     { 
       title: 'Healthcare Equity & Clinical Trials', 
       path: '/healthcare', 
-      desc: 'Humanizing healthcare & affirming care systems',
+      desc: 'Bridging protocol disparities and gender-affirming care',
       icon: HeartPulse,
       color: '#007AFF'
     },
     { 
-      title: 'Trainings & Workshops', 
+      title: 'Keynotes & Masterclasses', 
       path: '/topics', 
-      desc: 'ERG, allyship & corporate keynote workshops',
-      icon: BookOpen,
+      desc: 'High-energy keynotes on equity and intersectionality',
+      icon: Sparkles,
       color: '#AF52DE'
     },
     { 
-      title: 'Diversity & Inclusion Consulting', 
+      title: 'Bathroom to Boardroom DEIB', 
       path: '/deib', 
-      desc: 'Bathroom to the Boardroom cultural transformation',
-      icon: Users,
+      desc: 'Workplace policy audits and executive ERG governance',
+      icon: Briefcase,
       color: '#FF2D55'
     },
     { 
-      title: 'Policy & Guidelines', 
-      path: '/policies', 
-      desc: 'Trans, gender-diverse & intersex enterprise policies',
-      icon: ShieldCheck,
+      title: 'Responsible AI & Data Dignity', 
+      path: '/topics#ai', 
+      desc: 'Algorithmic bias audits and ethical guardrails',
+      icon: Cpu,
       color: '#007AFF'
     },
-  ];
-
-  const navLinks = [
-    { title: 'Media', path: '/media' },
-    { title: 'Case Studies', path: '/case-studies' },
-    { title: 'Resources', path: '/resources' },
-    { title: 'About Us', path: '/about' },
-    { title: 'Blogs', path: '/blogs' },
+    { 
+      title: 'Corporate Policies & Guidelines', 
+      path: '/policies', 
+      desc: 'Standardized transgender transition guidelines',
+      icon: ShieldCheck,
+      color: '#AF52DE'
+    }
   ];
 
   const isCurrent = (path: string) => {
@@ -140,21 +107,17 @@ export const Navbar: React.FC = () => {
     location.pathname.startsWith('/policies');
 
   return (
-    <header
-      className={`fixed top-3 sm:top-4 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none transition-transform duration-300 ease-in-out ${
-        hiddenOnDesktop ? 'lg:-translate-y-28 lg:opacity-0 pointer-events-none' : 'lg:translate-y-0 lg:opacity-100'
-      }`}
-    >
-      {/* Floating Apple iOS Glass Capsule */}
+    <header className="fixed top-3 sm:top-5 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none transition-all duration-300">
+      {/* Floating Capsule matching Template */}
       <div
-        className={`pointer-events-auto max-w-6xl 2xl:max-w-7xl mx-auto rounded-full transition-all duration-300 ${
+        className={`pointer-events-auto max-w-6xl mx-auto rounded-full transition-all duration-300 ${
           isScrolled
-            ? 'ios-glass py-2 sm:py-2.5 px-4 sm:px-6 shadow-[0_16px_40px_-10px_rgba(0,122,255,0.12),0_8px_20px_-6px_rgba(255,45,85,0.1)]'
-            : 'bg-white/80 backdrop-blur-2xl py-2.5 sm:py-3 px-4 sm:px-6 border border-white/90 shadow-[0_10px_30px_rgba(15,23,42,0.06)]'
+            ? 'bg-[#0B0F19]/90 backdrop-blur-2xl py-2.5 px-4 sm:px-6 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_30px_rgba(0,122,255,0.15)] text-white'
+            : 'bg-[#0B0F19]/75 backdrop-blur-xl py-3 px-4 sm:px-7 border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.4)] text-white'
         }`}
       >
         <div className="flex items-center justify-between gap-4">
-          {/* Logo with specular micro-scale effect */}
+          {/* Logo with Brand Name */}
           <Link
             to="/"
             className="flex items-center gap-2.5 shrink-0 focus:outline-none focus:ring-2 focus:ring-[#007AFF]/40 rounded-full p-0.5 group"
@@ -163,23 +126,48 @@ export const Navbar: React.FC = () => {
               <img
                 src="/images/real/rebekon_official_logo.jpg"
                 alt={SITE_CONFIG.companyName}
-                className="h-8 sm:h-9 w-auto object-contain rounded-lg transition-transform duration-300 group-hover:scale-105"
+                className="h-8 sm:h-9 w-auto object-contain rounded-lg ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-105"
               />
-              <span className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-gradient-to-r from-[#FF2D55] to-[#007AFF] rounded-full ring-2 ring-white" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-r from-[#FF2D55] to-[#007AFF] rounded-full ring-2 ring-[#0B0F19]" />
             </div>
+            <span className="text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-slate-200 transition-colors">
+              Rebekon<span className="text-[#007AFF]">.</span>
+            </span>
           </Link>
 
-          {/* Desktop Navigation Segmented Pill */}
-          <nav className="hidden lg:flex items-center gap-1 bg-slate-100/60 p-1 rounded-full border border-slate-200/50 backdrop-blur-md">
+          {/* Desktop Navigation Links (Home, About, Services, Success Stories, Blog) */}
+          <nav className="hidden lg:flex items-center gap-1.5 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
+            <Link
+              to="/"
+              className={`px-4 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 ${
+                isCurrent('/') && location.pathname === '/'
+                  ? 'bg-white/15 text-white shadow-xs'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              Home
+            </Link>
+
+            <Link
+              to="/about"
+              className={`px-4 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 ${
+                isCurrent('/about')
+                  ? 'bg-white/15 text-white shadow-xs'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              About
+            </Link>
+
             {/* Services Dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
                 type="button"
                 onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   isServiceActive
-                    ? 'text-slate-900 bg-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                    ? 'bg-white/15 text-white shadow-xs'
+                    : 'text-slate-300 hover:text-white hover:bg-white/10'
                 }`}
                 aria-expanded={servicesDropdownOpen}
               >
@@ -191,9 +179,9 @@ export const Navbar: React.FC = () => {
                 />
               </button>
 
-              {/* iOS Control Center Styled Dropdown Sheet */}
+              {/* Dropdown Menu */}
               {servicesDropdownOpen && (
-                <div className="absolute top-full left-0 mt-3 w-88 ios-glass-card p-3 z-50 animate-in fade-in zoom-in-95 duration-200 border border-white/90 shadow-[0_24px_60px_-10px_rgba(0,122,255,0.18)]">
+                <div className="absolute top-full left-0 mt-3 w-88 bg-[#0E1320] border border-white/15 p-3 rounded-2xl z-50 animate-in fade-in zoom-in-95 duration-200 shadow-[0_24px_60px_rgba(0,0,0,0.8),0_0_30px_rgba(0,122,255,0.15)] backdrop-blur-2xl">
                   <div className="space-y-1">
                     {serviceLinks.map((item) => {
                       const Icon = item.icon;
@@ -203,80 +191,76 @@ export const Navbar: React.FC = () => {
                         <Link
                           key={item.path}
                           to={item.path}
-                          className={`flex items-start gap-3 p-2.5 rounded-2xl transition-all ${
+                          className={`flex items-start gap-3 p-2.5 rounded-xl transition-all ${
                             active
-                              ? 'bg-gradient-to-r from-[#FFEBF0] to-[#E8F2FF] text-slate-900 shadow-2xs'
-                              : 'hover:bg-white/80 text-slate-800'
+                              ? 'bg-white/10 text-white'
+                              : 'hover:bg-white/5 text-slate-300 hover:text-white'
                           }`}
                           onClick={() => setServicesDropdownOpen(false)}
                         >
                           <div 
-                            className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 shadow-2xs mt-0.5"
+                            className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 shadow-xs mt-0.5"
                             style={{ 
-                              backgroundColor: `${item.color}15`,
+                              backgroundColor: `${item.color}20`,
                               color: item.color 
                             }}
                           >
                             <Icon className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="font-bold text-xs xl:text-sm text-slate-900">{item.title}</div>
-                            <div className="text-[11px] text-slate-500 mt-0.5">{item.desc}</div>
+                            <div className="font-bold text-xs xl:text-sm text-white">{item.title}</div>
+                            <div className="text-[11px] text-slate-400 mt-0.5">{item.desc}</div>
                           </div>
                         </Link>
                       );
                     })}
                   </div>
-
-                  {/* Dropdown Footer */}
-                  <div className="mt-2 pt-2 border-t border-slate-200/60 px-3 py-2 flex items-center justify-between text-xs text-slate-500 bg-white/50 rounded-2xl">
-                    <span className="font-medium text-[11px] text-slate-500">Bathroom to the Boardroom</span>
-                    <Link
-                      to="/services"
-                      className="text-[#007AFF] font-bold hover:underline flex items-center gap-1 text-[11px]"
-                      onClick={() => setServicesDropdownOpen(false)}
-                    >
-                      Overview <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </div>
                 </div>
               )}
             </div>
 
-            {/* Other Navigation Links */}
-            {navLinks.map((link) => {
-              const active = isCurrent(link.path);
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`px-3.5 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 ${
-                    active
-                      ? 'text-slate-900 bg-white shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-                  }`}
-                >
-                  {link.title}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Desktop Right CTA Capsule */}
-          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
             <Link
-              to="/contact"
-              className="text-xs xl:text-sm font-semibold text-slate-600 hover:text-slate-900 px-3.5 py-1.5 rounded-full hover:bg-white/70 transition-colors"
+              to="/case-studies"
+              className={`px-4 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 ${
+                isCurrent('/case-studies')
+                  ? 'bg-white/15 text-white shadow-xs'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'
+              }`}
             >
-              Contact
+              Success Stories
             </Link>
 
             <Link
-              to="/book-online"
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs xl:text-sm font-bold ios-btn-primary shadow-sm"
+              to="/media"
+              className={`px-4 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 ${
+                isCurrent('/media')
+                  ? 'bg-white/15 text-white shadow-xs'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'
+              }`}
             >
-              <Calendar className="w-3.5 h-3.5" />
-              <span>Book Online</span>
+              Media
+            </Link>
+
+            <Link
+              to="/blogs"
+              className={`px-4 py-1.5 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 ${
+                isCurrent('/blogs')
+                  ? 'bg-white/15 text-white shadow-xs'
+                  : 'text-slate-300 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              Blog
+            </Link>
+          </nav>
+
+          {/* Right Action: Pill Button "Book a Consultation" */}
+          <div className="hidden sm:flex items-center gap-3">
+            <Link
+              to="/book-online"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/40 transition-all duration-300 shadow-sm hover:scale-102"
+            >
+              <Calendar className="w-3.5 h-3.5 text-[#FF2D55]" />
+              <span>Book a Consultation</span>
             </Link>
           </div>
 
@@ -284,7 +268,7 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center gap-2 lg:hidden">
             <Link
               to="/book-online"
-              className="px-3 py-1.5 rounded-full text-xs font-bold ios-btn-primary"
+              className="px-3 py-1.5 rounded-full text-[11px] font-bold text-white bg-gradient-to-r from-[#FF2D55] to-[#007AFF] shadow-sm"
             >
               Book
             </Link>
@@ -292,99 +276,86 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-full bg-white/80 border border-slate-200/60 text-slate-700 hover:text-slate-900 focus:outline-none"
-              aria-label="Toggle Navigation Menu"
+              className="p-2 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              {mobileMenuOpen ? <X className="w-5 h-5 text-[#FF2D55]" /> : <Menu className="w-5 h-5 text-slate-800" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile iOS Control Center Fullscreen Frosted Sheet */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="pointer-events-auto fixed inset-0 top-16 sm:top-20 z-40 bg-white/95 backdrop-blur-3xl p-4 sm:p-6 overflow-y-auto lg:hidden animate-in fade-in slide-in-from-top-4 duration-300">
-          <div className="max-w-md mx-auto space-y-5 pb-12">
-            {/* Quick Status Pill */}
-            <div className="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-[#FFEBF0] to-[#E8F2FF] border border-white">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#FF2D55] animate-ping" />
-                <span className="text-xs font-bold text-slate-800">2025–2026 Keynotes & Advisory</span>
-              </div>
-              <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/80 text-[#007AFF]">
-                Open
-              </span>
-            </div>
+        <div className="lg:hidden pointer-events-auto fixed inset-0 z-40 bg-black/80 backdrop-blur-xl animate-in fade-in duration-200 flex flex-col justify-between p-6 pt-24 text-white">
+          <div className="space-y-3 overflow-y-auto max-h-[75vh]">
+            <Link
+              to="/"
+              className="block p-3 rounded-2xl bg-white/5 hover:bg-white/10 font-bold text-base"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              className="block p-3 rounded-2xl bg-white/5 hover:bg-white/10 font-bold text-base"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About Celia Daniels
+            </Link>
+            <Link
+              to="/services"
+              className="block p-3 rounded-2xl bg-white/5 hover:bg-white/10 font-bold text-base text-[#007AFF]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Services Overview
+            </Link>
+            <Link
+              to="/healthcare"
+              className="block p-3 rounded-2xl bg-white/5 hover:bg-white/10 font-bold text-base"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Health Equity & Trials
+            </Link>
+            <Link
+              to="/case-studies"
+              className="block p-3 rounded-2xl bg-white/5 hover:bg-white/10 font-bold text-base"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Success Stories & Case Studies
+            </Link>
+            <Link
+              to="/media"
+              className="block p-3 rounded-2xl bg-white/5 hover:bg-white/10 font-bold text-base"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Media & Keynotes
+            </Link>
+            <Link
+              to="/blogs"
+              className="block p-3 rounded-2xl bg-white/5 hover:bg-white/10 font-bold text-base"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Insights & Blog
+            </Link>
+            <Link
+              to="/contact"
+              className="block p-3 rounded-2xl bg-white/5 hover:bg-white/10 font-bold text-base"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Contact
+            </Link>
+          </div>
 
-            {/* Service Pillars Card Grid */}
-            <div>
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-2">
-                Advisory & Keynote Practices
-              </span>
-              <div className="grid grid-cols-1 gap-2 mt-2">
-                {serviceLinks.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.path}
-                      to={item.path}
-                      className="flex items-center gap-3 p-3 rounded-2xl bg-white/80 border border-slate-200/60 shadow-2xs hover:bg-white"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <div 
-                        className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                        style={{ backgroundColor: `${item.color}15`, color: item.color }}
-                      >
-                        <Icon className="w-4 h-4" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-bold text-xs text-slate-900">{item.title}</div>
-                        <div className="text-[10px] text-slate-500 truncate">{item.desc}</div>
-                      </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* General Navigation Links */}
-            <div>
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-2">
-                Explore Rebekon
-              </span>
-              <div className="grid grid-cols-2 gap-2 mt-2">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className="p-3 rounded-2xl bg-white/70 border border-slate-200/60 text-xs font-bold text-slate-800 hover:bg-white text-center shadow-2xs"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.title}
-                  </Link>
-                ))}
-                <Link
-                  to="/contact"
-                  className="p-3 rounded-2xl bg-white/70 border border-slate-200/60 text-xs font-bold text-slate-800 hover:bg-white text-center shadow-2xs col-span-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Contact & Inquiry
-                </Link>
-              </div>
-            </div>
-
-            {/* Direct Booking CTA */}
-            <div className="pt-2">
-              <Link
-                to="/book-online"
-                className="w-full py-3.5 rounded-full ios-btn-primary flex items-center justify-center gap-2 text-sm font-bold shadow-lg"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Calendar className="w-4 h-4" />
-                <span>Book Consultation / Keynote</span>
-              </Link>
-            </div>
+          <div className="pt-4 border-t border-white/10">
+            <Link
+              to="/book-online"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-full font-bold text-white bg-gradient-to-r from-[#FF2D55] to-[#007AFF] shadow-lg"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Book a Consultation</span>
+            </Link>
           </div>
         </div>
       )}

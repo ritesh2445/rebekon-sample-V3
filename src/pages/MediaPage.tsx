@@ -39,14 +39,14 @@ export const MediaPage: React.FC = () => {
       title: "Diversity Collective: 2024 Diversity Spotlight Award",
       publication: "Congressional & Community Recognition",
       type: "Award Profile",
-      link: "#",
+      link: "/about",
       description: "Presented by a Member of Congress for dedicated service uplifting the LGBTQ+ community in Southern California."
     },
     {
       title: "All American Speakers Bureau Keynote Profile",
       publication: "AASpeakers",
       type: "Speaker Roster",
-      link: "#",
+      link: "/book-online",
       description: "Official keynote speaker portfolio for conferences, corporate summits, and university commencements."
     }
   ];
