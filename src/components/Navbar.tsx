@@ -117,10 +117,11 @@ export const Navbar: React.FC = () => {
         }`}
       >
         <div className="flex items-center justify-between gap-4">
-          {/* Logo with Brand Name */}
+          {/* Logo Only (no repeated text) */}
           <Link
             to="/"
-            className="flex items-center gap-2.5 shrink-0 focus:outline-none focus:ring-2 focus:ring-[#007AFF]/40 rounded-full p-0.5 group"
+            className="flex items-center shrink-0 focus:outline-none focus:ring-2 focus:ring-[#007AFF]/40 rounded-full p-0.5 group"
+            aria-label={SITE_CONFIG.companyName}
           >
             <div className="relative">
               <img
@@ -130,9 +131,6 @@ export const Navbar: React.FC = () => {
               />
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-r from-[#FF2D55] to-[#007AFF] rounded-full ring-2 ring-[#0B0F19]" />
             </div>
-            <span className="text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-slate-200 transition-colors">
-              Rebekon<span className="text-[#007AFF]">.</span>
-            </span>
           </Link>
 
           {/* Desktop Navigation Links (Home, About, Services, Success Stories, Blog) */}

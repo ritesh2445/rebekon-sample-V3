@@ -39,7 +39,7 @@ export const App: React.FC = () => {
       {/* Dynamic Ambient Apple Pink & Blue Aurora Mesh */}
       <AmbientMesh />
       
-      <div className="min-h-screen flex flex-col selection:bg-[#FFEBF0] selection:text-[#FF2D55] relative">
+      <div className="min-h-screen flex flex-col bg-[#080B11] text-slate-100 selection:bg-[#FF2D55]/30 selection:text-white relative">
         <Navbar />
         <main className="flex-grow">
           <Suspense fallback={<PageLoader />}>
