@@ -16,10 +16,19 @@
     <meta property="og:title" content="Rebekon Consulting LLC — Educate. Engage. Empower." />
     <meta property="og:description" content="Organizations to be truly inclusive — from the Bathroom to the Boardroom. Health Equity, Clinical Trials Inclusion, and DEIB Strategy." />
     
-    <!-- Google Fonts: Plus Jakarta Sans & Fraunces with display=swap for instantaneous rendering -->
+    <!-- Preload critical hero image (LCP) -->
+    <link rel="preload" as="image" href="/images/real/celia_hero.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/real/rebekon_official_logo.jpg">
+
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://www.youtube.com">
+    <link rel="dns-prefetch" href="https://i.ytimg.com">
+
+    <!-- Google Fonts: Plus Jakarta Sans (reduced weights for speed) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body class="bg-[#080B11] text-slate-100 font-sans antialiased selection:bg-[#FF2D55]/30 selection:text-white overflow-x-hidden min-h-screen">
     <div id="root"></div>

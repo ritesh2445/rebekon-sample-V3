@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
@@ -149,7 +149,7 @@ export const HomePage: React.FC = () => {
                   src="/images/real/celia_hero.jpg"
                   alt="Celia Sandhya Daniels — Keynote Speaker & Health Equity Champion"
                   className="w-full h-[400px] sm:h-[480px] object-cover object-top transition-transform duration-500 hover:scale-103"
-                />
+                 loading="eager" decoding="async" fetchPriority="high" />
               </div>
             </div>
           </div>
@@ -232,6 +232,7 @@ export const HomePage: React.FC = () => {
                     onError={(e) => {
                       (e.currentTarget as HTMLElement).style.display = 'none';
                     }}
+                    loading="lazy" decoding="async"
                   />
                   <span className="text-xs font-bold text-slate-200 text-center line-clamp-1 group-hover:text-[#007AFF]">
                     {partner.name}
@@ -311,7 +312,7 @@ export const HomePage: React.FC = () => {
                   src="/images/real/celia_speaking_award.jpg"
                   alt="Celia Sandhya Daniels on stage"
                   className="w-full h-[440px] sm:h-[500px] object-cover object-center"
-                />
+                 loading="lazy" decoding="async" />
               </div>
             </div>
           </div>
@@ -376,7 +377,7 @@ export const HomePage: React.FC = () => {
                   src="/images/real/conference_stage.jpg"
                   alt="Keynote Speaking"
                   className="w-full h-36 object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                />
+                 loading="lazy" decoding="async" />
               </div>
             </div>
 
@@ -410,7 +411,7 @@ export const HomePage: React.FC = () => {
                   src="/images/real/healthcare_workshop.jpeg"
                   alt="Clinical Trials Diversity"
                   className="w-full h-36 object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                />
+                 loading="lazy" decoding="async" />
               </div>
             </div>
 
@@ -444,7 +445,7 @@ export const HomePage: React.FC = () => {
                   src="/images/real/corporate_training.jpeg"
                   alt="Bathroom to Boardroom"
                   className="w-full h-36 object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                />
+                 loading="lazy" decoding="async" />
               </div>
             </div>
 
@@ -478,7 +479,7 @@ export const HomePage: React.FC = () => {
                   src="/images/real/panel_discussion.jpg"
                   alt="Responsible AI"
                   className="w-full h-36 object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                />
+                 loading="lazy" decoding="async" />
               </div>
             </div>
           </div>
@@ -508,7 +509,7 @@ export const HomePage: React.FC = () => {
               src="/images/real/yt_thumb_bathroom_boardroom.jpg"
               alt="Celia Daniels Keynote Video"
               className="w-full h-[320px] sm:h-[460px] object-cover opacity-80 group-hover:opacity-90 transition-opacity"
-            />
+             loading="lazy" decoding="async" />
 
             {/* Play Button Overlay */}
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-[2px]">
@@ -569,7 +570,7 @@ export const HomePage: React.FC = () => {
                     src="/images/real/healthcare_workshop.jpeg"
                     alt="Clinical Trial Diversity"
                     className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                   loading="lazy" decoding="async" />
                 </div>
                 <div className="text-xs font-semibold text-[#007AFF] mb-2">
                   June 20, 2025
@@ -601,7 +602,7 @@ export const HomePage: React.FC = () => {
                     src="/images/real/corporate_training.jpeg"
                     alt="Corporate Equity"
                     className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                   loading="lazy" decoding="async" />
                 </div>
                 <div className="text-xs font-semibold text-[#FF2D55] mb-2">
                   July 14, 2025
@@ -633,7 +634,7 @@ export const HomePage: React.FC = () => {
                     src="/images/real/conference_stage.jpg"
                     alt="Responsible AI"
                     className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                   loading="lazy" decoding="async" />
                 </div>
                 <div className="text-xs font-semibold text-[#AF52DE] mb-2">
                   August 02, 2025
@@ -803,3 +804,7 @@ export const HomePage: React.FC = () => {
     </div>
   );
 };
+
+
+
+

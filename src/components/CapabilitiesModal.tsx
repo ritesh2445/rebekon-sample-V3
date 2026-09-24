@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { X, Download, FileText, CheckCircle2, ShieldCheck, Building, Award, Phone, Mail, MapPin } from 'lucide-react';
 import { SITE_CONFIG, CERTIFICATIONS, NAICS_CODES, SERVICES_INCLUDE } from '../data/siteData';
 
@@ -165,7 +165,7 @@ DIFFERENTIATORS:
                             src={cert.logoUrl}
                             alt={cert.name}
                             className="max-h-full max-w-full object-contain"
-                          />
+                           loading="lazy" decoding="async" />
                         </div>
                       )}
                       <div className="min-w-0">
@@ -263,3 +263,5 @@ DIFFERENTIATORS:
     </div>
   );
 };
+
+

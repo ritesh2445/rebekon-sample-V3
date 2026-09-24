@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { GraduationCap, CheckCircle2, Calendar, Users, Cpu, Heart, ArrowRight } from 'lucide-react';
 import { GradientCTASection } from '../components/GradientCTASection';
@@ -33,19 +33,19 @@ export const TopicsPage: React.FC = () => {
   ];
 
   return (
-    <div className="pt-24 sm:pt-28 pb-16 select-none">
+    <div className="pt-24 sm:pt-28 pb-16 select-none bg-[#080B11] text-slate-100 min-h-screen">
       {/* Hero */}
       <section className="py-16 sm:py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full ios-glass-pill text-xs font-bold text-slate-800 mb-4 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full ios-glass-pill text-xs font-bold text-white mb-4 shadow-xs">
               <GraduationCap className="w-4 h-4 text-[#FF2D55]" />
               <span className="ios-pink-blue-text font-black uppercase tracking-wider">EDUCATE — TRAININGS & WORKSHOPS</span>
             </div>
-            <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight leading-tight">
+            <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
               Trainings, Workshops & Keynotes
             </h1>
-            <p className="text-slate-600 text-base sm:text-lg mt-4 leading-relaxed font-normal">
+            <p className="text-slate-300 text-base sm:text-lg mt-4 leading-relaxed font-normal">
               Tailored learning experiences that dismantle stereotypes, empower employee resource groups (ERGs), and equip leaders with tactical allyship frameworks from the frontline to the boardroom.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-6">
@@ -74,10 +74,10 @@ export const TopicsPage: React.FC = () => {
             <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
               EDUCATE WORKSTREAMS
             </span>
-            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
+            <h2 className="font-extrabold text-3xl sm:text-4xl text-white mt-2 tracking-tight">
               Transformative Learning for Every Function
             </h2>
-            <p className="text-slate-600 text-base mt-2">
+            <p className="text-slate-300 text-base mt-2">
               All sessions are customized to your organizational maturity, industry compliance, and participant roles.
             </p>
           </div>
@@ -98,12 +98,12 @@ export const TopicsPage: React.FC = () => {
                       >
                         <Icon className="w-6 h-6" />
                       </div>
-                      <span className="text-[10px] font-extrabold tracking-wider px-3 py-1 rounded-full bg-white/90 text-slate-800 border border-slate-200/60 shadow-2xs">
+                      <span className="text-[10px] font-extrabold tracking-wider px-3 py-1 rounded-full bg-white/90 text-slate-100 border border-slate-200/60 ">
                         {track.badge}
                       </span>
                     </div>
 
-                    <h3 className="font-bold text-xl text-slate-900 mb-2">
+                    <h3 className="font-bold text-xl text-white mb-2">
                       {track.title}
                     </h3>
 
@@ -111,7 +111,7 @@ export const TopicsPage: React.FC = () => {
                       Target: {track.audience}
                     </div>
 
-                    <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    <p className="text-slate-300 text-sm leading-relaxed mb-6">
                       {track.description}
                     </p>
                   </div>
@@ -138,7 +138,7 @@ export const TopicsPage: React.FC = () => {
           <span className="text-xs font-bold tracking-widest text-[#007AFF] uppercase">
             TRUSTED PARTNERSHIPS
           </span>
-          <h3 className="font-extrabold text-2xl sm:text-3xl text-slate-900 mt-1 tracking-tight">
+          <h3 className="font-extrabold text-2xl sm:text-3xl text-white mt-1 tracking-tight">
             Workshops Delivered for Leading Enterprises & Health Systems
           </h3>
         </div>
@@ -157,3 +157,5 @@ export const TopicsPage: React.FC = () => {
 };
 
 export default TopicsPage;
+
+

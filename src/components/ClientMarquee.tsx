@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { CLIENT_PARTNERS } from '../data/siteData';
 
 export const ClientMarquee: React.FC = () => {
@@ -39,3 +39,4 @@ export const ClientMarquee: React.FC = () => {
     </div>
   );
 };
+

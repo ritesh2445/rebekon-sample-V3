@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import { Volume2, VolumeX, Play, Pause, Maximize2, Sparkles } from 'lucide-react';
 import { MediaItem } from '../data/siteData';
 
@@ -160,3 +160,4 @@ export const HeroVideoPlayer: React.FC<HeroVideoPlayerProps> = ({
     </div>
   );
 };
+

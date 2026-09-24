@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { Play, ExternalLink, Radio, Award, Newspaper, Mic, Sparkles, CheckCircle2, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { YoutubeIcon } from '../components/SocialIcons';
 import { MEDIA_ITEMS, SITE_CONFIG } from '../data/siteData';
@@ -58,19 +58,19 @@ export const MediaPage: React.FC = () => {
   const featuredVideo = MEDIA_ITEMS[0];
 
   return (
-    <div className="pt-24 sm:pt-28 pb-16 select-none">
+    <div className="pt-24 sm:pt-28 pb-16 select-none bg-[#080B11] text-slate-100 min-h-screen">
       {/* Hero Header */}
       <section className="py-16 sm:py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full ios-glass-pill text-xs font-bold text-slate-800 mb-4 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full ios-glass-pill text-xs font-bold text-white mb-4 shadow-xs">
               <Radio className="w-4 h-4 text-[#FF2D55]" />
               <span className="ios-pink-blue-text font-black uppercase tracking-wider">MEDIA & THOUGHT LEADERSHIP</span>
             </div>
-            <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight leading-tight">
+            <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
               Podcasts, Webcasts & Keynotes
             </h1>
-            <p className="text-slate-600 text-base sm:text-lg mt-4 leading-relaxed font-normal">
+            <p className="text-slate-300 text-base sm:text-lg mt-4 leading-relaxed font-normal">
               Explore authentic keynote recordings, podcast interviews, and press features on health equity, transgender advocacy, and enterprise DEI transformation with Celia Sandhya Daniels.
             </p>
             <div className="pt-6 flex flex-wrap items-center gap-4">
@@ -105,7 +105,7 @@ export const MediaPage: React.FC = () => {
                       src={featuredVideo.thumbnailUrl}
                       alt={featuredVideo.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                     loading="lazy" decoding="async" />
                     <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 transition-colors flex items-center justify-center">
                       <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-full bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] text-white flex items-center justify-center shadow-2xl group-hover:scale-115 transition-transform">
                         <Play className="w-6 sm:w-7 h-6 sm:h-7 ml-1 fill-current" />
@@ -154,11 +154,11 @@ export const MediaPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-10">
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">
+                <h2 className="font-extrabold text-2xl sm:text-3xl text-white tracking-tight">
                   All Podcasts, Webcasts & Keynotes ({MEDIA_ITEMS.length})
                 </h2>
               </div>
-              <p className="text-slate-500 text-xs sm:text-sm mt-1 font-medium">
+              <p className="text-slate-400 text-xs sm:text-sm mt-1 font-medium">
                 Click any real video card below to watch the authentic recording.
               </p>
             </div>
@@ -175,7 +175,7 @@ export const MediaPage: React.FC = () => {
                     className={`px-4 py-2 rounded-full text-xs font-bold capitalize whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                       filterType === type
                         ? 'ios-btn-primary text-white shadow-xs'
-                        : 'ios-glass text-slate-700 hover:bg-white border border-white/80'
+                        : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/15'
                     }`}
                   >
                     {type === 'all' ? 'All Media' : type}
@@ -189,7 +189,7 @@ export const MediaPage: React.FC = () => {
                   type="button"
                   onClick={() => scrollMedia('left')}
                   aria-label="Previous media"
-                  className="w-9 h-9 rounded-full ios-glass text-slate-800 flex items-center justify-center border border-white/80 active:scale-95 shadow-xs transition-all cursor-pointer"
+                  className="w-9 h-9 rounded-full ios-glass text-slate-100 flex items-center justify-center border border-white/12 active:scale-95 shadow-xs transition-all cursor-pointer"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -221,7 +221,7 @@ export const MediaPage: React.FC = () => {
                     src={item.thumbnailUrl}
                     alt={item.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95 group-hover:opacity-100"
-                  />
+                   loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
                     <div className="w-12 sm:w-14 h-12 sm:h-14 rounded-full bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                       <Play className="w-5 sm:w-6 h-5 sm:h-6 ml-0.5 fill-current" />
@@ -242,10 +242,10 @@ export const MediaPage: React.FC = () => {
                     <span className="text-[11px] font-bold text-[#FF2D55] uppercase tracking-wider block mb-1">
                       {item.source}
                     </span>
-                    <h3 className="font-bold text-base sm:text-lg text-slate-900 mt-1 mb-2 group-hover:text-[#007AFF] transition-colors line-clamp-2">
+                    <h3 className="font-bold text-base sm:text-lg text-white mt-1 mb-2 group-hover:text-[#007AFF] transition-colors line-clamp-2">
                       {item.title}
                     </h3>
-                    <p className="text-slate-600 text-xs sm:text-sm line-clamp-3 leading-relaxed">
+                    <p className="text-slate-300 text-xs sm:text-sm line-clamp-3 leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -267,10 +267,10 @@ export const MediaPage: React.FC = () => {
             <span className="text-xs font-bold tracking-widest text-[#007AFF] uppercase">
               EDITORIAL PROFILES & HONORS
             </span>
-            <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl text-slate-900 mt-2 tracking-tight">
+            <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white mt-2 tracking-tight">
               Press Coverage & Industry Profiles
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base mt-2">
+            <p className="text-slate-300 text-sm sm:text-base mt-2">
               National biopharma editorial profiles, LinkedIn Top Voices awards, and speaker bureau representation.
             </p>
           </div>
@@ -283,17 +283,17 @@ export const MediaPage: React.FC = () => {
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/90 text-[#007AFF] border border-blue-200/60 shadow-2xs">
+                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/90 text-[#007AFF] border border-blue-200/60 ">
                       {press.publication}
                     </span>
-                    <span className="text-xs font-semibold text-slate-500">
+                    <span className="text-xs font-semibold text-slate-400">
                       {press.type}
                     </span>
                   </div>
-                  <h3 className="font-bold text-xl text-slate-900 mb-2">
+                  <h3 className="font-bold text-xl text-white mb-2">
                     {press.title}
                   </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">
+                  <p className="text-slate-300 text-sm leading-relaxed">
                     {press.description}
                   </p>
                 </div>
@@ -331,3 +331,7 @@ export const MediaPage: React.FC = () => {
 };
 
 export default MediaPage;
+
+
+
+

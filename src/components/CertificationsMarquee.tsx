@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { CERTIFICATIONS } from '../data/siteData';
 
@@ -64,3 +64,4 @@ export const CertificationsMarquee: React.FC<CertificationsMarqueeProps> = ({
     </div>
   );
 };
+

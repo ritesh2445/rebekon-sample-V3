@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+﻿import React, { useEffect, useState, useRef } from 'react';
 
 interface StatCounterProps {
   value: string;
@@ -46,3 +46,4 @@ export const StatCounter: React.FC<StatCounterProps> = ({ value, label, subtext 
     </div>
   );
 };
+

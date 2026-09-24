@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { X, Play } from 'lucide-react';
 import { MediaItem } from '../data/siteData';
 
@@ -70,3 +70,4 @@ export const VideoModal: React.FC<VideoModalProps> = ({ item, onClose }) => {
     </div>
   );
 };
+

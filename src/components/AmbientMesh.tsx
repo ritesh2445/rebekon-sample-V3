@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 /**
  * AmbientMesh provides fluid, continuous Apple iOS liquid gradients
@@ -57,3 +57,4 @@ export const AmbientMesh: React.FC = () => {
     </div>
   );
 };
+

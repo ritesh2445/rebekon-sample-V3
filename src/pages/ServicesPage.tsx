@@ -11,20 +11,20 @@ export const ServicesPage: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
 
   return (
-    <div className="pt-24 sm:pt-28 pb-16 select-none">
+    <div className="pt-24 sm:pt-28 pb-16 select-none bg-[#080B11] text-slate-100 min-h-screen">
       {/* HERO SECTION */}
       <section className="relative py-16 sm:py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full ios-glass-pill text-xs font-bold text-slate-800 mb-4 shadow-2xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full ios-glass-pill text-xs font-bold text-white mb-4 ">
                 <span className="w-2 h-2 rounded-full bg-[#FF2D55]" />
                 <span className="ios-pink-blue-text uppercase tracking-wider">STRATEGIC SOLUTIONS & EXPERTISE</span>
               </div>
-              <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight leading-tight">
+              <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
                 Our Services
               </h1>
-              <p className="text-slate-600 text-base sm:text-lg mt-4 leading-relaxed font-normal">
+              <p className="text-slate-300 text-base sm:text-lg mt-4 leading-relaxed font-normal">
                 Comprehensive advisory, training, and strategic transformation designed to take your organizational change from the Bathroom to the Boardroom.
               </p>
             </div>
@@ -47,11 +47,11 @@ export const ServicesPage: React.FC = () => {
       {/* VISION & MISSION PULL-QUOTE */}
       <section className="py-16 relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="ios-glass-card p-8 sm:p-12 border border-white/90 shadow-[0_20px_50px_-15px_rgba(0,122,255,0.12)]">
+          <div className="ios-glass-card p-8 sm:p-12 border border-white/12 shadow-[0_20px_50px_-15px_rgba(0,122,255,0.12)]">
             <span className="text-xs font-bold tracking-widest text-[#007AFF] uppercase">
               VISION AND MISSION
             </span>
-            <blockquote className="font-medium text-2xl sm:text-3xl text-slate-900 leading-snug my-6 italic">
+            <blockquote className="font-medium text-2xl sm:text-3xl text-white leading-snug my-6 italic">
               "Transforming organizations to foster genuine inclusivity at all levels from the Bathroom to the Boardroom, unlocking the potential of employees to drive innovation, enhance productivity, and cultivate a profound sense of authenticity and belonging in the workplace."
             </blockquote>
             <div className="w-20 h-1 rounded-full bg-gradient-to-r from-[#FF2D55] to-[#007AFF] mx-auto" />
@@ -66,10 +66,10 @@ export const ServicesPage: React.FC = () => {
             <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
               THE THREE-PART FRAMEWORK
             </span>
-            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
+            <h2 className="font-extrabold text-3xl sm:text-4xl text-white mt-2 tracking-tight">
               Educate · Engage · Empower
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
+            <p className="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
               A systematic, phased methodology designed to move organizations from foundational awareness to enterprise-level equity.
             </p>
           </div>
@@ -84,12 +84,12 @@ export const ServicesPage: React.FC = () => {
                 className={`p-6 rounded-3xl text-left transition-all duration-300 border cursor-pointer ${
                   activeStep === idx
                     ? 'ios-glass-card border-[#FF2D55]/60 shadow-[0_16px_36px_-10px_rgba(255,45,85,0.25)] -translate-y-1'
-                    : 'bg-white/60 backdrop-blur-md border-white/80 hover:bg-white text-slate-700'
+                    : 'bg-white/5 border-white/10 hover:bg-white/10 text-slate-300'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className={`text-xs font-bold tracking-wider px-3 py-1 rounded-full ${
-                    activeStep === idx ? 'ios-btn-primary text-white' : 'bg-slate-100 text-slate-500'
+                    activeStep === idx ? 'ios-btn-primary text-white' : 'bg-white/10 text-slate-400'
                   }`}>
                     STEP {step.stepNumber}
                   </span>
@@ -97,10 +97,10 @@ export const ServicesPage: React.FC = () => {
                     {step.stepName}
                   </span>
                 </div>
-                <h3 className="font-bold text-xl text-slate-900 mb-1">
+                <h3 className="font-bold text-xl text-white mb-1">
                   {step.title}
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-400">
                   Click to inspect detailed workstreams & offerings
                 </p>
               </button>
@@ -108,7 +108,7 @@ export const ServicesPage: React.FC = () => {
           </div>
 
           {/* Active Framework Step Detail Card */}
-          <div className="ios-glass-card p-8 sm:p-12 border border-white/95 shadow-xl">
+          <div className="ios-glass-card p-8 sm:p-12 border border-white/12 shadow-xl">
             <div className="flex flex-col lg:flex-row items-start justify-between gap-8">
               <div className="space-y-6 max-w-3xl">
                 <div className="flex items-center gap-3">
@@ -119,7 +119,7 @@ export const ServicesPage: React.FC = () => {
                     <span className="text-xs font-bold text-slate-400 tracking-wider uppercase">
                       {FRAMEWORK_STEPS[activeStep].stepName}
                     </span>
-                    <h3 className="font-extrabold text-2xl sm:text-3xl text-slate-900">
+                    <h3 className="font-extrabold text-2xl sm:text-3xl text-white">
                       {FRAMEWORK_STEPS[activeStep].title}
                     </h3>
                   </div>
@@ -132,7 +132,7 @@ export const ServicesPage: React.FC = () => {
                       <div className="w-6 h-6 rounded-full bg-[#FFEBF0] flex items-center justify-center text-[#FF2D55] shrink-0 mt-0.5">
                         <CheckCircle2 className="w-4 h-4" />
                       </div>
-                      <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                      <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
                         {bullet}
                       </p>
                     </div>
@@ -168,10 +168,10 @@ export const ServicesPage: React.FC = () => {
             <span className="text-xs font-bold tracking-widest text-[#007AFF] uppercase">
               DEEP PRACTICE CAPABILITIES
             </span>
-            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
+            <h2 className="font-extrabold text-3xl sm:text-4xl text-white mt-2 tracking-tight">
               Services Include
             </h2>
-            <p className="text-slate-600 text-base mt-2">
+            <p className="text-slate-300 text-base mt-2">
               Actionable, bespoke engagements across healthcare, biopharma, HR, and enterprise compliance.
             </p>
           </div>
@@ -183,14 +183,14 @@ export const ServicesPage: React.FC = () => {
                 <div className="w-12 h-12 rounded-2xl bg-[#E8F2FF] flex items-center justify-center text-[#007AFF] mb-6 shadow-xs">
                   <HeartPulse className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-2xl text-slate-900 mb-6 italic">
+                <h3 className="font-bold text-2xl text-white mb-6 italic">
                   Best Inclusive Healthcare and Clinical Practices:
                 </h3>
                 <ul className="space-y-4">
                   {SERVICES_INCLUDE.healthcare.map((bullet, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <span className="w-2 h-2 rounded-full bg-[#007AFF] shrink-0 mt-2" />
-                      <span className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                      <span className="text-slate-200 text-sm sm:text-base leading-relaxed">
                         {bullet}
                       </span>
                     </li>
@@ -215,14 +215,14 @@ export const ServicesPage: React.FC = () => {
                 <div className="w-12 h-12 rounded-2xl bg-[#FFEBF0] flex items-center justify-center text-[#FF2D55] mb-6 shadow-xs">
                   <Briefcase className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-2xl text-slate-900 mb-6 italic">
+                <h3 className="font-bold text-2xl text-white mb-6 italic">
                   Inclusive Workplace Consultation:
                 </h3>
                 <ul className="space-y-4">
                   {SERVICES_INCLUDE.workplace.map((bullet, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <span className="w-2 h-2 rounded-full bg-[#FF2D55] shrink-0 mt-2" />
-                      <span className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                      <span className="text-slate-200 text-sm sm:text-base leading-relaxed">
                         {bullet}
                       </span>
                     </li>
@@ -251,7 +251,7 @@ export const ServicesPage: React.FC = () => {
             <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
               CREDENTIALS & ENTERPRISE PEDIGREE
             </span>
-            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
+            <h2 className="font-extrabold text-3xl sm:text-4xl text-white mt-2 tracking-tight">
               Verified Certifications & Codes
             </h2>
           </div>
@@ -261,15 +261,15 @@ export const ServicesPage: React.FC = () => {
             <div className="ios-glass-card p-6 space-y-4">
               <div className="flex items-center gap-2 text-[#007AFF]">
                 <ShieldCheck className="w-5 h-5" />
-                <h4 className="font-bold text-slate-900 text-base">Certifications</h4>
+                <h4 className="font-bold text-white text-base">Certifications</h4>
               </div>
-              <ul className="space-y-2 text-xs sm:text-sm text-slate-600">
-                <li className="font-medium">• CA/LA SBE (Proprietary) — <strong className="text-slate-900 font-mono">2034333</strong></li>
-                <li className="font-medium">• EBE – <strong className="text-slate-900 font-mono">203433</strong></li>
-                <li className="font-medium">• VSBE (Harbor) — <strong className="text-slate-900 font-mono">2034333</strong></li>
-                <li className="font-medium">• NGLCC (<strong className="text-slate-900 font-mono">30210</strong>)</li>
-                <li className="font-medium">• D&B D-U-N-S (<strong className="text-slate-900 font-mono">010274745</strong>)</li>
-                <li className="font-medium">• California Public Utilities Commission (<strong className="text-slate-900 font-mono">VON: 24000841</strong>)</li>
+              <ul className="space-y-2 text-xs sm:text-sm text-slate-300">
+                <li className="font-medium">• CA/LA SBE (Proprietary) — <strong className="text-white font-mono">2034333</strong></li>
+                <li className="font-medium">• EBE – <strong className="text-white font-mono">203433</strong></li>
+                <li className="font-medium">• VSBE (Harbor) — <strong className="text-white font-mono">2034333</strong></li>
+                <li className="font-medium">• NGLCC (<strong className="text-white font-mono">30210</strong>)</li>
+                <li className="font-medium">• D&B D-U-N-S (<strong className="text-white font-mono">010274745</strong>)</li>
+                <li className="font-medium">• California Public Utilities Commission (<strong className="text-white font-mono">VON: 24000841</strong>)</li>
               </ul>
             </div>
 
@@ -277,9 +277,9 @@ export const ServicesPage: React.FC = () => {
             <div className="ios-glass-card p-6 space-y-4">
               <div className="flex items-center gap-2 text-[#FF2D55]">
                 <Building className="w-5 h-5" />
-                <h4 className="font-bold text-slate-900 text-base">Established</h4>
+                <h4 className="font-bold text-white text-base">Established</h4>
               </div>
-              <ul className="space-y-2.5 text-xs sm:text-sm text-slate-600">
+              <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300">
                 <li>• Built on 30+ Years of experience with F100 companies.</li>
                 <li>• Focus on IT, DEI, Healthcare and Life Science.</li>
                 <li>• Founded in 2018, based out of Thousand Oaks, California.</li>
@@ -290,9 +290,9 @@ export const ServicesPage: React.FC = () => {
             <div className="ios-glass-card p-6 space-y-4">
               <div className="flex items-center gap-2 text-[#AF52DE]">
                 <Award className="w-5 h-5" />
-                <h4 className="font-bold text-slate-900 text-base">Differentiator</h4>
+                <h4 className="font-bold text-white text-base">Differentiator</h4>
               </div>
-              <ul className="space-y-2.5 text-xs sm:text-sm text-slate-600">
+              <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300">
                 <li>• Top 10 LGBTQ+ Voices on LinkedIn in the U.S. and Canada.</li>
                 <li>• Endpoints News's Top 20 LGBTQ+ Leaders in the Biopharma Industry.</li>
                 <li>• Top 100 trailblazing LGBTQ+ women making a difference in DEI.</li>
@@ -303,23 +303,23 @@ export const ServicesPage: React.FC = () => {
             <div className="ios-glass-card p-6 space-y-4">
               <div className="flex items-center gap-2 text-[#007AFF]">
                 <FileText className="w-5 h-5" />
-                <h4 className="font-bold text-slate-900 text-base">NAICS Codes</h4>
+                <h4 className="font-bold text-white text-base">NAICS Codes</h4>
               </div>
-              <ul className="space-y-2 text-xs sm:text-sm text-slate-600">
+              <ul className="space-y-2 text-xs sm:text-sm text-slate-300">
                 <li>
-                  <span className="font-mono font-bold text-slate-900 bg-white/80 px-1.5 py-0.5 rounded mr-1">611430</span>
+                  <span className="font-mono font-bold text-white bg-white/80 px-1.5 py-0.5 rounded mr-1">611430</span>
                   Professional and Management Development Training
                 </li>
                 <li>
-                  <span className="font-mono font-bold text-slate-900 bg-white/80 px-1.5 py-0.5 rounded mr-1">541612</span>
+                  <span className="font-mono font-bold text-white bg-white/80 px-1.5 py-0.5 rounded mr-1">541612</span>
                   Human Resource Consulting Services
                 </li>
                 <li>
-                  <span className="font-mono font-bold text-slate-900 bg-white/80 px-1.5 py-0.5 rounded mr-1">541512</span>
+                  <span className="font-mono font-bold text-white bg-white/80 px-1.5 py-0.5 rounded mr-1">541512</span>
                   Computer Software Consulting Services
                 </li>
                 <li>
-                  <span className="font-mono font-bold text-slate-900 bg-white/80 px-1.5 py-0.5 rounded mr-1">541611</span>
+                  <span className="font-mono font-bold text-white bg-white/80 px-1.5 py-0.5 rounded mr-1">541611</span>
                   Administrative Management and General Consulting
                 </li>
               </ul>
@@ -334,7 +334,7 @@ export const ServicesPage: React.FC = () => {
           <span className="text-xs font-bold tracking-widest text-slate-400 uppercase">
             COLLABORATIONS
           </span>
-          <h2 className="font-extrabold text-2xl sm:text-3xl text-slate-900 mt-1 tracking-tight">
+          <h2 className="font-extrabold text-2xl sm:text-3xl text-white mt-1 tracking-tight">
             Working With the Best Clients and Partners
           </h2>
         </div>
@@ -354,3 +354,5 @@ export const ServicesPage: React.FC = () => {
 };
 
 export default ServicesPage;
+
+

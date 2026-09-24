@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { FileCheck, CheckCircle2, ArrowRight, Shield, Calendar, Scale, Building, HeartHandshake } from 'lucide-react';
 import { GradientCTASection } from '../components/GradientCTASection';
@@ -32,19 +32,19 @@ export const PoliciesPage: React.FC = () => {
   ];
 
   return (
-    <div className="pt-24 sm:pt-28 pb-16 select-none">
+    <div className="pt-24 sm:pt-28 pb-16 select-none bg-[#080B11] text-slate-100 min-h-screen">
       {/* Hero */}
       <section className="py-16 sm:py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full ios-glass-pill text-xs font-bold text-slate-800 mb-4 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full ios-glass-pill text-xs font-bold text-white mb-4 shadow-xs">
               <Scale className="w-4 h-4 text-[#007AFF]" />
               <span className="ios-pink-blue-text font-black uppercase tracking-wider">POLICY & GUIDELINES</span>
             </div>
-            <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight leading-tight">
+            <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
               Inclusion Policies & Transition Guidelines
             </h1>
-            <p className="text-slate-600 text-base sm:text-lg mt-4 leading-relaxed font-normal">
+            <p className="text-slate-300 text-base sm:text-lg mt-4 leading-relaxed font-normal">
               Implementation of actionable policies and guidelines for Trans, Gender-diverse, and Intersex employees and job seekers — aligning legal compliance, operational safety, and human dignity.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-6">
@@ -73,10 +73,10 @@ export const PoliciesPage: React.FC = () => {
             <span className="text-xs font-bold tracking-widest text-[#007AFF] uppercase">
               STRUCTURED ADVISORY
             </span>
-            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
+            <h2 className="font-extrabold text-3xl sm:text-4xl text-white mt-2 tracking-tight">
               Actionable Policy Architecture
             </h2>
-            <p className="text-slate-600 text-base mt-2">
+            <p className="text-slate-300 text-base mt-2">
               Moving beyond performative declarations into robust, legally defensible, and humane enterprise guidelines.
             </p>
           </div>
@@ -95,10 +95,10 @@ export const PoliciesPage: React.FC = () => {
                   >
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="font-bold text-xl sm:text-2xl text-slate-900 mb-3">
+                  <h3 className="font-bold text-xl sm:text-2xl text-white mb-3">
                     {area.title}
                   </h3>
-                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
                     {area.description}
                   </p>
                 </div>
@@ -111,14 +111,14 @@ export const PoliciesPage: React.FC = () => {
       {/* POLICY CIVIC CREDIBILITY */}
       <section className="py-16 relative">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <div className="ios-glass-card p-8 sm:p-12 border border-white/95">
+          <div className="ios-glass-card p-8 sm:p-12 border border-white/12">
             <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
               PUBLIC POLICY IMPACT
             </span>
-            <h3 className="font-extrabold text-2xl sm:text-3xl text-slate-900 mt-2 tracking-tight">
+            <h3 className="font-extrabold text-2xl sm:text-3xl text-white mt-2 tracking-tight">
               Shaping State and Community Guidelines
             </h3>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto mt-3">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto mt-3">
               Celia Sandhya Daniels has advised the Commission on Peace Officer Standards and Training (POST), contributed to policy changes alongside the TransLatino Coalition to recommend statewide California legislative updates, and serves on the Workforce Development Board of Ventura County.
             </p>
           </div>
@@ -137,3 +137,5 @@ export const PoliciesPage: React.FC = () => {
 };
 
 export default PoliciesPage;
+
+

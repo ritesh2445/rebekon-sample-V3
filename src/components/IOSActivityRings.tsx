@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Award, Mic, Briefcase, HeartPulse, ChevronRight, Sparkles, TrendingUp } from 'lucide-react';
 
 interface MetricDetail {
@@ -306,3 +306,4 @@ export const IOSActivityRings: React.FC = () => {
     </div>
   );
 };
+

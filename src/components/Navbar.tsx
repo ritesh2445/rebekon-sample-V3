@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   ChevronDown, 
@@ -128,7 +128,7 @@ export const Navbar: React.FC = () => {
                 src="/images/real/rebekon_official_logo.jpg"
                 alt={SITE_CONFIG.companyName}
                 className="h-8 sm:h-9 w-auto object-contain rounded-lg ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-105"
-              />
+               loading="eager" decoding="async" fetchPriority="high" />
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-r from-[#FF2D55] to-[#007AFF] rounded-full ring-2 ring-[#0B0F19]" />
             </div>
           </Link>
@@ -360,3 +360,7 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
+
+
+
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Award, Calendar, CheckCircle2, ExternalLink, Heart, Sparkles, GraduationCap, ArrowRight, Mic, ShieldCheck, MapPin } from 'lucide-react';
 import { SITE_CONFIG, ACHIEVEMENTS, CERTIFICATIONS } from '../data/siteData';
@@ -7,7 +7,7 @@ import { ClientMarquee } from '../components/ClientMarquee';
 
 export const AboutPage: React.FC = () => {
   return (
-    <div className="pt-24 sm:pt-28 pb-16 select-none">
+    <div className="pt-24 sm:pt-28 pb-16 select-none bg-[#080B11] text-slate-100 min-h-screen">
       {/* HERO SPLIT LAYOUT */}
       <section className="relative py-16 sm:py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,23 +15,23 @@ export const AboutPage: React.FC = () => {
             {/* Left Column: Portrait in Apple Vision Glass Frame */}
             <div className="lg:col-span-5 relative">
               <div className="relative mx-auto max-w-md lg:max-w-none">
-                <div className="relative ios-glass-card p-3 shadow-2xl border border-white/95 overflow-hidden">
+                <div className="relative ios-glass-card p-3 shadow-2xl border border-white/12 overflow-hidden">
                   <div className="aspect-[4/5] rounded-[2rem] overflow-hidden bg-slate-900">
                     <img
                       src="/images/real/celia_official_speaker.jpg"
                       alt="Celia Sandhya Daniels — Founder & CEO of Rebekon Consulting LLC"
                       className="w-full h-full object-cover object-[75%_25%] hover:scale-105 transition-transform duration-700"
-                    />
+                     loading="lazy" decoding="async" />
                   </div>
                 </div>
 
                 {/* Floating identity glass pill */}
-                <div className="absolute -bottom-5 right-4 ios-glass rounded-2xl p-4 shadow-xl border border-white/90 flex items-center gap-3">
+                <div className="absolute -bottom-5 right-4 ios-glass rounded-2xl p-4 shadow-xl border border-white/12 flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] flex items-center justify-center text-white shadow-sm">
                     <Sparkles className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="font-bold text-slate-900 text-sm">{SITE_CONFIG.founder}</div>
+                    <div className="font-bold text-white text-sm">{SITE_CONFIG.founder}</div>
                     <div className="text-xs text-[#FF2D55] font-bold">{SITE_CONFIG.pronouns}</div>
                   </div>
                 </div>
@@ -39,14 +39,14 @@ export const AboutPage: React.FC = () => {
             </div>
 
             {/* Right Column: Name, Pronouns & Introduction */}
-            <div className="lg:col-span-7 space-y-6 text-slate-700">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full ios-glass-pill text-xs font-bold text-slate-800 shadow-2xs">
+            <div className="lg:col-span-7 space-y-6 text-slate-200">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full ios-glass-pill text-xs font-bold text-white ">
                 <Heart className="w-4 h-4 text-[#FF2D55]" />
                 <span className="ios-pink-blue-text font-black uppercase tracking-wider">FOUNDER & PRINCIPAL CONSULTANT</span>
               </div>
 
               <div className="space-y-2">
-                <h1 className="font-extrabold text-4xl sm:text-5xl text-slate-900 tracking-tight leading-tight">
+                <h1 className="font-extrabold text-4xl sm:text-5xl text-white tracking-tight leading-tight">
                   {SITE_CONFIG.founder}{' '}
                   <span className="text-2xl sm:text-3xl text-slate-400 font-normal">
                     {SITE_CONFIG.pronouns}
@@ -58,12 +58,12 @@ export const AboutPage: React.FC = () => {
               </div>
 
               {/* Bio Paragraphs */}
-              <div className="space-y-4 text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
+              <div className="space-y-4 text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
                 <p>
                   Celia is an entrepreneur, motivational speaker, DEI champion, blogger, composer, musician, photographer, hiker, and filmmaker. She currently resides in Southern California with her family. She is an Asian Indian who identifies as gender non-binary, trans femme.
                 </p>
 
-                <div className="p-5 rounded-2xl ios-glass border border-white/90 text-slate-800 font-medium text-base shadow-xs">
+                <div className="p-5 rounded-2xl ios-glass border border-white/15 text-slate-100 font-medium text-base shadow-xs">
                   <p>
                     She is recognized as one of the <strong>Top 20 LGBTQ leaders in Biopharma</strong> and the <strong>Top 10 LGBTQ+ Voices on LinkedIn</strong> in the US and Canada, and <strong>Top 100 LGBTQ+ Women in DEI</strong> worldwide — alongside Laverne Cox, Wanda Sykes, Lily Tomlin, and others.
                   </p>
@@ -110,7 +110,7 @@ export const AboutPage: React.FC = () => {
                     src="/images/real/award_congressional.png"
                     alt="Celia Sandhya Daniels receiving 2024 Congressional Diversity Spotlight Award"
                     className="w-full h-auto object-cover"
-                  />
+                   loading="lazy" decoding="async" />
                 </div>
               </div>
               <div className="md:col-span-7 space-y-4">
@@ -141,17 +141,17 @@ export const AboutPage: React.FC = () => {
             <span className="text-xs font-bold tracking-widest text-[#007AFF] uppercase">
               EXECUTIVE CREDIBILITY
             </span>
-            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+            <h2 className="font-extrabold text-3xl sm:text-4xl text-white tracking-tight">
               Professional Background
             </h2>
           </div>
 
-          <div className="space-y-6 text-slate-700 text-base sm:text-lg leading-relaxed">
+          <div className="space-y-6 text-slate-200 text-base sm:text-lg leading-relaxed">
             <p>
               She is a management consultant with over <strong>25+ years of demonstrated success</strong> in operating, growing, and spearheading media, healthcare, and life sciences engagements for Fortune 100 companies like <strong>Amgen, Genentech, United Health, BlueCross, and Americhoice</strong>. As a senior regional executive with companies like <strong>IQVIA, Capgemini, Cognizant, and Dun & Bradstreet</strong>, she has managed global cross-functional teams, and implemented enterprise strategies, maximizing ROI for multi-billion dollar clients. She has been consistently recognized for customer satisfaction and employee empowerment. She has a Bachelor's and Master's degree in computer science.
             </p>
 
-            <blockquote className="ios-glass p-6 rounded-3xl border border-white/90 text-xl sm:text-2xl text-slate-900 italic my-6 shadow-sm">
+            <blockquote className="ios-glass p-6 rounded-3xl border border-white/12 text-xl sm:text-2xl text-white italic my-6 shadow-sm">
               "She advocates for the LGBTQ+ community with Providers, Payers, Pharmaceuticals, and Policymakers in the U.S. and South Asia. She strives to make LGBTQ+ communities, particularly the trans community, feel welcomed and accepted in all facets of society, from the bathroom to the boardroom."
             </blockquote>
 
@@ -170,12 +170,12 @@ export const AboutPage: React.FC = () => {
               <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
                 COMMUNITY ADVOCACY & GRASSROOTS IMPACT
               </span>
-              <h3 className="font-extrabold text-3xl text-slate-900 tracking-tight">
+              <h3 className="font-extrabold text-3xl text-white tracking-tight">
                 Community Advocate
               </h3>
             </div>
 
-            <div className="space-y-6 text-slate-700 text-base sm:text-lg leading-relaxed">
+            <div className="space-y-6 text-slate-200 text-base sm:text-lg leading-relaxed">
               <p>
                 Celia brings an intersectional blend of ethnicity, creativity, religion, and corporate experience in her <em>'trans-evangelism,'</em> as she likes to call it. She offers freelance consulting for small to large-size companies and volunteers for several non-profit organizations, churches, institutions, and community resource groups in the United States and India. She is passionate about supporting marginalized communities and individuals by providing them with a safe space to address various issues relating to bullying, gender discrimination, medical, behavioral, mental health, and suicidal ideation.
               </p>
@@ -195,10 +195,10 @@ export const AboutPage: React.FC = () => {
             <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
               PHOTO GALLERY
             </span>
-            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
+            <h2 className="font-extrabold text-3xl sm:text-4xl text-white mt-2 tracking-tight">
               Celia Daniels in Action
             </h2>
-            <p className="text-slate-600 text-base mt-2">
+            <p className="text-slate-300 text-base mt-2">
               Keynotes, panel discussions, award banquets, and executive education.
             </p>
           </div>
@@ -210,11 +210,11 @@ export const AboutPage: React.FC = () => {
                   src="/images/real/yt_thumb_outburo.jpg"
                   alt="Celia Daniels OutBüro Voices Spotlight"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                 loading="lazy" decoding="async" />
               </div>
               <div className="p-4 bg-white/90">
-                <div className="font-bold text-slate-900 text-sm">Executive Spotlight</div>
-                <div className="text-xs text-slate-500 mt-0.5 font-medium">OutBüro LGBTQ+ Leadership</div>
+                <div className="font-bold text-white text-sm">Executive Spotlight</div>
+                <div className="text-xs text-slate-400 mt-0.5 font-medium">OutBüro LGBTQ+ Leadership</div>
               </div>
             </div>
 
@@ -224,11 +224,11 @@ export const AboutPage: React.FC = () => {
                   src="/images/real/yt_thumb_bathroom_boardroom.jpg"
                   alt="Bathroom to Boardroom Keynote"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                 loading="lazy" decoding="async" />
               </div>
               <div className="p-4 bg-white/90">
-                <div className="font-bold text-slate-900 text-sm">Keynote Address</div>
-                <div className="text-xs text-slate-500 mt-0.5 font-medium">Bathroom to Boardroom</div>
+                <div className="font-bold text-white text-sm">Keynote Address</div>
+                <div className="text-xs text-slate-400 mt-0.5 font-medium">Bathroom to Boardroom</div>
               </div>
             </div>
 
@@ -238,11 +238,11 @@ export const AboutPage: React.FC = () => {
                   src="/images/real/yt_thumb_workplace_pride.jpg"
                   alt="Workplace Pride Keynote at Amplify DEI"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                 loading="lazy" decoding="async" />
               </div>
               <div className="p-4 bg-white/90">
-                <div className="font-bold text-slate-900 text-sm">Global Summit</div>
-                <div className="text-xs text-slate-500 mt-0.5 font-medium">Amplify DEI Workplace Pride</div>
+                <div className="font-bold text-white text-sm">Global Summit</div>
+                <div className="text-xs text-slate-400 mt-0.5 font-medium">Amplify DEI Workplace Pride</div>
               </div>
             </div>
 
@@ -252,11 +252,11 @@ export const AboutPage: React.FC = () => {
                   src="/images/real/award_congressional.png"
                   alt="Featured on 12+ Leading Podcasts"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                 loading="lazy" decoding="async" />
               </div>
               <div className="p-4 bg-white/90">
-                <div className="font-bold text-slate-900 text-sm">Media Roster</div>
-                <div className="text-xs text-slate-500 mt-0.5 font-medium">12+ Top Industry Podcasts</div>
+                <div className="font-bold text-white text-sm">Media Roster</div>
+                <div className="text-xs text-slate-400 mt-0.5 font-medium">12+ Top Industry Podcasts</div>
               </div>
             </div>
           </div>
@@ -269,7 +269,7 @@ export const AboutPage: React.FC = () => {
           <span className="text-xs font-bold tracking-widest text-[#007AFF] uppercase">
             COLLABORATIVE REACH
           </span>
-          <h3 className="font-extrabold text-2xl sm:text-3xl text-slate-900 mt-1 tracking-tight">
+          <h3 className="font-extrabold text-2xl sm:text-3xl text-white mt-1 tracking-tight">
             Trusted by Global Enterprise Leaders & Diverse Organizations
           </h3>
         </div>
@@ -283,10 +283,10 @@ export const AboutPage: React.FC = () => {
             <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
               TRACK RECORD & HONORS
             </span>
-            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
+            <h2 className="font-extrabold text-3xl sm:text-4xl text-white mt-2 tracking-tight">
               Achievements & Engagements
             </h2>
-            <p className="text-slate-600 text-base mt-2">
+            <p className="text-slate-300 text-base mt-2">
               A comprehensive chronicle of civic appointments, congressional recognition, and biopharma leadership.
             </p>
           </div>
@@ -314,11 +314,11 @@ export const AboutPage: React.FC = () => {
                       </span>
                     )}
                   </div>
-                  <h4 className="font-bold text-base sm:text-lg text-slate-900 leading-snug">
+                  <h4 className="font-bold text-base sm:text-lg text-white leading-snug">
                     {item.title}
                   </h4>
                   {item.description && (
-                    <p className="text-slate-600 text-xs sm:text-sm mt-2">
+                    <p className="text-slate-300 text-xs sm:text-sm mt-2">
                       {item.description}
                     </p>
                   )}
@@ -351,3 +351,6 @@ export const AboutPage: React.FC = () => {
 };
 
 export default AboutPage;
+
+
+

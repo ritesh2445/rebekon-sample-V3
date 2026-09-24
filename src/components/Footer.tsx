@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, ArrowUpRight, ShieldCheck, Award } from 'lucide-react';
 import { LinkedinIcon, YoutubeIcon, FacebookIcon, InstagramIcon } from './SocialIcons';
@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
               src="/images/real/rebekon_official_logo.jpg"
               alt={SITE_CONFIG.companyName}
               className="h-10 w-auto object-contain rounded-xl ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-105"
-            />
+             loading="lazy" decoding="async" />
             <div>
               <span className="text-xl font-extrabold text-white tracking-tight block">
                 Rebekon<span className="text-[#007AFF]">.</span>
@@ -144,3 +144,5 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+
+

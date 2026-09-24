@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, HeartHandshake, Users, Sparkles, Shield, ArrowUpRight } from 'lucide-react';
 import { ServicePillar } from '../data/siteData';
@@ -119,3 +119,4 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ pillar, index }) => {
     </div>
   );
 };
+
