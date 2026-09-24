@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none">
+  <defs>
+    <linearGradient id="rebekonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F45B9C" />
+      <stop offset="50%" stop-color="#7C6BE8" />
+      <stop offset="100%" stop-color="#3E6BE0" />
+    </linearGradient>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F45B9C" />
+      <stop offset="100%" stop-color="#FB7185" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3E6BE0" />
+      <stop offset="100%" stop-color="#60A5FA" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Icon Mark: Intersecting organic loops representing Bathroom to Boardroom & Inclusion -->
+  <g transform="translate(4, 8)">
+    <circle cx="24" cy="24" r="22" fill="#FCE4EF" opacity="0.6"/>
+    <path d="M14 24C14 18.477 18.477 14 24 14C29.523 14 34 18.477 34 24C34 29.523 29.523 34 24 34" stroke="url(#rebekonGrad)" stroke-width="4.5" stroke-linecap="round"/>
+    <circle cx="24" cy="24" r="5" fill="#F45B9C"/>
+    <path d="M24 14C24 8.5 28.5 4 34 4C39.5 4 44 8.5 44 14C44 22 36 28 24 38C12 28 4 22 4 14C4 8.5 8.5 4 14 4C19.5 4 24 8.5 24 14Z" fill="url(#rebekonGrad)" opacity="0.15"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="64" y="32" font-family="'Fraunces', serif" font-weight="700" font-size="24" fill="#0F172A" letter-spacing="-0.02em">
+    REBEKON
+  </text>
+  <text x="65" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="9.5" fill="#475569" letter-spacing="0.22em">
+    CONSULTING LLC
+  </text>
+  
+  <!-- Sub-dot accent -->
+  <circle cx="206" cy="24" r="3" fill="#F45B9C"/>
+</svg>
