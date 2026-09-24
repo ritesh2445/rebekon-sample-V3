@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
+import { AmbientMesh } from './components/AmbientMesh';
 
 // Immediate load for Homepage for maximum initial performance
 import { HomePage } from './pages/HomePage';
@@ -21,12 +22,12 @@ const BlogsPage = lazy(() => import('./pages/BlogsPage').then(m => ({ default: m
 const BookOnlinePage = lazy(() => import('./pages/BookOnlinePage').then(m => ({ default: m.BookOnlinePage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
 
-// Sleek, minimal loading fallback for smooth transitions
+// Apple iOS Frosted Loading Fallback
 const PageLoader = () => (
   <div className="min-h-[55vh] flex items-center justify-center">
-    <div className="flex flex-col items-center gap-3">
-      <div className="w-9 h-9 rounded-full border-2 border-slate-200 border-t-[#3E6BE0] animate-spin" />
-      <span className="text-[11px] font-medium text-slate-400 tracking-wider uppercase">Loading experience...</span>
+    <div className="ios-glass p-6 rounded-3xl flex flex-col items-center gap-3 shadow-lg">
+      <div className="w-10 h-10 rounded-full border-3 border-slate-200/80 border-t-[#FF2D55] border-r-[#007AFF] animate-spin" />
+      <span className="text-[11px] font-bold text-slate-500 tracking-wider uppercase">Loading experience...</span>
     </div>
   </div>
 );
@@ -35,7 +36,10 @@ export const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col bg-[#FAFAFC] text-[#0F172A] selection:bg-[#FCE4EF] selection:text-[#F45B9C]">
+      {/* Dynamic Ambient Apple Pink & Blue Aurora Mesh */}
+      <AmbientMesh />
+      
+      <div className="min-h-screen flex flex-col selection:bg-[#FFEBF0] selection:text-[#FF2D55] relative">
         <Navbar />
         <main className="flex-grow">
           <Suspense fallback={<PageLoader />}>

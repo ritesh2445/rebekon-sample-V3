@@ -88,51 +88,51 @@ DIFFERENTIATORS:
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xl animate-in fade-in duration-300"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-3xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-100 max-h-[90vh] flex flex-col animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-3xl ios-glass-card rounded-[32px] overflow-hidden shadow-[0_24px_50px_rgba(0,122,255,0.18)] border border-white/60 dark:border-white/15 max-h-[90vh] flex flex-col animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100 bg-slate-50/80">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-black/[0.06] dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-md">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl brand-gradient flex items-center justify-center text-white">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#FF2D55] to-[#007AFF] flex items-center justify-center text-white shadow-md shadow-pink-500/20">
               <FileText className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-display font-bold text-lg text-slate-900">
+              <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white">
                 Capabilities Statement
               </h3>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 {SITE_CONFIG.companyName} • Thousand Oaks, CA
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors"
+            className="p-2 rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Scrollable Body */}
-        <div className="p-6 sm:p-8 overflow-y-auto space-y-6 text-sm text-slate-600">
+        <div className="p-6 sm:p-8 overflow-y-auto space-y-6 text-sm text-slate-600 dark:text-slate-300">
           {/* Top Banner */}
-          <div className="p-5 rounded-2xl bg-[#FCE4EF]/40 border border-[#FCE4EF] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="p-5 rounded-2xl bg-gradient-to-r from-[#FF2D55]/10 via-[#007AFF]/10 to-[#5856D6]/10 border border-[#FF2D55]/20 dark:border-[#FF2D55]/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <span className="text-xs font-bold text-[#F45B9C] uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#FF2D55] uppercase tracking-wider">
                 {SITE_CONFIG.tagline}
               </span>
-              <h4 className="font-display font-bold text-slate-900 text-base mt-0.5">
+              <h4 className="font-display font-bold text-slate-900 dark:text-white text-base mt-0.5">
                 {SITE_CONFIG.positioningLine}
               </h4>
             </div>
             <button
               onClick={handleDownload}
-              className="brand-gradient text-white text-xs font-semibold px-4 py-2.5 rounded-full flex items-center gap-2 shadow-sm hover:shadow transition-all shrink-0"
+              className="ios-btn-primary text-xs font-semibold px-4 py-2.5 rounded-full flex items-center gap-2 shadow-sm hover:shadow transition-all shrink-0"
             >
               {downloadSuccess ? (
                 <>
@@ -151,16 +151,16 @@ DIFFERENTIATORS:
           {/* Grid of Certifications & NAICS */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
-              <h5 className="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-[#3E6BE0]" />
+              <h5 className="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-[#007AFF]" />
                 Corporate & Government Certifications
               </h5>
               <div className="space-y-2">
                 {CERTIFICATIONS.map((cert) => (
-                  <div key={cert.name} className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between gap-3">
+                  <div key={cert.name} className="p-2.5 rounded-xl bg-white/50 dark:bg-white/5 border border-black/[0.05] dark:border-white/10 flex items-center justify-between gap-3 backdrop-blur-sm">
                     <div className="flex items-center gap-2.5 min-w-0">
                       {cert.logoUrl && (
-                        <div className="w-8 h-8 rounded-lg bg-white border border-slate-200/80 p-1 flex items-center justify-center shrink-0">
+                        <div className="w-8 h-8 rounded-lg bg-white border border-slate-200/80 p-1 flex items-center justify-center shrink-0 shadow-sm">
                           <img
                             src={cert.logoUrl}
                             alt={cert.name}
@@ -169,11 +169,11 @@ DIFFERENTIATORS:
                         </div>
                       )}
                       <div className="min-w-0">
-                        <div className="font-semibold text-slate-800 text-xs truncate">{cert.name}</div>
-                        <div className="text-[11px] text-slate-500 truncate">{cert.issuer}</div>
+                        <div className="font-semibold text-slate-800 dark:text-slate-200 text-xs truncate">{cert.name}</div>
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{cert.issuer}</div>
                       </div>
                     </div>
-                    <span className="font-mono text-xs font-bold text-[#3E6BE0] bg-white px-2 py-0.5 rounded border border-slate-200 shrink-0">
+                    <span className="font-mono text-xs font-bold text-[#007AFF] bg-[#007AFF]/10 px-2 py-0.5 rounded border border-[#007AFF]/20 shrink-0">
                       {cert.code}
                     </span>
                   </div>
@@ -182,17 +182,17 @@ DIFFERENTIATORS:
             </div>
 
             <div className="space-y-3">
-              <h5 className="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-1.5">
-                <Award className="w-4 h-4 text-[#F45B9C]" />
+              <h5 className="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
+                <Award className="w-4 h-4 text-[#FF2D55]" />
                 NAICS Classification Codes
               </h5>
               <div className="space-y-2">
                 {NAICS_CODES.map((item) => (
-                  <div key={item.code} className="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <span className="font-mono font-bold text-xs text-[#F45B9C] bg-[#FCE4EF]/60 px-1.5 py-0.5 rounded mr-2">
+                  <div key={item.code} className="p-2.5 rounded-xl bg-white/50 dark:bg-white/5 border border-black/[0.05] dark:border-white/10 backdrop-blur-sm">
+                    <span className="font-mono font-bold text-xs text-[#FF2D55] bg-[#FF2D55]/10 px-1.5 py-0.5 rounded border border-[#FF2D55]/20 mr-2">
                       {item.code}
                     </span>
-                    <span className="text-xs text-slate-700 font-medium">
+                    <span className="text-xs text-slate-700 dark:text-slate-300 font-medium">
                       {item.name}
                     </span>
                   </div>
@@ -200,14 +200,14 @@ DIFFERENTIATORS:
               </div>
 
               {/* Direct Contacts box */}
-              <div className="mt-4 p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-xs space-y-1.5">
-                <div className="font-semibold text-slate-800">Direct Procurement Contact</div>
-                <div className="flex items-center gap-2 text-slate-600">
-                  <Mail className="w-3.5 h-3.5 text-[#F45B9C]" />
+              <div className="mt-4 p-3.5 rounded-xl bg-white/50 dark:bg-white/5 border border-black/[0.05] dark:border-white/10 text-xs space-y-1.5 backdrop-blur-sm">
+                <div className="font-semibold text-slate-800 dark:text-slate-200">Direct Procurement Contact</div>
+                <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                  <Mail className="w-3.5 h-3.5 text-[#FF2D55]" />
                   <span>{SITE_CONFIG.email}</span>
                 </div>
-                <div className="flex items-center gap-2 text-slate-600">
-                  <Phone className="w-3.5 h-3.5 text-[#3E6BE0]" />
+                <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                  <Phone className="w-3.5 h-3.5 text-[#007AFF]" />
                   <span>{SITE_CONFIG.phone}</span>
                 </div>
               </div>
@@ -216,27 +216,27 @@ DIFFERENTIATORS:
 
           {/* Core Services bullets */}
           <div>
-            <h5 className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-2">
+            <h5 className="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider mb-2">
               Core Practice Areas
             </h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-100">
-                <h6 className="font-bold text-slate-900 text-xs mb-2 text-[#3E6BE0]">Inclusive Healthcare & Clinical Practice</h6>
+              <div className="p-4 rounded-xl bg-white/50 dark:bg-white/5 border border-black/[0.05] dark:border-white/10 backdrop-blur-sm">
+                <h6 className="font-bold text-slate-900 dark:text-white text-xs mb-2 text-[#007AFF]">Inclusive Healthcare & Clinical Practice</h6>
                 <ul className="space-y-1.5 text-xs">
                   {SERVICES_INCLUDE.healthcare.slice(0, 2).map((b, i) => (
                     <li key={i} className="flex items-start gap-1.5">
-                      <span className="text-[#3E6BE0] font-bold">•</span>
+                      <span className="text-[#007AFF] font-bold">•</span>
                       <span>{b}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-100">
-                <h6 className="font-bold text-slate-900 text-xs mb-2 text-[#F45B9C]">Inclusive Workplace Consultation</h6>
+              <div className="p-4 rounded-xl bg-white/50 dark:bg-white/5 border border-black/[0.05] dark:border-white/10 backdrop-blur-sm">
+                <h6 className="font-bold text-slate-900 dark:text-white text-xs mb-2 text-[#FF2D55]">Inclusive Workplace Consultation</h6>
                 <ul className="space-y-1.5 text-xs">
                   {SERVICES_INCLUDE.workplace.slice(0, 2).map((b, i) => (
                     <li key={i} className="flex items-start gap-1.5">
-                      <span className="text-[#F45B9C] font-bold">•</span>
+                      <span className="text-[#FF2D55] font-bold">•</span>
                       <span>{b}</span>
                     </li>
                   ))}
@@ -247,13 +247,13 @@ DIFFERENTIATORS:
         </div>
 
         {/* Footer actions */}
-        <div className="px-6 py-4 border-t border-slate-100 bg-slate-50/80 flex items-center justify-between">
-          <span className="text-xs text-slate-500">
+        <div className="px-6 py-4 border-t border-black/[0.06] dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-md flex items-center justify-between">
+          <span className="text-xs text-slate-500 dark:text-slate-400">
             D&B D-U-N-S: 010274745 • SBE / EBE / VSBE
           </span>
           <button
             onClick={handleDownload}
-            className="brand-gradient text-white text-sm font-semibold px-5 py-2.5 rounded-full flex items-center gap-2 shadow-md hover:scale-[1.02] transition-all"
+            className="ios-btn-primary text-sm font-semibold px-5 py-2.5 rounded-full flex items-center gap-2 shadow-md hover:scale-[1.02] transition-all"
           >
             <Download className="w-4 h-4" />
             <span>Download PDF / Text Summary</span>

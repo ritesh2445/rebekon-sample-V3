@@ -16,24 +16,26 @@ import {
   Users, 
   HeartHandshake, 
   Eye,
-  Radio,
-  Flame,
   Activity,
   Cpu,
   HeartPulse,
-  Briefcase
+  Briefcase,
+  Layers,
+  TrendingUp,
+  FileText
 } from 'lucide-react';
 import { SITE_CONFIG, SERVICE_PILLARS, CERTIFICATIONS, ESTABLISHED_STATS, MEDIA_ITEMS } from '../data/siteData';
 import { ServiceCard } from '../components/ServiceCard';
-import { StatCounter } from '../components/StatCounter';
 import { ClientMarquee } from '../components/ClientMarquee';
 import { CertificationsMarquee } from '../components/CertificationsMarquee';
 import { GradientCTASection } from '../components/GradientCTASection';
 import { VideoModal } from '../components/VideoModal';
 import { HeroVideoPlayer } from '../components/HeroVideoPlayer';
 import { CapabilitiesModal } from '../components/CapabilitiesModal';
+import { IOSActivityRings } from '../components/IOSActivityRings';
+import { IOSInfographicsSection } from '../components/IOSInfographicsSection';
 
-// Focus modes for interactive hero practice switcher
+// Practice modes for Apple iOS hero switcher
 const HERO_MODES = {
   keynote: {
     id: 'keynote',
@@ -50,7 +52,7 @@ const HERO_MODES = {
     video: MEDIA_ITEMS[0], // Bathroom to Boardroom (41:26)
     audioTrackName: 'Keynote Spotlight: "From the Bathroom to the Boardroom"',
     trackDuration: '41:26',
-    pillColor: 'from-[#F45B9C] to-[#7C6BE8]'
+    pillColor: '#FF2D55'
   },
   healthcare: {
     id: 'healthcare',
@@ -67,7 +69,7 @@ const HERO_MODES = {
     video: MEDIA_ITEMS[4], // Safe & Inclusive Workplaces
     audioTrackName: 'Healthcare Briefing: "Clinical Equity & Transgender Care Delivery"',
     trackDuration: '18:45',
-    pillColor: 'from-[#3E6BE0] to-[#7C6BE8]'
+    pillColor: '#007AFF'
   },
   deib: {
     id: 'deib',
@@ -84,7 +86,7 @@ const HERO_MODES = {
     video: MEDIA_ITEMS[6], // #EquityMatters
     audioTrackName: 'Executive Briefing: "#EquityMatters: Systemic Policy Reform"',
     trackDuration: '24:10',
-    pillColor: 'from-[#7C6BE8] to-[#F45B9C]'
+    pillColor: '#AF52DE'
   },
   ai: {
     id: 'ai',
@@ -101,7 +103,7 @@ const HERO_MODES = {
     video: MEDIA_ITEMS[1], // FUTRtv Challenge of Being Trans in Tech
     audioTrackName: 'FUTRtv Tech Dialogue: "Algorithmic Equity & Identity in Tech"',
     trackDuration: '14:22',
-    pillColor: 'from-[#F45B9C] to-[#3E6BE0]'
+    pillColor: '#00C7BE'
   }
 } as const;
 
@@ -173,23 +175,30 @@ export const HomePage: React.FC = () => {
   const currentMode = HERO_MODES[activeFocus];
 
   return (
-    <div className="relative pt-16 sm:pt-24 lg:pt-28 overflow-hidden">
-      {/* Subtle, Clean Ambient Grid Pattern */}
-      <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:28px_28px] opacity-40" />
-      </div>
-
+    <div className="relative pt-20 sm:pt-28 lg:pt-32 overflow-hidden select-none">
+      
       {/* =========================================================================
-          HERO SECTION: CLEAN, EXECUTIVE & PROFESSIONAL (FULL-SCREEN EXPANDED)
+          HERO SECTION: APPLE iOS GLASS STAGE & INTERACTIVE FOCUS SWITCHER
          ========================================================================= */}
-      <section className="relative w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pt-2 sm:pt-4 pb-12 sm:pb-16">
+      <section className="relative w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pt-2 sm:pt-4 pb-12 sm:pb-20">
         
-        {/* Interactive Practice Matrix Pills: Clean Top Navigator */}
-        <div className="mb-5 sm:mb-7 flex items-center justify-start lg:justify-start w-full overflow-x-auto scrollbar-none pb-1 -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="inline-flex items-center gap-1.5 p-1 rounded-full bg-slate-100/90 border border-slate-200/90 shadow-2xs shrink-0">
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-medium tracking-wider text-slate-500 uppercase shrink-0">
-              <Sparkles className="w-3 h-3 text-[#3E6BE0]" />
-              Focus Area:
+        {/* Apple Dynamic Island Live Activity Pill */}
+        <div className="flex justify-center sm:justify-start mb-6">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full ios-glass text-xs font-semibold shadow-sm border border-white/80">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FF2D55] animate-ping" />
+            <span className="text-slate-800 font-bold">2025–2026 Keynote & Health Equity Booking</span>
+            <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-gradient-to-r from-[#FF2D55] to-[#007AFF] text-white">
+              Active
+            </span>
+          </div>
+        </div>
+
+        {/* Apple iOS Segmented Practice Switcher */}
+        <div className="mb-8 flex items-center justify-start w-full overflow-x-auto scrollbar-none pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="inline-flex items-center gap-1.5 p-1.5 rounded-full ios-glass border border-white/80 shadow-[0_10px_30px_rgba(0,122,255,0.06)] shrink-0">
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-bold tracking-wider text-slate-400 uppercase shrink-0">
+              <Sparkles className="w-3.5 h-3.5 text-[#007AFF]" />
+              Practice:
             </span>
             {(Object.keys(HERO_MODES) as FocusModeKey[]).map((key) => {
               const mode = HERO_MODES[key];
@@ -200,13 +209,16 @@ export const HomePage: React.FC = () => {
                   key={key}
                   type="button"
                   onClick={() => setActiveFocus(key)}
-                  className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
                     isActive
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                      ? 'bg-white text-slate-900 shadow-md scale-102 border border-slate-100'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#F45B9C]' : 'text-slate-400'}`} />
+                  <Icon 
+                    className="w-3.5 h-3.5 transition-colors" 
+                    style={{ color: isActive ? mode.pillColor : '#94A3B8' }}
+                  />
                   <span>{mode.pill}</span>
                 </button>
               );
@@ -214,55 +226,54 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
 
+        {/* Hero Main Cockpit */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center">
           
-          {/* Left Column: Value Proposition & Dynamic Content (Smooth Entrance) */}
-          <div className="lg:col-span-7 xl:col-span-6 space-y-5 text-left animate-fade-in-up">
+          {/* Left Column: Glass Headline & Telemetry */}
+          <div className="lg:col-span-7 xl:col-span-6 space-y-6 text-left">
             {/* Multi-badge Kicker Strip */}
             <div className="inline-flex flex-wrap items-center justify-start gap-2.5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-[#3E6BE0]" />
-                <span className="text-xs font-medium tracking-wide text-slate-800 uppercase">
-                  {currentMode.badge}
-                </span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full ios-glass-pill text-xs font-bold text-slate-800 shadow-xs">
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: currentMode.pillColor }} />
+                <span>{currentMode.badge}</span>
               </div>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-900 text-white shadow-2xs">
+              <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-900 text-white shadow-xs">
                 {currentMode.impactStat}
               </span>
             </div>
 
-            {/* Dynamic H1 Headline - Clean, Executive Sans-Serif Typography */}
-            <h1 className="font-sans font-semibold text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] text-slate-900 tracking-[-0.03em] leading-[1.18] transition-all duration-200">
+            {/* Apple Dynamic Headline with Pink & Blue Fluid Gradient */}
+            <h1 className="font-extrabold text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] text-slate-900 tracking-[-0.035em] leading-[1.15]">
               {currentMode.titleLead}
-              <span className="text-[#3E6BE0]">
+              <span className="ios-pink-blue-text font-black">
                 {currentMode.titleAccent}
               </span>{' '}
               {currentMode.titleEnd}
             </h1>
 
-            {/* Authentic Subhead */}
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal transition-all duration-200">
+            {/* Subtitle */}
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
               {currentMode.description}{' '}
-              Led by <span className="font-semibold text-slate-900">{SITE_CONFIG.founder}</span> <span className="text-slate-500 font-normal">{SITE_CONFIG.pronouns}</span>, Founder & CEO.
+              Led by <span className="font-bold text-slate-900">{SITE_CONFIG.founder}</span> <span className="text-slate-400 font-medium">{SITE_CONFIG.pronouns}</span>, Founder & CEO.
             </p>
 
-            {/* Clean Keynote Preview Strip */}
-            <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-900 text-white border border-slate-800 shadow-sm text-left">
+            {/* Apple Music / Podcast Frosted Preview Bar */}
+            <div className="p-3.5 rounded-2xl ios-glass-card-dark text-white border border-white/15 shadow-xl text-left">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                  <div className="w-8 h-8 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center gap-1 shrink-0 px-1.5">
-                    <div className="w-1 bg-[#F45B9C] rounded-full animate-eq-1" />
-                    <div className="w-1 bg-[#7C6BE8] rounded-full animate-eq-2" />
-                    <div className="w-1 bg-[#3E6BE0] rounded-full animate-eq-3" />
-                    <div className="w-1 bg-[#F45B9C] rounded-full animate-eq-4" />
+                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center gap-1 shrink-0 px-1.5">
+                    <div className="w-1 bg-[#FF2D55] rounded-full animate-eq-1" />
+                    <div className="w-1 bg-[#AF52DE] rounded-full animate-eq-2" />
+                    <div className="w-1 bg-[#007AFF] rounded-full animate-eq-3" />
+                    <div className="w-1 bg-[#FF2D55] rounded-full animate-eq-4" />
                   </div>
                   <div className="text-left overflow-hidden min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-semibold text-[#F45B9C] tracking-wider uppercase">
-                        KEYNOTE SPOTLIGHT · {currentMode.trackDuration}
+                      <span className="text-[10px] font-extrabold text-[#FF2D55] tracking-wider uppercase">
+                        SPOTLIGHT · {currentMode.trackDuration}
                       </span>
                     </div>
-                    <div className="font-medium text-xs sm:text-sm text-slate-200 truncate">
+                    <div className="font-semibold text-xs sm:text-sm text-slate-100 truncate">
                       {currentMode.audioTrackName}
                     </div>
                   </div>
@@ -272,19 +283,19 @@ export const HomePage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setActiveVideo(currentMode.video)}
-                  className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 rounded-xl bg-[#3E6BE0] hover:bg-[#2F59C7] text-white text-xs font-semibold shadow-xs hover:scale-102 active:scale-98 transition-all cursor-pointer"
+                  className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full ios-btn-primary text-xs font-bold shadow-md cursor-pointer"
                 >
                   <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>Watch Keynote</span>
+                  <span>Watch Presentation</span>
                 </button>
               </div>
             </div>
 
-            {/* Primary Action Buttons Row */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-2.5 sm:gap-3 pt-1">
+            {/* Apple iOS Button Cluster */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 pt-2">
               <Link
                 to={currentMode.primaryCta.link}
-                className="bg-[#3E6BE0] hover:bg-[#2F59C7] text-white font-medium px-7 py-3.5 rounded-full text-base shadow-sm hover:shadow-md hover:scale-102 transition-all duration-200 flex items-center justify-center gap-2 group"
+                className="ios-btn-primary px-7 py-3.5 text-sm sm:text-base flex items-center justify-center gap-2 group shadow-lg"
               >
                 <span>{currentMode.primaryCta.label}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -292,80 +303,79 @@ export const HomePage: React.FC = () => {
 
               <Link
                 to="/book-online"
-                className="bg-white hover:bg-slate-50 text-slate-800 font-medium px-6 py-3.5 rounded-full text-sm sm:text-base border border-slate-300 shadow-2xs hover:border-[#3E6BE0] transition-all duration-200 flex items-center justify-center gap-2"
+                className="ios-btn-secondary px-6 py-3.5 text-sm sm:text-base flex items-center justify-center gap-2"
               >
-                <Calendar className="w-4 h-4 text-[#3E6BE0]" />
+                <Calendar className="w-4 h-4 text-[#007AFF]" />
                 <span>Book Online</span>
               </Link>
 
               <button
                 type="button"
                 onClick={() => setCapabilitiesModalOpen(true)}
-                className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-5 py-3.5 rounded-full text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                className="px-5 py-3.5 rounded-full ios-glass-pill text-xs sm:text-sm font-bold text-slate-700 hover:text-slate-900 transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Eye className="w-4 h-4 text-slate-500" />
+                <FileText className="w-4 h-4 text-[#FF2D55]" />
                 <span>Capabilities Statement</span>
               </button>
             </div>
 
             {/* Official Diverse Supplier Trust Strip */}
-            <div className="pt-4 border-t border-slate-200/80 flex flex-wrap items-center justify-start gap-2.5">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-[#3E6BE0] border border-blue-200/60 shadow-2xs">
+            <div className="pt-4 border-t border-slate-200/70 flex flex-wrap items-center justify-start gap-2.5">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#E8F2FF] text-[#007AFF] border border-blue-200/70 shadow-2xs">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 Verified Diverse Supplier
               </span>
-              <span className="text-xs text-slate-600 font-medium">
+              <span className="text-xs text-slate-600 font-semibold">
                 NGLCC (30210) • CPUC VON: 24000841 • SBE • D-U-N-S Registered
               </span>
             </div>
           </div>
 
-          {/* Right Column: 16:9 Executive Keynote Theater Card (Smooth Scale-In) */}
-          <div className="lg:col-span-5 xl:col-span-6 animate-scale-in">
-            <div className="bg-white p-3 sm:p-4 rounded-3xl shadow-xl border border-slate-200/90 overflow-hidden">
-              
-              {/* Autoplaying 16:9 Hero Keynote Video with Native Ratio & Sound Toggle Button */}
+          {/* Right Column: Apple Vision Frosted Media Deck */}
+          <div className="lg:col-span-5 xl:col-span-6">
+            <div className="ios-glass-card p-4 sm:p-5 border border-white/90 shadow-[0_25px_65px_-15px_rgba(0,122,255,0.2)]">
+              {/* Autoplaying 16:9 Video Player */}
               <HeroVideoPlayer
                 video={currentMode.video}
                 onOpenModal={() => setActiveVideo(currentMode.video)}
                 badgeText={currentMode.badge}
               />
 
-              {/* Under-Video Speaker Bar & Credential Stats */}
-              <div className="pt-3.5 px-1">
-                <div className="flex items-center justify-between gap-3 pb-3 border-b border-slate-100">
+              {/* Speaker Metadata & Telemetry Cards */}
+              <div className="pt-4 px-1">
+                <div className="flex items-center justify-between gap-3 pb-3.5 border-b border-slate-200/60">
                   <div className="min-w-0">
-                    <div className="font-semibold text-sm text-slate-900 flex items-center gap-1.5 truncate">
+                    <div className="font-bold text-sm text-slate-900 flex items-center gap-1.5 truncate">
                       <span>{SITE_CONFIG.founder}</span>
-                      <CheckCircle2 className="w-4 h-4 text-[#3E6BE0] shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-[#007AFF] shrink-0" />
                     </div>
-                    <p className="text-xs text-slate-500 truncate mt-0.5">
+                    <p className="text-xs text-slate-500 truncate mt-0.5 font-medium">
                       {currentMode.audioTrackName}
                     </p>
                   </div>
                   <button
                     type="button"
                     onClick={() => setActiveVideo(currentMode.video)}
-                    className="shrink-0 text-xs font-semibold text-[#3E6BE0] hover:text-[#2550C0] flex items-center gap-1 cursor-pointer transition-colors"
+                    className="shrink-0 text-xs font-bold text-[#007AFF] hover:underline flex items-center gap-1 cursor-pointer"
                   >
-                    <span>Full Keynote</span>
+                    <span>Expand Video</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
 
-                {/* Stats Bar */}
-                <div className="grid grid-cols-3 gap-2 pt-3 text-center">
-                  <div className="p-2 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="font-semibold text-slate-900 text-xs">12+ Podcasts</div>
-                    <div className="text-[10px] text-slate-500 font-normal">Featured Voice</div>
+                {/* Micro Metric Pills */}
+                <div className="grid grid-cols-3 gap-2.5 pt-3 text-center">
+                  <div className="p-2.5 rounded-2xl bg-white/70 border border-white shadow-2xs">
+                    <div className="font-black text-slate-900 text-xs sm:text-sm">12+ Podcasts</div>
+                    <div className="text-[10px] text-slate-500 font-semibold">Featured Voice</div>
                   </div>
-                  <div className="p-2 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="font-semibold text-slate-900 text-xs">Top 20 Leader</div>
-                    <div className="text-[10px] text-slate-500 font-normal">Endpoints News</div>
+                  <div className="p-2.5 rounded-2xl bg-white/70 border border-white shadow-2xs">
+                    <div className="font-black text-slate-900 text-xs sm:text-sm">Top 20 Leader</div>
+                    <div className="text-[10px] text-slate-500 font-semibold">Endpoints News</div>
                   </div>
-                  <div className="p-2 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="font-semibold text-slate-900 text-xs">30+ Years</div>
-                    <div className="text-[10px] text-slate-500 font-normal">Fortune 100 Pedigree</div>
+                  <div className="p-2.5 rounded-2xl bg-white/70 border border-white shadow-2xs">
+                    <div className="font-black text-slate-900 text-xs sm:text-sm">30+ Years</div>
+                    <div className="text-[10px] text-slate-500 font-semibold">Fortune 100 Pedigree</div>
                   </div>
                 </div>
               </div>
@@ -375,25 +385,19 @@ export const HomePage: React.FC = () => {
 
         </div>
 
-        {/* =========================================================================
-            PROMINENT ROLLING CERTIFICATIONS & ACCREDITATIONS MARQUEE
-           ========================================================================= */}
-        <div className="w-full max-w-[1600px] mx-auto mt-6 sm:mt-10 pt-4 sm:pt-6 border-t border-slate-200/90 relative">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2 px-1">
+        {/* Certifications Rolling Marquee Strip */}
+        <div className="w-full max-w-[1600px] mx-auto mt-8 sm:mt-12 pt-6 border-t border-slate-200/70 relative">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 px-1">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-200/70 flex items-center justify-center text-[#3E6BE0] shrink-0 shadow-2xs">
-                <ShieldCheck className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] p-0.5 shrink-0 shadow-md">
+                <div className="w-full h-full bg-white rounded-2xl flex items-center justify-center">
+                  <ShieldCheck className="w-5 h-5 text-[#007AFF]" />
+                </div>
               </div>
               <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight">
-                    OFFICIAL GOVERNMENT & DIVERSE SUPPLIER ACCREDITATIONS
-                  </h3>
-                  <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    <CheckCircle2 className="w-3 h-3" />
-                    Verified & Active
-                  </span>
-                </div>
+                <h3 className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight">
+                  OFFICIAL GOVERNMENT & DIVERSE SUPPLIER ACCREDITATIONS
+                </h3>
                 <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">
                   Certified by NGLCC National LGBT Chamber, California Public Utilities Commission (CPUC), CA/LA SBE, and Dun & Bradstreet Registered
                 </p>
@@ -403,10 +407,10 @@ export const HomePage: React.FC = () => {
             <button
               type="button"
               onClick={() => setCapabilitiesModalOpen(true)}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#3E6BE0] hover:text-[#2550C0] transition-colors cursor-pointer self-start sm:self-auto group"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#007AFF] hover:underline cursor-pointer self-start sm:self-auto"
             >
               <span>View Full Capabilities & Codes</span>
-              <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              <ExternalLink className="w-3.5 h-3.5" />
             </button>
           </div>
 
@@ -415,20 +419,33 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          INTERACTIVE KEYNOTE VIDEO STRIP: IMMEDIATE VISUAL & AUDIO PROOF
+          APPLE ACTIVITY RINGS TELEMETRY & SMOOTH INFOGRAPHICS
          ========================================================================= */}
-      <section className="py-8 sm:py-12 bg-slate-900 text-white relative overflow-hidden">
-        {/* Subtle background glow */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#F45B9C]/10 via-transparent to-[#3E6BE0]/10 pointer-events-none" />
+      <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <IOSActivityRings />
+      </section>
+
+      {/* =========================================================================
+          DATA-DRIVEN INCLUSION INFOGRAPHIC DASHBOARD (MEASURABLE MATRIX)
+         ========================================================================= */}
+      <IOSInfographicsSection />
+
+      {/* =========================================================================
+          KEYNOTE VIDEO CAROUSEL WITH GLASS PLAYERS
+         ========================================================================= */}
+      <section className="py-16 bg-slate-950/85 text-white relative overflow-hidden backdrop-blur-2xl border-y border-white/10">
+        {/* Ambient Pink and Blue Glows */}
+        <div className="absolute top-0 left-10 w-96 h-96 bg-[#FF2D55]/15 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-10 w-96 h-96 bg-[#007AFF]/15 blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 md:mb-8 gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#F45B9C] text-xs font-bold tracking-wider uppercase mb-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#FF2D55] text-xs font-bold tracking-wider uppercase mb-2 border border-white/15">
                 <Mic className="w-3.5 h-3.5" />
                 <span>WATCH CELIA IN ACTION</span>
               </div>
-              <h2 className="font-display font-bold text-2xl sm:text-3xl text-white">
+              <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight">
                 Featured Keynotes, Interviews & Thought Leadership
               </h2>
               <p className="text-slate-400 text-xs sm:text-sm mt-1">
@@ -438,7 +455,7 @@ export const HomePage: React.FC = () => {
             <div className="flex items-center justify-between md:justify-end gap-3">
               <Link
                 to="/media"
-                className="text-xs sm:text-sm font-semibold text-[#F45B9C] hover:text-[#ff7bb5] flex items-center gap-1.5 transition-colors shrink-0"
+                className="text-xs sm:text-sm font-bold text-[#FF2D55] hover:text-pink-300 flex items-center gap-1.5 transition-colors shrink-0"
               >
                 <span>Explore All 10 Video Appearances</span>
                 <ArrowRight className="w-4 h-4" />
@@ -446,47 +463,47 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Keynotes Carousel Wrapper with Floating Navigation Arrows */}
+          {/* Keynotes Carousel */}
           <div className="relative group">
-            {/* Floating Left Arrow */}
+            {/* Left Arrow */}
             <button
               type="button"
               onClick={() => scrollToKeynote(activeKeynoteIdx - 1)}
               disabled={activeKeynoteIdx === 0}
               aria-label="Previous keynote"
-              className={`absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-slate-900/95 text-white border border-slate-700 shadow-2xl flex items-center justify-center transition-all cursor-pointer ${
-                activeKeynoteIdx === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110 active:scale-95'
+              className={`absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-slate-900/90 text-white border border-white/20 shadow-2xl flex items-center justify-center transition-all cursor-pointer backdrop-blur-xl ${
+                activeKeynoteIdx === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110'
               }`}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
 
-            {/* Floating Right Arrow */}
+            {/* Right Arrow */}
             <button
               type="button"
               onClick={() => scrollToKeynote(activeKeynoteIdx + 1)}
               disabled={activeKeynoteIdx === 2}
               aria-label="Next keynote"
-              className={`absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-[#F45B9C] text-white shadow-2xl flex items-center justify-center transition-all cursor-pointer ${
-                activeKeynoteIdx === 2 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110 active:scale-95'
+              className={`absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-gradient-to-r from-[#FF2D55] to-[#007AFF] text-white shadow-2xl flex items-center justify-center transition-all cursor-pointer ${
+                activeKeynoteIdx === 2 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110'
               }`}
             >
               <ChevronRight className="w-5 h-5" />
             </button>
 
-            {/* 3 Real Featured Video Cards: Centered on mobile with px-[7vw], Desktop 3-Col Grid */}
+            {/* 3 Featured Video Cards */}
             <div
               ref={keynoteScrollRef}
               onScroll={handleKeynoteScroll}
-              className="flex md:grid md:grid-cols-3 gap-4 sm:gap-6 overflow-x-auto pb-4 pt-1 px-[7vw] sm:px-0 snap-x snap-mandatory scrollbar-none scroll-smooth items-stretch"
+              className="flex md:grid md:grid-cols-3 gap-5 sm:gap-6 overflow-x-auto pb-4 pt-1 px-[7vw] sm:px-0 snap-x snap-mandatory scrollbar-none scroll-smooth items-stretch"
             >
               {MEDIA_ITEMS.slice(0, 3).map((item) => (
                 <div
                   key={item.id}
                   onClick={() => setActiveVideo(item)}
-                  className="w-[86vw] max-w-[360px] md:max-w-none md:w-auto shrink-0 snap-center group relative bg-slate-800/80 rounded-2xl overflow-hidden border border-slate-700/80 hover:border-[#F45B9C] shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col justify-between h-full"
+                  className="w-[86vw] max-w-[360px] md:max-w-none md:w-auto shrink-0 snap-center group relative ios-glass-card-dark rounded-3xl overflow-hidden border border-white/15 hover:border-[#FF2D55]/60 shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between h-full"
                 >
-                  {/* Real YouTube Video Thumbnail */}
+                  {/* YouTube Thumbnail */}
                   <div className="relative aspect-video overflow-hidden bg-black">
                     <img
                       src={item.thumbnailUrl}
@@ -494,16 +511,16 @@ export const HomePage: React.FC = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 transition-colors flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full brand-gradient text-white flex items-center justify-center shadow-xl group-hover:scale-115 transition-transform">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] text-white flex items-center justify-center shadow-2xl group-hover:scale-115 transition-transform">
                         <Play className="w-5 h-5 ml-0.5 fill-current" />
                       </div>
                     </div>
                     {item.duration && (
-                      <span className="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-black/85 text-white">
+                      <span className="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md text-[11px] font-mono font-bold bg-black/80 text-white backdrop-blur-md">
                         {item.duration}
                       </span>
                     )}
-                    <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-900/90 text-[#F45B9C] uppercase tracking-wider backdrop-blur-xs">
+                    <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-black/80 text-[#FF2D55] uppercase tracking-wider backdrop-blur-md border border-white/10">
                       {item.type}
                     </span>
                   </div>
@@ -513,12 +530,12 @@ export const HomePage: React.FC = () => {
                       <span className="text-[11px] font-semibold text-slate-400 block mb-1">
                         {item.source}
                       </span>
-                      <h3 className="font-display font-bold text-white text-base group-hover:text-[#F45B9C] transition-colors line-clamp-2">
+                      <h3 className="font-bold text-white text-base group-hover:text-[#FF2D55] transition-colors line-clamp-2">
                         {item.title}
                       </h3>
                     </div>
-                    <div className="mt-4 pt-3 border-t border-slate-700/60 flex items-center justify-between text-xs font-semibold text-[#3E6BE0]">
-                      <span className="group-hover:translate-x-0.5 transition-transform">Play Video in Player</span>
+                    <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-[#007AFF]">
+                      <span className="group-hover:translate-x-0.5 transition-transform">Play in Apple Player</span>
                       <Play className="w-3.5 h-3.5 fill-current" />
                     </div>
                   </div>
@@ -526,7 +543,7 @@ export const HomePage: React.FC = () => {
               ))}
             </div>
 
-            {/* Mobile Dot Indicators */}
+            {/* Mobile Indicators */}
             <div className="flex md:hidden items-center justify-center gap-2 mt-2">
               {[0, 1, 2].map((idx) => (
                 <button
@@ -534,7 +551,7 @@ export const HomePage: React.FC = () => {
                   type="button"
                   onClick={() => scrollToKeynote(idx)}
                   className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    activeKeynoteIdx === idx ? 'w-6 bg-[#F45B9C]' : 'w-2 bg-slate-700'
+                    activeKeynoteIdx === idx ? 'w-6 bg-[#FF2D55]' : 'w-2 bg-slate-700'
                   }`}
                   aria-label={`Go to video ${idx + 1}`}
                 />
@@ -545,60 +562,34 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          ESTABLISHED STATS STRIP: Equal Box Sizes Across All 5 Stats
-         ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 items-stretch">
-          {ESTABLISHED_STATS.map((stat, idx) => (
-            <div
-              key={idx}
-              className={
-                idx === 4
-                  ? "col-span-2 flex justify-center md:col-span-1 h-full"
-                  : "h-full"
-              }
-            >
-              <div className={idx === 4 ? "w-full max-w-[calc(50%-0.375rem)] md:max-w-none h-full" : "h-full w-full"}>
-                <StatCounter
-                  value={stat.value}
-                  label={stat.label}
-                  subtext={stat.subtext}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* =========================================================================
           REAL PHOTO GALLERY: LEADERSHIP & ADVOCACY IN ACTION
          ========================================================================= */}
-      <section className="py-16 bg-gradient-to-b from-white via-slate-50 to-white border-y border-slate-200/60">
+      <section className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="text-xs font-bold tracking-[0.2em] text-[#F45B9C] uppercase">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
               LEADERSHIP IN ACTION
             </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
+            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
               On Stage, in the Boardroom, and in the Community
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base mt-3">
+            <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
               Witness Celia Sandhya Daniels keynoting national healthcare conferences, addressing industry delegations, and receiving bipartisan congressional honors.
             </p>
           </div>
 
-          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto pb-4 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory scrollbar-none">
+          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5 overflow-x-auto pb-4 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory scrollbar-none">
             {/* Photo 1: OutBuro Spotlight */}
-            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start snap-always group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-slate-900 border border-slate-200/80">
-              <div className="aspect-[4/3] overflow-hidden">
+            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start group relative rounded-3xl overflow-hidden ios-glass-card shadow-md flex flex-col justify-between">
+              <div className="aspect-[4/3] overflow-hidden bg-slate-900">
                 <img
                   src="/images/real/yt_thumb_outburo.jpg"
                   alt="Celia Daniels OutBüro Voices Spotlight"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="p-4 bg-white">
-                <span className="text-[10px] font-bold text-[#F45B9C] uppercase tracking-wider block">
+              <div className="p-4 bg-white/90">
+                <span className="text-[10px] font-bold text-[#FF2D55] uppercase tracking-wider block">
                   Executive Spotlight
                 </span>
                 <div className="font-bold text-slate-900 text-sm mt-0.5">
@@ -611,16 +602,16 @@ export const HomePage: React.FC = () => {
             </div>
 
             {/* Photo 2: Bathroom to Boardroom Keynote */}
-            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start snap-always group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-slate-900 border border-slate-200/80">
-              <div className="aspect-[4/3] overflow-hidden">
+            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start group relative rounded-3xl overflow-hidden ios-glass-card shadow-md flex flex-col justify-between">
+              <div className="aspect-[4/3] overflow-hidden bg-slate-900">
                 <img
                   src="/images/real/yt_thumb_bathroom_boardroom.jpg"
                   alt="Bathroom to Boardroom Keynote"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="p-4 bg-white">
-                <span className="text-[10px] font-bold text-[#3E6BE0] uppercase tracking-wider block">
+              <div className="p-4 bg-white/90">
+                <span className="text-[10px] font-bold text-[#007AFF] uppercase tracking-wider block">
                   Keynote Address
                 </span>
                 <div className="font-bold text-slate-900 text-sm mt-0.5">
@@ -633,16 +624,16 @@ export const HomePage: React.FC = () => {
             </div>
 
             {/* Photo 3: Workplace Pride */}
-            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start snap-always group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-slate-900 border border-slate-200/80">
-              <div className="aspect-[4/3] overflow-hidden">
+            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start group relative rounded-3xl overflow-hidden ios-glass-card shadow-md flex flex-col justify-between">
+              <div className="aspect-[4/3] overflow-hidden bg-slate-900">
                 <img
                   src="/images/real/yt_thumb_workplace_pride.jpg"
                   alt="Amplify DEI Workplace Pride Keynote"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="p-4 bg-white">
-                <span className="text-[10px] font-bold text-[#7C6BE8] uppercase tracking-wider block">
+              <div className="p-4 bg-white/90">
+                <span className="text-[10px] font-bold text-[#AF52DE] uppercase tracking-wider block">
                   Global Summit
                 </span>
                 <div className="font-bold text-slate-900 text-sm mt-0.5">
@@ -655,16 +646,16 @@ export const HomePage: React.FC = () => {
             </div>
 
             {/* Photo 4: 12+ Featured Podcast Networks */}
-            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start snap-always group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-slate-900 border border-slate-200/80">
-              <div className="aspect-[4/3] overflow-hidden">
+            <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-auto shrink-0 snap-start group relative rounded-3xl overflow-hidden ios-glass-card shadow-md flex flex-col justify-between">
+              <div className="aspect-[4/3] overflow-hidden bg-slate-900">
                 <img
                   src="/images/real/award_congressional.png"
                   alt="12+ Featured Podcast Appearances"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="p-4 bg-white">
-                <span className="text-[10px] font-bold text-[#F45B9C] uppercase tracking-wider block">
+              <div className="p-4 bg-white/90">
+                <span className="text-[10px] font-bold text-[#FF2D55] uppercase tracking-wider block">
                   Media Roster
                 </span>
                 <div className="font-bold text-slate-900 text-sm mt-0.5">
@@ -680,23 +671,23 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          THREE SERVICE PILLARS
+          THE THREE PILLARS: APPLE GLASS BENTO GRID
          ========================================================================= */}
-      <section className="py-20 bg-slate-50/60 border-b border-slate-100">
+      <section className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold tracking-[0.2em] text-[#F45B9C] uppercase">
+            <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
               CORE PRACTICE AREAS
             </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
+            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
               Humanizing Healthcare, Workplace & Business
             </h2>
-            <p className="text-slate-600 text-base sm:text-lg mt-4">
+            <p className="text-slate-600 text-base sm:text-lg mt-3 leading-relaxed">
               Strategic advisory grounded in lived experience and over 30 years of corporate Fortune 100 enterprise execution.
             </p>
           </div>
 
-          {/* 3 Pillars Grid */}
+          {/* 3 Pillars Grid with Apple Glass Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {SERVICE_PILLARS.map((pillar, idx) => (
               <ServiceCard key={pillar.id} pillar={pillar} index={idx} />
@@ -706,7 +697,7 @@ export const HomePage: React.FC = () => {
           <div className="mt-12 text-center">
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#3E6BE0] hover:text-[#2850B8] transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#007AFF] hover:underline"
             >
               <span>Explore the complete Educate · Engage · Empower framework</span>
               <ArrowRight className="w-4 h-4" />
@@ -716,14 +707,14 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          CLIENTS / PARTNERS AUTO-SCROLLING MARQUEE
+          CLIENT PARTNERS MARQUEE
          ========================================================================= */}
-      <section className="py-16 bg-white overflow-hidden">
+      <section className="py-16 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
-          <span className="text-xs font-bold tracking-[0.2em] text-slate-400 uppercase">
+          <span className="text-xs font-bold tracking-widest text-slate-400 uppercase">
             TRUSTED PARTNERSHIPS & CLIENT EXPERIENCE
           </span>
-          <h2 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 mt-2">
+          <h2 className="font-extrabold text-2xl sm:text-3xl text-slate-900 mt-2 tracking-tight">
             Working With the Best Clients and Partners
           </h2>
           <p className="text-slate-500 text-sm mt-1">
@@ -735,64 +726,66 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          FOUNDER HIGHLIGHT / VISION STATEMENT WITH REAL PORTRAIT
+          FOUNDER VISION STATEMENT: APPLE FROSTED GLASS CALLOUT
          ========================================================================= */}
-      <section className="py-20 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="w-14 h-14 rounded-2xl brand-gradient flex items-center justify-center text-white mx-auto mb-6 shadow-md">
-            <Sparkles className="w-7 h-7" />
-          </div>
-
-          <span className="text-xs font-bold tracking-widest text-[#F45B9C] uppercase">
-            OUR CORE VISION & MISSION
-          </span>
-
-          <blockquote className="font-display font-normal text-2xl sm:text-3xl lg:text-4xl text-slate-800 leading-snug my-8 italic">
-            "Transforming organizations to foster genuine inclusivity at all levels from the Bathroom to the Boardroom, unlocking the potential of employees to drive innovation, enhance productivity, and cultivate a profound sense of authenticity and belonging in the workplace."
-          </blockquote>
-
-          <div className="flex items-center justify-center gap-3">
-            <img
-              src="/images/real/celia_official_speaker.jpg"
-              alt="Celia Sandhya Daniels"
-              className="w-14 h-14 rounded-full object-cover object-[75%_25%] border-2 border-[#F45B9C] shadow-md"
-            />
-            <div className="text-left">
-              <div className="font-bold text-slate-900 text-base">{SITE_CONFIG.founder}</div>
-              <div className="text-xs text-slate-500">Founder & CEO, Rebekon Consulting LLC • {SITE_CONFIG.pronouns}</div>
+      <section className="py-20 relative">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="ios-glass-card p-8 sm:p-14 text-center border border-white/95 shadow-[0_20px_60px_-15px_rgba(255,45,85,0.12)]">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#FF2D55] via-[#AF52DE] to-[#007AFF] flex items-center justify-center text-white mx-auto mb-6 shadow-md">
+              <Sparkles className="w-7 h-7" />
             </div>
-          </div>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#3E6BE0] hover:text-[#2850B8] transition-colors"
-            >
-              <span>Read Celia's Full Biography & 16+ Civic Honors</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
+              OUR CORE VISION & MISSION
+            </span>
+
+            <blockquote className="font-medium text-2xl sm:text-3xl lg:text-4xl text-slate-900 leading-snug my-8 italic">
+              "Transforming organizations to foster genuine inclusivity at all levels from the Bathroom to the Boardroom, unlocking the potential of employees to drive innovation, enhance productivity, and cultivate a profound sense of authenticity and belonging in the workplace."
+            </blockquote>
+
+            <div className="flex items-center justify-center gap-3">
+              <img
+                src="/images/real/celia_official_speaker.jpg"
+                alt="Celia Sandhya Daniels"
+                className="w-14 h-14 rounded-full object-cover object-[75%_25%] border-2 border-[#FF2D55] shadow-md"
+              />
+              <div className="text-left">
+                <div className="font-bold text-slate-900 text-base">{SITE_CONFIG.founder}</div>
+                <div className="text-xs text-slate-500 font-medium">Founder & CEO, Rebekon Consulting LLC • {SITE_CONFIG.pronouns}</div>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#007AFF] hover:underline"
+              >
+                <span>Read Celia's Full Biography & 16+ Civic Honors</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          FEATURED MEDIA SECTION WITH REAL THUMBNAILS & PLAY MODALS
+          FEATURED VOICES & INTERVIEWS REEL
          ========================================================================= */}
-      <section className="pt-8 sm:pt-12 pb-2 bg-white">
+      <section className="pt-8 sm:pt-12 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 md:mb-8 gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
-              <span className="text-xs font-bold tracking-widest text-[#F45B9C] uppercase">
+              <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
                 PODCASTS · WEBCASTS · KEYNOTES
               </span>
-              <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-slate-900 mt-1">
+              <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl text-slate-900 mt-1 tracking-tight">
                 Featured Voices & Thought Leadership
               </h2>
             </div>
             <div className="flex items-center justify-between md:justify-end gap-3">
               <Link
                 to="/media"
-                className="text-sm font-semibold text-[#3E6BE0] hover:text-[#2850B8] flex items-center gap-1.5 shrink-0"
+                className="text-sm font-bold text-[#007AFF] hover:underline flex items-center gap-1.5 shrink-0"
               >
                 <span>View All 10 Interviews</span>
                 <ArrowRight className="w-4 h-4" />
@@ -800,29 +793,29 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Podcasts and Videos: Centered horizontal snap carousel on mobile with swipe arrows, responsive grid on desktop */}
+          {/* Podcasts and Videos */}
           <div className="relative group">
-            {/* Floating Left Arrow */}
+            {/* Left Arrow */}
             <button
               type="button"
               onClick={() => scrollToMedia(activeMediaIdx - 1)}
               disabled={activeMediaIdx === 0}
               aria-label="Previous podcast"
-              className={`absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 text-slate-800 border border-slate-200 shadow-2xl flex items-center justify-center transition-all cursor-pointer ${
-                activeMediaIdx === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110 active:scale-95'
+              className={`absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full ios-glass text-slate-800 shadow-2xl flex items-center justify-center transition-all cursor-pointer ${
+                activeMediaIdx === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110'
               }`}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
 
-            {/* Floating Right Arrow */}
+            {/* Right Arrow */}
             <button
               type="button"
               onClick={() => scrollToMedia(activeMediaIdx + 1)}
               disabled={activeMediaIdx === 5}
               aria-label="Next podcast"
-              className={`absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-[#3E6BE0] text-white shadow-2xl flex items-center justify-center transition-all cursor-pointer ${
-                activeMediaIdx === 5 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110 active:scale-95'
+              className={`absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full ios-btn-primary text-white shadow-2xl flex items-center justify-center transition-all cursor-pointer ${
+                activeMediaIdx === 5 ? 'opacity-30 cursor-not-allowed' : 'opacity-90 hover:opacity-100 hover:scale-110'
               }`}
             >
               <ChevronRight className="w-5 h-5" />
@@ -831,12 +824,12 @@ export const HomePage: React.FC = () => {
             <div
               ref={mediaScrollRef}
               onScroll={handleMediaScroll}
-              className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 overflow-x-auto pb-4 pt-1 px-[7vw] sm:px-0 snap-x snap-mandatory scrollbar-none scroll-smooth items-stretch"
+              className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 overflow-x-auto pb-4 pt-1 px-[7vw] sm:px-0 snap-x snap-mandatory scrollbar-none scroll-smooth items-stretch"
             >
               {MEDIA_ITEMS.slice(0, 6).map((item) => (
                 <div
                   key={item.id}
-                  className="w-[86vw] max-w-[360px] md:max-w-none md:w-auto shrink-0 snap-center group bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer h-full"
+                  className="w-[86vw] max-w-[360px] md:max-w-none md:w-auto shrink-0 snap-center group ios-glass-card rounded-3xl overflow-hidden shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between cursor-pointer h-full"
                   onClick={() => setActiveVideo(item)}
                 >
                   <div className="relative aspect-video overflow-hidden bg-slate-900">
@@ -846,28 +839,28 @@ export const HomePage: React.FC = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95 group-hover:opacity-100"
                     />
                     <div className="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full brand-gradient text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
                         <Play className="w-5 h-5 ml-0.5 fill-current" />
                       </div>
                     </div>
-                    <span className="absolute bottom-3 right-3 px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-black/75 text-white">
+                    <span className="absolute bottom-3 right-3 px-2 py-0.5 rounded-md text-[11px] font-mono font-bold bg-black/75 text-white backdrop-blur-md">
                       {item.duration || 'Watch'}
                     </span>
                   </div>
 
                   <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between">
                     <div>
-                      <span className="text-[11px] font-bold text-[#F45B9C] uppercase tracking-wider">
+                      <span className="text-[11px] font-extrabold text-[#FF2D55] uppercase tracking-wider">
                         {item.type} • {item.source}
                       </span>
-                      <h3 className="font-display font-bold text-base sm:text-lg text-slate-900 mt-1 mb-2 group-hover:text-[#3E6BE0] transition-colors line-clamp-2">
+                      <h3 className="font-bold text-base sm:text-lg text-slate-900 mt-1 mb-2 group-hover:text-[#007AFF] transition-colors line-clamp-2">
                         {item.title}
                       </h3>
-                      <p className="text-slate-600 text-xs sm:text-sm line-clamp-2">
+                      <p className="text-slate-600 text-xs sm:text-sm line-clamp-2 leading-relaxed">
                         {item.description}
                       </p>
                     </div>
-                    <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-[#3E6BE0]">
+                    <div className="mt-4 pt-4 border-t border-slate-200/60 flex items-center justify-between text-xs font-bold text-[#007AFF]">
                       <span>Watch Full Recording</span>
                       <Play className="w-3.5 h-3.5 fill-current" />
                     </div>
@@ -876,7 +869,7 @@ export const HomePage: React.FC = () => {
               ))}
             </div>
 
-            {/* Mobile Dot Indicators */}
+            {/* Mobile Indicators */}
             <div className="flex md:hidden items-center justify-center gap-1.5 mt-2">
               {MEDIA_ITEMS.slice(0, 6).map((_, idx) => (
                 <button
@@ -884,7 +877,7 @@ export const HomePage: React.FC = () => {
                   type="button"
                   onClick={() => scrollToMedia(idx)}
                   className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    activeMediaIdx === idx ? 'w-6 bg-[#3E6BE0]' : 'w-2 bg-slate-300'
+                    activeMediaIdx === idx ? 'w-6 bg-[#007AFF]' : 'w-2 bg-slate-300'
                   }`}
                   aria-label={`Go to podcast ${idx + 1}`}
                 />
@@ -895,11 +888,11 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          CLOSING GRADIENT CTA BAND
+          CLOSING APPLE AURORA CTA BAND
          ========================================================================= */}
       <GradientCTASection onOpenCapabilities={() => setCapabilitiesModalOpen(true)} />
 
-      {/* Interactive Video Modal Player */}
+      {/* Video Modal Player */}
       <VideoModal item={activeVideo} onClose={() => setActiveVideo(null)} />
 
       {/* Capabilities Statement Modal */}
@@ -910,3 +903,5 @@ export const HomePage: React.FC = () => {
     </div>
   );
 };
+
+export default HomePage;

@@ -7,32 +7,32 @@ import { ClientMarquee } from '../components/ClientMarquee';
 
 export const DeibPage: React.FC = () => {
   return (
-    <div className="pt-24 sm:pt-28 pb-16">
+    <div className="pt-24 sm:pt-28 pb-16 select-none">
       {/* Sub-Service Hero */}
-      <section className="py-16 bg-gradient-to-b from-[#FCE4EF]/40 via-[#FAFAFC] to-white border-b border-slate-100">
+      <section className="py-16 sm:py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FCE4EF] text-[#F45B9C] text-xs font-bold tracking-wider uppercase mb-4">
-              <Users className="w-4 h-4" />
-              <span>HUMANIZING WORKPLACE</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full ios-glass-pill text-xs font-bold text-slate-800 mb-4 shadow-xs">
+              <Users className="w-4 h-4 text-[#FF2D55]" />
+              <span className="ios-pink-blue-text font-black uppercase tracking-wider">HUMANIZING WORKPLACE</span>
             </div>
-            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight">
+            <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight leading-tight">
               Diversity and Inclusion Consulting
             </h1>
-            <p className="text-slate-600 text-base sm:text-lg mt-4 leading-relaxed">
+            <p className="text-slate-600 text-base sm:text-lg mt-4 leading-relaxed font-normal">
               With years of experience, we have the capabilities and expertise to take your organizational change from the Bathroom to the Boardroom. We combine our insights and skills to transform your People, Processes, and IT strategies, into an inclusive company. With lived experiences, we are proud to help shape and improve your organizational outcome.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-6">
               <Link
                 to="/book-online"
-                className="brand-gradient text-white font-semibold px-7 py-3.5 rounded-full text-sm shadow-md hover:scale-105 transition-all flex items-center gap-2"
+                className="ios-btn-primary px-7 py-3.5 text-sm flex items-center gap-2 shadow-lg"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Schedule DEIB Consultation</span>
               </Link>
               <Link
                 to="/case-studies"
-                className="bg-white hover:bg-slate-50 text-slate-700 font-semibold px-6 py-3.5 rounded-full text-sm border border-slate-300 transition-colors"
+                className="ios-btn-secondary px-6 py-3.5 text-sm"
               >
                 Read Case Studies
               </Link>
@@ -42,15 +42,15 @@ export const DeibPage: React.FC = () => {
       </section>
 
       {/* DETAIL BREAKDOWN */}
-      <section className="py-20 bg-white">
+      <section className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
-              <span className="text-xs font-bold tracking-widest text-[#3E6BE0] uppercase">
+              <span className="text-xs font-bold tracking-widest text-[#007AFF] uppercase">
                 STRATEGIC WORKPLACE INTERVENTIONS
               </span>
-              <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900">
+              <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
                 Inclusive Workplace Consultation
               </h2>
               <p className="text-slate-600 text-base leading-relaxed">
@@ -59,8 +59,8 @@ export const DeibPage: React.FC = () => {
 
               <div className="space-y-4">
                 {SERVICES_INCLUDE.workplace.map((bullet, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                    <div className="w-6 h-6 rounded-full bg-[#FCE4EF] flex items-center justify-center text-[#F45B9C] shrink-0 mt-0.5">
+                  <div key={idx} className="flex items-start gap-3.5 p-4 rounded-2xl ios-glass border border-white/90 shadow-2xs">
+                    <div className="w-6 h-6 rounded-full bg-[#FFEBF0] flex items-center justify-center text-[#FF2D55] shrink-0 mt-0.5 shadow-2xs">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
                     <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
@@ -73,25 +73,25 @@ export const DeibPage: React.FC = () => {
 
             {/* Right Card: Transformation Pillars */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="p-8 rounded-3xl bg-slate-900 text-white shadow-xl relative overflow-hidden">
+              <div className="p-8 rounded-3xl ios-glass-card-dark text-white shadow-xl relative overflow-hidden border border-white/15">
                 <div className="relative z-10 space-y-4">
-                  <span className="text-xs font-bold tracking-widest text-[#F45B9C] uppercase">
+                  <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
                     3-TIER TRANSFORMATION
                   </span>
-                  <h3 className="font-display font-bold text-2xl text-white">
+                  <h3 className="font-bold text-2xl text-white">
                     People, Processes, and IT Strategies
                   </h3>
-                  <div className="space-y-3 pt-2 text-sm text-slate-300">
-                    <div className="p-3 rounded-xl bg-slate-800 border border-slate-700">
-                      <strong className="text-white block">People</strong>
+                  <div className="space-y-3 pt-2 text-sm text-slate-200">
+                    <div className="p-3.5 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md">
+                      <strong className="text-white block font-bold">People</strong>
                       Cultivating psychological safety, empathetic leadership, and active allyship.
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-800 border border-slate-700">
-                      <strong className="text-white block">Processes</strong>
+                    <div className="p-3.5 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md">
+                      <strong className="text-white block font-bold">Processes</strong>
                       Recruiting audits, bathroom policies, healthcare benefits, and complaint resolution.
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-800 border border-slate-700">
-                      <strong className="text-white block">IT Strategies</strong>
+                    <div className="p-3.5 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md">
+                      <strong className="text-white block font-bold">IT Strategies</strong>
                       Self-ID systems, email aliases, CRM/HRIS name fields, and gender-inclusive data architecture.
                     </div>
                   </div>
@@ -99,8 +99,8 @@ export const DeibPage: React.FC = () => {
               </div>
 
               {/* Real Photo Card */}
-              <div className="rounded-3xl overflow-hidden shadow-lg border border-slate-200 bg-white">
-                <div className="aspect-[16/9] overflow-hidden bg-slate-900">
+              <div className="ios-glass-card rounded-3xl overflow-hidden shadow-md p-2">
+                <div className="aspect-[16/9] overflow-hidden rounded-2xl bg-slate-900">
                   <img
                     src="/images/real/corporate_training.jpeg"
                     alt="Corporate Workplace DEI Training in Progress"
@@ -108,7 +108,7 @@ export const DeibPage: React.FC = () => {
                   />
                 </div>
                 <div className="p-4">
-                  <div className="text-xs font-bold text-[#F45B9C] uppercase tracking-wider">
+                  <div className="text-xs font-bold text-[#FF2D55] uppercase tracking-wider">
                     Interactive Workshops
                   </div>
                   <div className="text-sm font-bold text-slate-900 mt-0.5">
@@ -122,12 +122,12 @@ export const DeibPage: React.FC = () => {
       </section>
 
       {/* CLIENTS & PARTNERS STRIP */}
-      <section className="py-14 bg-slate-50 border-t border-slate-200/80 overflow-hidden">
+      <section className="py-14 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 text-center">
-          <span className="text-xs font-bold tracking-[0.2em] text-[#F45B9C] uppercase">
+          <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
             ENTERPRISE TRUST
           </span>
-          <h3 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 mt-1">
+          <h3 className="font-extrabold text-2xl sm:text-3xl text-slate-900 mt-1 tracking-tight">
             Collaborating With Leading Global Organizations
           </h3>
         </div>
@@ -144,3 +144,5 @@ export const DeibPage: React.FC = () => {
     </div>
   );
 };
+
+export default DeibPage;

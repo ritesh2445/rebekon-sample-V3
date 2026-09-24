@@ -8,52 +8,56 @@ export const ResourcesPage: React.FC = () => {
     {
       title: 'Resume Building & Personal Branding',
       description: 'One-on-one and cohort sessions tailored for transgender, non-binary, and intersectional job seekers navigating career transitions and legal name updates.',
-      icon: FileCheck
+      icon: FileCheck,
+      color: '#FF2D55'
     },
     {
       title: 'Job Readiness & Interview Coaching',
       description: 'Preparing candidates with confidence, interviewing strategies, negotiating affirming benefits, and evaluating prospective employer safety.',
-      icon: Briefcase
+      icon: Briefcase,
+      color: '#007AFF'
     },
     {
       title: 'Diverse Job Fairs & Corporate Matchmaking',
       description: 'Partnering with certified diversity employers, NGLCC affiliates, and Fortune 100 enterprise ERGs seeking qualified underrepresented talent.',
-      icon: HeartHandshake
+      icon: HeartHandshake,
+      color: '#AF52DE'
     },
     {
       title: 'Mentorship & Wrap-Around Services',
       description: 'Connecting community members with holistic support networks, legal aid referrals, mental health professionals, and gender-affirming healthcare guidance.',
-      icon: Sparkles
+      icon: Sparkles,
+      color: '#00C7BE'
     }
   ];
 
   return (
-    <div className="pt-24 sm:pt-28 pb-16">
+    <div className="pt-24 sm:pt-28 pb-16 select-none">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-b from-[#FCE4EF]/40 via-[#FAFAFC] to-white border-b border-slate-100">
+      <section className="py-16 sm:py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FCE4EF] text-[#F45B9C] text-xs font-bold tracking-wider uppercase mb-4">
-              <Sparkles className="w-4 h-4" />
-              <span>EMPOWER — COMMUNITY ENGAGEMENT</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full ios-glass-pill text-xs font-bold text-slate-800 mb-4 shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#FF2D55]" />
+              <span className="ios-pink-blue-text font-black uppercase tracking-wider">EMPOWER — COMMUNITY ENGAGEMENT</span>
             </div>
-            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight">
+            <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight leading-tight">
               Resources & Advocacy
             </h1>
-            <p className="text-slate-600 text-base sm:text-lg mt-4 leading-relaxed">
+            <p className="text-slate-600 text-base sm:text-lg mt-4 leading-relaxed font-normal">
               Advancing human dignity through public speaking, community advocacy with policymakers, and grassroots empowerment events that open doors to economic self-sufficiency.
             </p>
             <div className="pt-6 flex flex-wrap items-center gap-4">
               <Link
                 to="/book-online"
-                className="brand-gradient text-white font-semibold px-7 py-3.5 rounded-full text-sm shadow-md hover:scale-105 transition-all flex items-center gap-2"
+                className="ios-btn-primary px-7 py-3.5 text-sm flex items-center gap-2 shadow-lg"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book a Keynote / Speaking Event</span>
               </Link>
               <Link
                 to="/blogs"
-                className="bg-white hover:bg-slate-50 text-slate-700 font-semibold px-6 py-3.5 rounded-full text-sm border border-slate-300 transition-colors"
+                className="ios-btn-secondary px-6 py-3.5 text-sm"
               >
                 Read Insights & Blogs
               </Link>
@@ -63,37 +67,37 @@ export const ResourcesPage: React.FC = () => {
       </section>
 
       {/* KEYNOTE & PUBLIC SPEAKING OVERVIEW */}
-      <section className="py-20 bg-white">
+      <section className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-6">
-              <span className="text-xs font-bold tracking-widest text-[#3E6BE0] uppercase">
+              <span className="text-xs font-bold tracking-widest text-[#007AFF] uppercase">
                 KEYNOTES & PANELS
               </span>
-              <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900">
+              <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
                 Community Awareness & Public Speaking
               </h2>
               <p className="text-slate-600 text-base leading-relaxed">
                 Celia Sandhya Daniels delivers inspiring keynote presentations, moderates high-stakes executive panels, and speaks at global corporate conferences, universities, and healthcare symposia.
               </p>
               <div className="space-y-3">
-                <div className="flex items-center gap-3 text-slate-700 text-sm">
-                  <CheckCircle2 className="w-5 h-5 text-[#F45B9C] shrink-0" />
+                <div className="flex items-center gap-3 text-slate-800 text-sm font-medium p-3.5 rounded-2xl ios-glass border border-white/90">
+                  <CheckCircle2 className="w-5 h-5 text-[#FF2D55] shrink-0" />
                   <span>"From the Bathroom to the Boardroom: Building Genuine Belonging"</span>
                 </div>
-                <div className="flex items-center gap-3 text-slate-700 text-sm">
-                  <CheckCircle2 className="w-5 h-5 text-[#3E6BE0] shrink-0" />
+                <div className="flex items-center gap-3 text-slate-800 text-sm font-medium p-3.5 rounded-2xl ios-glass border border-white/90">
+                  <CheckCircle2 className="w-5 h-5 text-[#007AFF] shrink-0" />
                   <span>"Health Equity & Intersectionality in Clinical Research"</span>
                 </div>
-                <div className="flex items-center gap-3 text-slate-700 text-sm">
-                  <CheckCircle2 className="w-5 h-5 text-[#7C6BE8] shrink-0" />
+                <div className="flex items-center gap-3 text-slate-800 text-sm font-medium p-3.5 rounded-2xl ios-glass border border-white/90">
+                  <CheckCircle2 className="w-5 h-5 text-[#AF52DE] shrink-0" />
                   <span>"Courageous Allyship: Moving Beyond Performative Corporate Gestures"</span>
                 </div>
               </div>
               <div className="pt-2">
                 <Link
                   to="/book-online"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#3E6BE0] hover:underline"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-[#007AFF] hover:underline"
                 >
                   <span>Check Celia's speaking calendar</span>
                   <ArrowRight className="w-4 h-4" />
@@ -102,17 +106,17 @@ export const ResourcesPage: React.FC = () => {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="p-8 sm:p-10 rounded-3xl bg-slate-50 border border-slate-200/80 shadow-xs space-y-6">
-                <div className="w-12 h-12 rounded-2xl brand-gradient flex items-center justify-center text-white">
+              <div className="p-8 sm:p-10 rounded-3xl ios-glass-card shadow-lg space-y-6">
+                <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] flex items-center justify-center text-white shadow-md">
                   <Mic className="w-6 h-6" />
                 </div>
-                <h3 className="font-display font-bold text-2xl text-slate-900">
+                <h3 className="font-bold text-2xl text-slate-900 tracking-tight">
                   Advocacy With Policymakers & Agencies
                 </h3>
                 <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
                   Promoting awareness, policy recommendations, and legal protections alongside government agencies, local municipalities, and policymakers in Race, Sexual and Gender minorities.
                 </p>
-                <div className="p-4 rounded-2xl bg-white border border-slate-200 text-xs text-slate-600">
+                <div className="p-4 rounded-2xl bg-white/80 border border-slate-200/60 text-xs text-slate-700 font-medium">
                   Active contributions to POST (Peace Officer Standards and Training), TransLatino Coalition, and the Workforce Development Board of Ventura County.
                 </div>
               </div>
@@ -122,13 +126,13 @@ export const ResourcesPage: React.FC = () => {
       </section>
 
       {/* COMMUNITY EMPOWERMENT PROGRAMS */}
-      <section className="py-20 bg-slate-50 border-t border-slate-100">
+      <section className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold tracking-widest text-[#F45B9C] uppercase">
+            <span className="text-xs font-bold tracking-widest text-[#FF2D55] uppercase">
               GRASSROOTS INITIATIVES
             </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 mt-2">
+            <h2 className="font-extrabold text-3xl sm:text-4xl text-slate-900 mt-2 tracking-tight">
               Community Empowerment Programs
             </h2>
             <p className="text-slate-600 text-base mt-2">
@@ -142,9 +146,12 @@ export const ResourcesPage: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-lg transition-all"
+                  className="p-6 rounded-3xl ios-glass-card shadow-xs"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#FCE4EF] flex items-center justify-center text-[#F45B9C] mb-4">
+                  <div 
+                    className="w-11 h-11 rounded-2xl flex items-center justify-center mb-4 shadow-2xs"
+                    style={{ backgroundColor: `${prog.color}15`, color: prog.color }}
+                  >
                     <Icon className="w-5 h-5" />
                   </div>
                   <h4 className="font-bold text-slate-900 text-base mb-2">
@@ -172,3 +179,5 @@ export const ResourcesPage: React.FC = () => {
     </div>
   );
 };
+
+export default ResourcesPage;
