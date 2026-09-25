@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   ChevronDown, 
@@ -112,8 +112,8 @@ export const Navbar: React.FC = () => {
       <div
         className={`pointer-events-auto max-w-6xl mx-auto rounded-full transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#0B0F19]/90 backdrop-blur-2xl py-2.5 px-4 sm:px-6 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_30px_rgba(0,122,255,0.15)] text-white'
-            : 'bg-[#0B0F19]/75 backdrop-blur-xl py-3 px-4 sm:px-7 border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.4)] text-white'
+            ? 'bg-[#0B0F19]/90 backdrop-blur-lg py-2.5 px-4 sm:px-6 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_30px_rgba(0,122,255,0.15)] text-white transform-gpu'
+            : 'bg-[#0B0F19]/80 backdrop-blur-md py-3 px-4 sm:px-7 border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.4)] text-white transform-gpu'
         }`}
       >
         <div className="flex items-center justify-between gap-4">
@@ -127,7 +127,7 @@ export const Navbar: React.FC = () => {
               <img
                 src="/images/real/rebekon_official_logo.jpg"
                 alt={SITE_CONFIG.companyName}
-                className="h-8 sm:h-9 w-auto object-contain rounded-lg ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-105"
+                className="h-12 sm:h-14 lg:h-16 w-auto object-contain rounded-lg ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-105 transform-gpu"
                loading="eager" decoding="async" fetchPriority="high" />
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-r from-[#FF2D55] to-[#007AFF] rounded-full ring-2 ring-[#0B0F19]" />
             </div>

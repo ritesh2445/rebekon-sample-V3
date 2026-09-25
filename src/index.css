@@ -74,6 +74,8 @@
   box-shadow: 
     0 20px 48px -12px rgba(0, 0, 0, 0.4),
     0 8px 24px -6px rgba(0, 122, 255, 0.1);
+  transform: translateZ(0);
+  will-change: transform, backdrop-filter;
 }
 
 .ios-glass-subtle {
@@ -82,6 +84,8 @@
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  transform: translateZ(0);
+  will-change: transform, backdrop-filter;
 }
 
 /* Dark glass card — primary card style for dark-theme pages */
@@ -95,6 +99,8 @@
     0 16px 40px -10px rgba(0, 0, 0, 0.5),
     0 6px 18px -4px rgba(0, 122, 255, 0.08);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+  will-change: transform, backdrop-filter;
 }
 
 .ios-glass-card:hover {
@@ -116,6 +122,8 @@
     0 30px 65px -15px rgba(0, 0, 0, 0.5),
     0 10px 30px -5px rgba(0, 122, 255, 0.15),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateZ(0);
+  will-change: transform, backdrop-filter;
 }
 
 /* Light glass card — only used if you explicitly need light context */
@@ -129,6 +137,8 @@
     0 16px 40px -10px rgba(15, 23, 42, 0.05),
     inset 0 1px 1.5px 0 rgba(255, 255, 255, 1);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+  will-change: transform, backdrop-filter;
 }
 
 .ios-glass-pill {
@@ -138,6 +148,8 @@
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 9999px;
   box-shadow: 0 4px 16px -3px rgba(0, 0, 0, 0.3);
+  transform: translateZ(0);
+  will-change: transform, backdrop-filter;
 }
 
 /* Gradients: Apple Pink & Blue */
