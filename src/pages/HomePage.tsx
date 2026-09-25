@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
@@ -98,9 +98,9 @@ export const HomePage: React.FC = () => {
           <div className="absolute -bottom-32 -right-32 w-[550px] h-[550px] bg-[#007AFF]/25 rounded-full blur-[140px] pointer-events-none" />
 
           {/* Grid Layout: Left Headline & CTA, Right Real Keynote Portrait */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
-            {/* Left Column: Big Typography & Request a Call CTA */}
-            <div className="lg:col-span-7 space-y-6 sm:space-y-8">
+          {/* Hero Content Centered without Image */}
+          <div className="flex flex-col items-center text-center relative z-10 max-w-4xl mx-auto">
+            <div className="space-y-6 sm:space-y-8 flex flex-col items-center">
               <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
                 You're More Than <br className="hidden sm:inline" />
                 an Organization. <br />
@@ -110,11 +110,11 @@ export const HomePage: React.FC = () => {
                 </span>
               </h1>
 
-              {/* Sub-headline CTA Row (Matching Template) */}
-              <div className="flex flex-col sm:flex-row sm:items-center gap-5 pt-2">
+              {/* Sub-headline CTA Row */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-5 pt-2">
                 <Link
                   to="/book-online"
-                  className="template-pill-primary self-start group shadow-[0_12px_30px_rgba(0,122,255,0.4)]"
+                  className="template-pill-primary group shadow-[0_12px_30px_rgba(0,122,255,0.4)]"
                 >
                   <span className="tracking-wide">Request a Call</span>
                   <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
@@ -132,24 +132,13 @@ export const HomePage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedVideo(featuredVideo)}
-                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer group"
+                  className="inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer group"
                 >
                   <span className="w-8 h-8 rounded-full bg-white/10 group-hover:bg-[#FF2D55] flex items-center justify-center transition-colors">
                     <Play className="w-3.5 h-3.5 ml-0.5 fill-white text-white" />
                   </span>
                   <span>Watch Celia's Keynote Reel (Bathroom to Boardroom)</span>
                 </button>
-              </div>
-            </div>
-
-            {/* Right Column: Real Hero Portrait (Clean, Unobstructed, No Floating Tabs) */}
-            <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-gradient-to-b from-white/10 to-transparent">
-                <img
-                  src="/images/real/celia_hero.jpg"
-                  alt="Celia Sandhya Daniels — Keynote Speaker & Health Equity Champion"
-                  className="w-full h-[400px] sm:h-[480px] object-cover object-top transition-transform duration-500 hover:scale-103"
-                 loading="eager" decoding="async" fetchPriority="high" />
               </div>
             </div>
           </div>
@@ -309,8 +298,8 @@ export const HomePage: React.FC = () => {
             <div className="lg:col-span-6 flex justify-center lg:justify-end">
               <div className="relative w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-slate-900">
                 <img
-                  src="/images/real/celia_speaking_award.jpg"
-                  alt="Celia Sandhya Daniels on stage"
+                  src="/images/real/celia_about.jpg"
+                  alt="Celia Sandhya Daniels portrait"
                   className="w-full h-[440px] sm:h-[500px] object-cover object-center"
                  loading="lazy" decoding="async" />
               </div>
