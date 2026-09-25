@@ -13,7 +13,7 @@ export default defineConfig({
     host: true,
   },
   build: {
-    target: 'es2020',
+    target: 'es2022',
     cssCodeSplit: true,
     chunkSizeWarningLimit: 600,
     rollupOptions: {
