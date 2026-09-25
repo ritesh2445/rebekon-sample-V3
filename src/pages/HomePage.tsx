@@ -101,7 +101,7 @@ export const HomePage: React.FC = () => {
           {/* Hero Content Centered without Image */}
           <div className="flex flex-col items-center text-center relative z-10 max-w-4xl mx-auto">
             <div className="space-y-6 sm:space-y-8 flex flex-col items-center">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.12] sm:leading-[1.08] break-words">
                 You're More Than <br className="hidden sm:inline" />
                 an Organization. <br />
                 You're a{' '}
@@ -111,7 +111,7 @@ export const HomePage: React.FC = () => {
               </h1>
 
               {/* Sub-headline CTA Row */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-5 pt-2">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 pt-2">
                 <Link
                   to="/book-online"
                   className="template-pill-primary group shadow-[0_12px_30px_rgba(0,122,255,0.4)]"
@@ -122,7 +122,7 @@ export const HomePage: React.FC = () => {
                   </span>
                 </Link>
 
-                <p className="text-sm sm:text-base text-slate-300 max-w-md leading-relaxed font-normal">
+                <p className="text-sm sm:text-base text-slate-300 max-w-md leading-relaxed font-normal text-center sm:text-left">
                   Helping you turn inclusion into enterprise impact through authentic leadership and clinical trial equity.
                 </p>
               </div>
@@ -132,9 +132,9 @@ export const HomePage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedVideo(featuredVideo)}
-                  className="inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer group"
+                  className="inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer group text-center max-w-xs sm:max-w-none"
                 >
-                  <span className="w-8 h-8 rounded-full bg-white/10 group-hover:bg-[#FF2D55] flex items-center justify-center transition-colors">
+                  <span className="w-8 h-8 rounded-full bg-white/10 group-hover:bg-[#FF2D55] flex items-center justify-center transition-colors shrink-0">
                     <Play className="w-3.5 h-3.5 ml-0.5 fill-white text-white" />
                   </span>
                   <span>Watch Celia's Keynote Reel (Bathroom to Boardroom)</span>
@@ -144,48 +144,48 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* Hero Bottom Bar: 4 Pill Stat Chips in a Row (Matching Template) */}
-          <div className="mt-12 sm:mt-16 pt-8 border-t border-white/10 grid grid-cols-2 lg:grid-cols-4 gap-4 relative z-10">
+          <div className="mt-10 sm:mt-16 pt-8 border-t border-white/10 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 relative z-10">
             {/* Stat 1 */}
-            <div className="template-stat-chip p-4 sm:p-5 flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#007AFF]/20 text-[#007AFF] flex items-center justify-center shrink-0">
-                <Users className="w-5 h-5" />
+            <div className="template-stat-chip p-3 sm:p-5 flex items-center gap-2.5 sm:gap-3.5">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#007AFF]/20 text-[#007AFF] flex items-center justify-center shrink-0">
+                <Users className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div>
-                <div className="text-xl sm:text-2xl font-black text-white tracking-tight">200+</div>
-                <div className="text-xs text-slate-400 font-medium">Enterprise Engagements</div>
+                <div className="text-lg sm:text-2xl font-black text-white tracking-tight">200+</div>
+                <div className="text-[11px] sm:text-xs text-slate-400 font-medium leading-tight">Enterprise Engagements</div>
               </div>
             </div>
 
             {/* Stat 2 */}
-            <div className="template-stat-chip p-4 sm:p-5 flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#FF2D55]/20 text-[#FF2D55] flex items-center justify-center shrink-0">
-                <Sparkles className="w-5 h-5" />
+            <div className="template-stat-chip p-3 sm:p-5 flex items-center gap-2.5 sm:gap-3.5">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FF2D55]/20 text-[#FF2D55] flex items-center justify-center shrink-0">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div>
-                <div className="text-xl sm:text-2xl font-black text-white tracking-tight">6M+</div>
-                <div className="text-xs text-slate-400 font-medium">Audience & Media Reach</div>
+                <div className="text-lg sm:text-2xl font-black text-white tracking-tight">6M+</div>
+                <div className="text-[11px] sm:text-xs text-slate-400 font-medium leading-tight">Audience & Media Reach</div>
               </div>
             </div>
 
             {/* Stat 3 */}
-            <div className="template-stat-chip p-4 sm:p-5 flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#AF52DE]/20 text-[#AF52DE] flex items-center justify-center shrink-0">
-                <HeartPulse className="w-5 h-5" />
+            <div className="template-stat-chip p-3 sm:p-5 flex items-center gap-2.5 sm:gap-3.5">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#AF52DE]/20 text-[#AF52DE] flex items-center justify-center shrink-0">
+                <HeartPulse className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div>
-                <div className="text-xl sm:text-2xl font-black text-white tracking-tight">3k+</div>
-                <div className="text-xs text-slate-400 font-medium">Clinicians & Leaders Trained</div>
+                <div className="text-lg sm:text-2xl font-black text-white tracking-tight">3k+</div>
+                <div className="text-[11px] sm:text-xs text-slate-400 font-medium leading-tight">Clinicians & Leaders</div>
               </div>
             </div>
 
             {/* Stat 4 */}
-            <div className="template-stat-chip p-4 sm:p-5 flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#007AFF]/20 text-[#007AFF] flex items-center justify-center shrink-0">
-                <Award className="w-5 h-5" />
+            <div className="template-stat-chip p-3 sm:p-5 flex items-center gap-2.5 sm:gap-3.5">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#007AFF]/20 text-[#007AFF] flex items-center justify-center shrink-0">
+                <Award className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div>
-                <div className="text-xl sm:text-2xl font-black text-white tracking-tight">500+</div>
-                <div className="text-xs text-slate-400 font-medium">DEIB & Clinical Audits</div>
+                <div className="text-lg sm:text-2xl font-black text-white tracking-tight">500+</div>
+                <div className="text-[11px] sm:text-xs text-slate-400 font-medium leading-tight">DEIB & Clinical Audits</div>
               </div>
             </div>
           </div>
@@ -193,11 +193,11 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          2. PARTNERS AND CLIENTS SECTION (DARK THEMED LOGO CHIPS)
+          2. PARTNERS AND CLIENTS SECTION (HORIZONTAL AUTO-SCROLL ON MOBILE, GRID ON DESKTOP)
          ========================================================================= */}
-      <section className="py-14 sm:py-18 bg-[#080B11] border-y border-white/10">
+      <section className="py-12 sm:py-18 bg-[#080B11] border-y border-white/10 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
+          <div className="text-center mb-8 sm:mb-10">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-[#FF2D55] via-[#A855F7] to-[#007AFF] bg-clip-text text-transparent">
               Partners and Clients
             </h2>
@@ -206,8 +206,43 @@ export const HomePage: React.FC = () => {
             </p>
           </div>
 
-          {/* Logo Chips Grid (2 Rows on Dark Glass Backgrounds) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+          {/* Mobile: Horizontal Auto-Scrolling Infinite Marquee */}
+          <div className="lg:hidden relative w-full overflow-hidden py-2 select-none">
+            <div className="absolute left-0 top-0 bottom-0 w-10 sm:w-16 bg-gradient-to-r from-[#080B11] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-16 bg-gradient-to-l from-[#080B11] to-transparent z-10 pointer-events-none" />
+
+            <div className="animate-marquee flex items-center gap-3">
+              {[...partnerLogos, ...partnerLogos].map((partner, index) => (
+                <div
+                  key={`partner-mob-${index}`}
+                  className="bg-[#0E1424] rounded-2xl px-4 py-3 border border-white/10 shadow-xs flex items-center gap-3 shrink-0"
+                >
+                  <div className="h-7 w-auto min-w-[65px] max-w-[95px] flex items-center justify-center shrink-0">
+                    <img
+                      src={partner.src}
+                      alt={partner.name}
+                      className="max-h-6 max-w-[90px] object-contain brightness-0 invert opacity-75"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLElement).style.display = 'none';
+                      }}
+                      loading="lazy" decoding="async"
+                    />
+                  </div>
+                  <div className="border-l border-white/10 pl-2.5 text-left">
+                    <div className="text-xs font-bold text-slate-200 whitespace-nowrap">
+                      {partner.name}
+                    </div>
+                    <div className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">
+                      {partner.category}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: 6-Column Grid */}
+          <div className="hidden lg:grid grid-cols-6 gap-4">
             {partnerLogos.map((partner, index) => (
               <div
                 key={index}
@@ -251,9 +286,9 @@ export const HomePage: React.FC = () => {
       {/* =========================================================================
           3. "ABOUT ME" STORY SECTION (CLEAN DARK PRESENTATION, NO FLOATING TABS)
          ========================================================================= */}
-      <section className="py-20 sm:py-28 bg-[#0B0F19] relative overflow-hidden border-b border-white/10">
+      <section className="py-16 sm:py-28 bg-[#0B0F19] relative overflow-hidden border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Left Content */}
             <div className="lg:col-span-6 space-y-6">
               <div className="inline-flex items-center gap-2 text-xs font-bold text-[#FF2D55] uppercase tracking-wider">
@@ -267,17 +302,17 @@ export const HomePage: React.FC = () => {
                 </span>
               </h2>
 
-              {/* Recognition Pill Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-xs font-semibold text-slate-300">
-                <span className="w-2 h-2 rounded-full bg-[#007AFF]" />
+              {/* Recognition Pill Badge with safe wrapping */}
+              <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-2xl sm:rounded-full bg-white/5 border border-white/15 text-[11px] sm:text-xs font-semibold text-slate-300 max-w-full">
+                <span className="w-2 h-2 rounded-full bg-[#007AFF] shrink-0" />
                 <span>Top 20 LGBTQ+ Leader in Biopharma • Top 10 LinkedIn Voice</span>
               </div>
 
-              <p className="text-base text-slate-300 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                 With over 30 years helping Fortune 100 leaders and biopharma innovators stand out in competitive markets, I specialize in crafting authentic, systemic equity that aligns with your mission, people, and healthcare outcomes.
               </p>
 
-              <p className="text-base text-slate-300 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                 Whether you're a corporate executive, healthcare provider, or research leader—I'll guide you to discover your organization's true potential and communicate it with unwavering confidence.
               </p>
 
@@ -300,7 +335,7 @@ export const HomePage: React.FC = () => {
                 <img
                   src="/images/real/celia_about.jpg"
                   alt="Celia Sandhya Daniels portrait"
-                  className="w-full h-[440px] sm:h-[500px] object-cover object-center"
+                  className="w-full h-[320px] sm:h-[460px] lg:h-[500px] object-cover object-center"
                  loading="lazy" decoding="async" />
               </div>
             </div>

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Award, Calendar, CheckCircle2, ExternalLink, Heart, Sparkles, GraduationCap, ArrowRight, Mic, ShieldCheck, MapPin } from 'lucide-react';
 import { SITE_CONFIG, ACHIEVEMENTS, CERTIFICATIONS } from '../data/siteData';
@@ -7,11 +7,11 @@ import { ClientMarquee } from '../components/ClientMarquee';
 
 export const AboutPage: React.FC = () => {
   return (
-    <div className="pt-24 sm:pt-28 pb-16 select-none bg-[#080B11] text-slate-100 min-h-screen">
+    <div className="pt-24 sm:pt-28 pb-16 bg-[#080B11] text-slate-100 min-h-screen">
       {/* HERO SPLIT LAYOUT */}
       <section className="relative py-16 sm:py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Left Column: Portrait in Apple Vision Glass Frame */}
             <div className="lg:col-span-5 relative">
               <div className="relative mx-auto max-w-md lg:max-w-none">
@@ -26,8 +26,8 @@ export const AboutPage: React.FC = () => {
                 </div>
 
                 {/* Floating identity glass pill */}
-                <div className="absolute -bottom-5 right-4 ios-glass rounded-2xl p-4 shadow-xl border border-white/12 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] flex items-center justify-center text-white shadow-sm">
+                <div className="mt-3 sm:mt-0 sm:absolute sm:-bottom-5 sm:right-4 ios-glass rounded-2xl p-3.5 sm:p-4 shadow-xl border border-white/12 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF2D55] to-[#007AFF] flex items-center justify-center text-white shadow-sm shrink-0">
                     <Sparkles className="w-5 h-5" />
                   </div>
                   <div>

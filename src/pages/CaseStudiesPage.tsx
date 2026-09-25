@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FolderGit2, CheckCircle2, ArrowRight, Quote, Plus, Building2, TrendingUp, X } from 'lucide-react';
 import { CASE_STUDIES } from '../data/siteData';
@@ -16,16 +16,16 @@ export const CaseStudiesPage: React.FC = () => {
   const getTagStyle = (category: string) => {
     switch (category) {
       case 'Healthcare':
-        return 'bg-[#E8F2FF] text-[#007AFF] border-blue-200/60';
+        return 'bg-[#007AFF]/15 text-[#007AFF] border-[#007AFF]/30';
       case 'Workplace DEI':
-        return 'bg-[#FFEBF0] text-[#FF2D55] border-pink-200/60';
+        return 'bg-[#FF2D55]/15 text-[#FF2D55] border-[#FF2D55]/30';
       default:
-        return 'bg-[#F3EEFE] text-[#AF52DE] border-purple-200/60';
+        return 'bg-[#AF52DE]/15 text-[#AF52DE] border-[#AF52DE]/30';
     }
   };
 
   return (
-    <div className="pt-24 sm:pt-28 pb-16 select-none bg-[#080B11] text-slate-100 min-h-screen">
+    <div className="pt-24 sm:pt-28 pb-16 bg-[#080B11] text-slate-100 min-h-screen">
       {/* Hero */}
       <section className="py-16 sm:py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,9 +107,9 @@ export const CaseStudiesPage: React.FC = () => {
                   </div>
 
                   {/* Metrics preview */}
-                  <div className="grid grid-cols-2 gap-2 pt-4 border-t border-slate-200/60 mb-6">
+                  <div className="grid grid-cols-2 gap-2 pt-4 border-t border-white/10 mb-6">
                     {study.metrics.map((m, idx) => (
-                      <div key={idx} className="p-3 rounded-2xl bg-white/80 border border-white/12 ">
+                      <div key={idx} className="p-3 rounded-2xl bg-white/5 border border-white/10">
                         <div className="font-extrabold text-base text-[#007AFF]">{m.value}</div>
                         <div className="text-[10px] text-slate-400 font-semibold">{m.label}</div>
                       </div>
@@ -154,12 +154,12 @@ export const CaseStudiesPage: React.FC = () => {
 
       {/* CASE STUDY DETAIL MODAL */}
       {activeModalStudy && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xl animate-in fade-in duration-200">
-          <div className="ios-glass-card bg-[#0E1424] max-w-2xl w-full p-6 sm:p-10 max-h-[90vh] overflow-y-auto rounded-[2.5rem] shadow-2xl border border-white relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xl animate-in fade-in duration-200">
+          <div className="ios-glass-card bg-[#0E1424] max-w-2xl w-full p-6 sm:p-10 max-h-[90vh] overflow-y-auto rounded-[2.5rem] shadow-2xl border border-white/15 relative">
             <button
               type="button"
               onClick={() => setActiveModalStudy(null)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-300 transition-colors"
+              className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
             >
               <X className="w-5 h-5" />
             </button>

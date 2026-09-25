@@ -123,13 +123,13 @@ export const Navbar: React.FC = () => {
             className="flex items-center shrink-0 focus:outline-none focus:ring-2 focus:ring-[#007AFF]/40 rounded-full p-0.5 group"
             aria-label={SITE_CONFIG.companyName}
           >
-            <div className="relative h-9 sm:h-10 overflow-hidden rounded-lg ring-1 ring-white/20 flex items-center justify-center w-[120px]">
+            <div className="relative h-8 sm:h-9 max-w-[125px] sm:max-w-[155px] flex items-center shrink-0">
               <img
                 src="/images/real/rebekon_official_logo.jpg"
                 alt={SITE_CONFIG.companyName}
-                className="w-[150%] max-w-none h-auto object-cover transition-transform duration-300 transform-gpu group-hover:scale-110"
-               loading="eager" decoding="async" fetchPriority="high" />
-              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-r from-[#FF2D55] to-[#007AFF] rounded-full ring-2 ring-[#0B0F19]" />
+                className="h-full w-auto object-contain rounded-md ring-1 ring-white/15 transition-transform duration-300 transform-gpu group-hover:scale-105"
+                loading="eager" decoding="async" fetchPriority="high" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-gradient-to-r from-[#FF2D55] to-[#007AFF] rounded-full ring-1 ring-[#0B0F19]" />
             </div>
           </Link>
 
@@ -285,8 +285,23 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden pointer-events-auto fixed inset-0 z-40 bg-black/80 backdrop-blur-xl animate-in fade-in duration-200 flex flex-col justify-between p-6 pt-24 text-white">
-          <div className="space-y-3 overflow-y-auto max-h-[75vh]">
+        <div className="lg:hidden pointer-events-auto fixed inset-0 z-50 bg-[#080B11]/95 backdrop-blur-2xl animate-in fade-in duration-200 flex flex-col justify-between p-5 pt-6 pb-6 text-white min-h-dvh overflow-y-auto">
+          {/* Top Bar with brand and close button */}
+          <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-2">
+            <div className="flex items-center gap-2">
+              <span className="text-base font-extrabold text-white tracking-tight">Rebekon<span className="text-[#007AFF]">.</span></span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+              aria-label="Close menu"
+            >
+              <X className="w-5 h-5 text-white" />
+            </button>
+          </div>
+
+          <div className="space-y-2 overflow-y-auto my-auto py-2">
             <Link
               to="/"
               className="block p-3 rounded-2xl bg-white/5 hover:bg-white/10 font-bold text-base"
@@ -348,7 +363,7 @@ export const Navbar: React.FC = () => {
           <div className="pt-4 border-t border-white/10">
             <Link
               to="/book-online"
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-full font-bold text-white bg-gradient-to-r from-[#FF2D55] to-[#007AFF] shadow-lg"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-full font-bold text-white bg-gradient-to-r from-[#FF2D55] to-[#007AFF] shadow-lg text-sm"
               onClick={() => setMobileMenuOpen(false)}
             >
               <Calendar className="w-4 h-4" />

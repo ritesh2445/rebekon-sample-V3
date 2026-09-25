@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Newspaper, Calendar, Clock, ArrowRight, Share2, Plus, User, Tag, X, Check } from 'lucide-react';
 import { BLOG_POSTS, SITE_CONFIG, BlogPost } from '../data/siteData';
@@ -35,7 +35,7 @@ export const BlogsPage: React.FC = () => {
   };
 
   return (
-    <div className="pt-24 sm:pt-28 pb-16 select-none bg-[#080B11] text-slate-100 min-h-screen">
+    <div className="pt-24 sm:pt-28 pb-16 bg-[#080B11] text-slate-100 min-h-screen">
       {/* Hero */}
       <section className="py-16 sm:py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -165,13 +165,13 @@ export const BlogsPage: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header bar */}
-            <div className="sticky top-0 bg-white/90 backdrop-blur-md px-8 py-5 border-b border-slate-100 flex items-center justify-between z-10">
+            <div className="sticky top-0 bg-[#0E1424]/95 backdrop-blur-md px-6 sm:px-8 py-4 sm:py-5 border-b border-white/10 flex items-center justify-between z-10">
               <span className={`text-xs font-bold px-3 py-1 rounded-full border ${getTagStyle(readingPost.category)}`}>
                 {readingPost.category}
               </span>
               <button
                 onClick={() => setReadingPost(null)}
-                className="p-1.5 rounded-full text-slate-400 hover:text-slate-200 hover:bg-slate-100 transition-colors"
+                className="p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
                 aria-label="Close reader"
               >
                 <X className="w-5 h-5" />
@@ -179,12 +179,12 @@ export const BlogsPage: React.FC = () => {
             </div>
 
             {/* Post Content */}
-            <div className="p-8 sm:p-12 space-y-6">
+            <div className="p-6 sm:p-12 space-y-6">
               <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">
                 {readingPost.title}
               </h2>
 
-              <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-slate-100 text-xs sm:text-sm text-slate-400">
+              <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-white/10 text-xs sm:text-sm text-slate-400">
                 <div className="flex items-center gap-3">
                   <img
                     src="/images/real/celia_headshot.jpg"
@@ -200,26 +200,26 @@ export const BlogsPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleShare}
-                  className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-200 transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 transition-colors cursor-pointer border border-white/10"
                 >
-                  {copiedShare ? <Check className="w-3.5 h-3.5 text-green-600" /> : <Share2 className="w-3.5 h-3.5" />}
+                  {copiedShare ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
                   <span>{copiedShare ? 'Link Copied!' : 'Share Article'}</span>
                 </button>
               </div>
 
               {/* Rich Body */}
-              <div className="space-y-4 text-slate-200 text-base leading-relaxed">
+              <div className="space-y-4 text-slate-200 text-sm sm:text-base leading-relaxed">
                 {readingPost.content.map((paragraph, idx) => (
                   <p key={idx}>{paragraph}</p>
                 ))}
               </div>
 
               {/* Tags */}
-              <div className="pt-6 border-t border-slate-100">
+              <div className="pt-6 border-t border-white/10">
                 <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Topic Tags:</div>
                 <div className="flex flex-wrap gap-2">
                   {readingPost.tags.map((tag, idx) => (
-                    <span key={idx} className="text-xs font-semibold bg-slate-100 text-slate-200 px-3 py-1 rounded-full">
+                    <span key={idx} className="text-xs font-semibold bg-white/10 text-slate-200 px-3 py-1 rounded-full border border-white/10">
                       #{tag}
                     </span>
                   ))}

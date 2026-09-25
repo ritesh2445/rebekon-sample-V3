@@ -24,12 +24,12 @@ export const Footer: React.FC = () => {
         {/* Top Header Row with Logo & Email Pill */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-12 border-b border-white/10">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative h-10 w-[140px] overflow-hidden rounded-xl ring-1 ring-white/20 flex items-center justify-center">
+            <div className="relative h-9 sm:h-10 max-w-[150px] sm:max-w-[170px] flex items-center">
               <img
                 src="/images/real/rebekon_official_logo.jpg"
                 alt={SITE_CONFIG.companyName}
-                className="w-[150%] max-w-none h-auto object-cover transition-transform duration-300 transform-gpu group-hover:scale-110"
-               loading="lazy" decoding="async" />
+                className="h-full w-auto object-contain rounded-md ring-1 ring-white/15 transition-transform duration-300 transform-gpu group-hover:scale-105"
+                loading="lazy" decoding="async" />
             </div>
             <div>
               <span className="text-xl font-extrabold text-white tracking-tight block">
