@@ -123,11 +123,11 @@ export const Navbar: React.FC = () => {
             className="flex items-center shrink-0 focus:outline-none focus:ring-2 focus:ring-[#007AFF]/40 rounded-full p-0.5 group"
             aria-label={SITE_CONFIG.companyName}
           >
-            <div className="relative">
+            <div className="relative h-9 sm:h-10 overflow-hidden rounded-lg ring-1 ring-white/20 flex items-center justify-center w-[120px]">
               <img
                 src="/images/real/rebekon_official_logo.jpg"
                 alt={SITE_CONFIG.companyName}
-                className="h-12 sm:h-14 lg:h-16 w-auto object-contain rounded-lg ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-105 transform-gpu"
+                className="w-[150%] max-w-none h-auto object-cover transition-transform duration-300 transform-gpu group-hover:scale-110"
                loading="eager" decoding="async" fetchPriority="high" />
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-r from-[#FF2D55] to-[#007AFF] rounded-full ring-2 ring-[#0B0F19]" />
             </div>
